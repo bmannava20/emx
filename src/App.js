@@ -132,45 +132,104 @@ const App = () => {
             ]
         },
         { separator: true },*/
+        // {
+        //     /*label: "Hierarchy", icon: "pi pi-fw pi-align-left",*/
+        //     items: [
+        //         {
+        //             label: "Submenu 1", icon: "pi pi-fw pi-align-left",
+        //             items: [
+        //                 {
+        //                     label: "Submenu 1.1", icon: "pi pi-fw pi-align-left",
+        //                     items: [
+        //                         { label: "Submenu 1.1.1", icon: "pi pi-fw pi-align-left", to: "/file" },
+        //                         { label: "Submenu 1.1.2", icon: "pi pi-fw pi-align-left", to: "/file" },
+        //                         { label: "Submenu 1.1.3", icon: "pi pi-fw pi-align-left", to: "/invoice" }
+        //                     ]
+        //                 },
+        //                 {
+        //                     label: "Submenu 1.2", icon: "pi pi-fw pi-align-left", to: "/crud",
+        //                     items: [
+        //                         { label: "Submenu 1.2.1", icon: "pi pi-fw pi-align-left", to: "/grid" }
+        //                     ]
+        //                 }
+        //             ]
+        //         },
+        //         {
+        //             label: "Submenu 2", icon: "pi pi-fw pi-align-left", to: "/widgets",
+        //             items: [
+        //                 {
+        //                     label: "Submenu 2.1", icon: "pi pi-fw pi-align-left", to: "/elevation",
+        //                     items: [
+        //                         { label: "Submenu 2.1.1", icon: "pi pi-fw pi-align-left", to: "/table", },
+        //                         { label: "Submenu 2.1.2", icon: "pi pi-fw pi-align-left", to: "/button", },
+        //                     ],
+        //                 },
+        //                 {
+        //                     label: "Submenu 2.2", icon: "pi pi-fw pi-align-left", to: "/formlayout",
+        //                     items: [
+        //                         { label: "Submenu 2.2.1", icon: "pi pi-fw pi-align-left", to: "/widgets", },
+        //                     ]
+        //                 }
+        //             ]
+        //         }
+        //     ]
+        // },
         {
             /*label: "Hierarchy", icon: "pi pi-fw pi-align-left",*/
             items: [
                 {
-                    label: "Submenu 1", icon: "pi pi-fw pi-align-left",
-                    items: [
-                        {
-                            label: "Submenu 1.1", icon: "pi pi-fw pi-align-left",
-                            items: [
-                                { label: "Submenu 1.1.1", icon: "pi pi-fw pi-align-left", to: "/file"  },
-                                { label: "Submenu 1.1.2", icon: "pi pi-fw pi-align-left", to: "/file" },
-                                { label: "Submenu 1.1.3", icon: "pi pi-fw pi-align-left", to: "/invoice" }
-                            ]
+                    chapterId: "chapter1",
+                    title: "AML",
+                    shortDesc: "Aircraft Maintenance Log",
+                    description: "The maintenance log feature provides the ability to manage discrepancies that are observed on assets outside the context of a bill of work.",
+                    tagText: "AML, Maintenance Log, Log",
+                    company: {
+                        companyId: "GOL",
+                        name: "GOL"
+                    },
+                    to:'/grid',
+                    resourceLink: "/videos/aml.mp4",
+                    items: [{
+                        id: "sectionId1",
+                        title: "Mx Action",
+                        shortDesc: "Action taken for Maintenance Log",
+                        description: "Mx Action taken on discrepancy",
+                        tagText: "Mx Action, Action Log",
+                        to:'/file',
+                        company: {
+                            companyId: "GOL",
+                            name: "GOL"
                         },
-                        {
-                            label: "Submenu 1.2", icon: "pi pi-fw pi-align-left",to: "/crud",
-                            items: [
-                                { label: "Submenu 1.2.1", icon: "pi pi-fw pi-align-left", to: "/grid" }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    label: "Submenu 2", icon: "pi pi-fw pi-align-left",to: "/widgets",
-                    items: [
-                        {
-                            label: "Submenu 2.1", icon: "pi pi-fw pi-align-left",to: "/elevation",
-                            items: [
-                                { label: "Submenu 2.1.1", icon: "pi pi-fw pi-align-left", to: "/table",},
-                                { label: "Submenu 2.1.2", icon: "pi pi-fw pi-align-left",to: "/button", },
-                            ],
-                        },
-                        {
-                            label: "Submenu 2.2", icon: "pi pi-fw pi-align-left",to: "/formlayout",
-                            items: [
-                                { label: "Submenu 2.2.1", icon: "pi pi-fw pi-align-left", to: "/widgets", },
-                            ]
-                        }
-                    ]
+                        resourceLink: "/videos/mxaction.mp4",
+                        items: [
+                            {
+                                id: "subsectionId1",
+                                title: "Mx Asset",
+                                shortDesc: "Replace / remove asset",
+                                description: "Replace / remove asset part of action taken for Maintenance Log",
+                                tagText: "Asset, Part, Replace Asset",
+                                to:'/crud',
+                                company: {
+                                    companyId: "GOL",
+                                    name: "GOL"
+                                },
+                                resourceLink: "/videos/replaceasset.mp4"
+                            },
+                            {
+                                id: "subsectionId1",
+                                title: "Action Taken Task",
+                                shortDesc: "Task Performed",
+                                to:'/table',
+                                description: "Task  performed part of Maintenance Log",
+                                tagText: "Task, Action Taken",
+                                company: {
+                                    companyId: "GOL",
+                                    name: "GOL"
+                                },
+                                resourceLink: "/videos/actiontaken.mp4"
+                            }
+                        ]
+                    }]
                 }
             ]
         },
@@ -443,12 +502,10 @@ const App = () => {
                             if (router.exact) {
                                 return <Route key={`router${index}`} path={router.path} exact component={router.component} />
                             }
-
                             return <Route key={`router${index}`} path={router.path} component={router.component} />
                         })
                     }
                 </div>
-
                 <AppFooter />
             </div>
 

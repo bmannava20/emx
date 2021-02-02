@@ -19,7 +19,7 @@ const AppSubmenu = (props) => {
             event.preventDefault();
         }
         if (item.items) {
-            event.preventDefault();
+            //event.preventDefault();
         }
         if (props.root) {
             props.onRootMenuitemClick({
@@ -55,22 +55,25 @@ const AppSubmenu = (props) => {
     }, [props.menuMode])
 
     const getLink = (item, index) => {
-        const menuitemIconClassName = classNames('layout-menuitem-icon', item.icon);
-        const content = (
-            <>
-                <i className={menuitemIconClassName}></i>
-                <span className="layout-menuitem-text">{item.label}</span>
-                { item.items && <i className="pi pi-fw pi-angle-down layout-submenu-toggler"></i>}
-                <Ripple />
-            </>
-        );
         const commonLinkProps = {
             'style': item.style,
             'className': classNames(item.class, 'p-ripple', { 'p-disabled': item.disabled, 'p-link': !item.to }),
             'target': item.target,
             'onClick': (e) => onMenuItemClick(e, item, index),
-            'onMouseEnter': () => onMenuItemMouseEnter(index)
+            'onMouseEnter': () => onMenuItemMouseEnter(index),
+            payload:{title:""}
         }
+
+        const menuitemIconClassName = classNames('layout-menuitem-icon', item.items ? index === activeIndex ? "pi pi-fw pi-minus" : "pi pi-fw pi-plus" : "");
+        const content = (
+            <>
+                <i className={menuitemIconClassName}></i>
+                <span className="layout-menuitem-text">{item.title}</span>
+                {item.items && <i className="pi pi-fw pi-angle-down layout-submenu-toggler"></i>}
+                <Ripple />
+            </>
+        );
+
 
         if (item.url) {
             return <a href={item.url} rel="noopener noreferrer" {...commonLinkProps}>{content}</a>
@@ -87,7 +90,7 @@ const AppSubmenu = (props) => {
     }
 
     const getItems = () => {
-        const transitionTimeout =  props.mobileMenuActive ? 0 : (isSlim() && props.root ? { enter: 400, exit: 400 } : (props.root ? 0 : { enter: 1000, exit: 450 }));
+        const transitionTimeout = props.mobileMenuActive ? 0 : (isSlim() && props.root ? { enter: 400, exit: 400 } : (props.root ? 0 : { enter: 1000, exit: 450 }));
         return props.items.map((item, i) => {
             if (visible(item)) {
                 if (!item.separator) {
@@ -95,12 +98,12 @@ const AppSubmenu = (props) => {
                     const link = getLink(item, i);
                     const rootMenuItem = props.root && (
                         <div className="layout-root-menuitem">
-                            <div className="layout-menuitem-root-text" style={{ textTransform: 'uppercase' }}>{item.label}</div>
+                            <div className="layout-menuitem-root-text" style={{ textTransform: 'uppercase' }}>{item.title}</div>
                         </div>
                     );
 
                     return (
-                        <li key={item.label || i} className={menuitemClassName} role="menuitem">
+                        <li key={item.title || i} className={menuitemClassName} role="menuitem">
                             {link}
                             {rootMenuItem}
                             <CSSTransition classNames="layout-menu" timeout={transitionTimeout} in={isMenuActive(item, i)} unmountOnExit>
