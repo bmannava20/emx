@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
+import React, {useRef, useState} from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Dropdown } from 'primereact/dropdown';
+import {FileUpload} from "primereact/fileupload";
 
 export const FormLayoutDemo = () => {
-
+    const toast = useRef(null);
     const [dropdownItem, setDropdownItem] = useState(null);
     const dropdownItems = [
         { name: 'Option 1', code: 'Option 1' },
         { name: 'Option 2', code: 'Option 2' },
         { name: 'Option 3', code: 'Option 3' }
     ];
-
+    const onUpload = () => {
+        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
+    }
     return (
         <div className="p-grid">
-            <div className="p-col-12 p-md-6">
+            {/*<div className="p-col-12 p-md-6">
                 <div className="card p-fluid">
                     <h5>Vertical</h5>
                     <div className="p-field">
@@ -87,36 +90,39 @@ export const FormLayoutDemo = () => {
                         <small>Enter your username to reset your password.</small>
                     </div>
                 </div>
-            </div>
+            </div>*/}
 
             <div className="p-col-12">
                 <div className="card">
-                    <h5>Advanced</h5>
+                    <h5>AAA</h5>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-12 p-md-6">
-                            <label htmlFor="firstname2">Firstname</label>
+                            <label htmlFor="firstname2">Title</label>
                             <InputText id="firstname2" type="text" />
                         </div>
                         <div className="p-field p-col-12 p-md-6">
-                            <label htmlFor="lastname2">Lastname</label>
+                            <label htmlFor="lastname2">Tag text/Names</label>
                             <InputText id="lastname2" type="text" />
                         </div>
-                        <div className="p-field p-col-12">
-                            <label htmlFor="address">Address</label>
-                            <InputTextarea id="address" rows="4" />
-                        </div>
                         <div className="p-field p-col-12 p-md-6">
-                            <label htmlFor="city">City</label>
-                            <InputText id="city" type="text" />
+                            <label htmlFor="videoLink">Video Link</label>
+                            {/*<InputText id="videoLink" type="text" />*/}
+                            <FileUpload name="demo[]" url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} />
                         </div>
                         <div className="p-field p-col-12 p-md-3">
-                            <label htmlFor="state">State</label>
+                            <label htmlFor="state">Company ID's</label>
                             <Dropdown id="state" value={dropdownItem} onChange={(e) => setDropdownItem(e.value)} options={dropdownItems} optionLabel="name" placeholder="Select One"></Dropdown>
                         </div>
-                        <div className="p-field p-col-12 p-md-3">
-                            <label htmlFor="zip">Zip</label>
-                            <InputText id="zip" type="text" />
+                        <div className="p-field p-col-12">
+                            <label htmlFor="shortDesc">Short Description</label>
+                            <InputTextarea id="shortDesc" rows="4" />
                         </div>
+                        <div className="p-field p-col-12">
+                            <label htmlFor="longDesc">Long Description</label>
+                            <InputTextarea id="longDesc" rows="4" />
+                        </div>
+
+
                     </div>
                 </div>
             </div>

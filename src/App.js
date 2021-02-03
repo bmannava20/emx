@@ -187,7 +187,7 @@ const App = () => {
                         companyId: "GOL",
                         name: "GOL"
                     },
-                    to:'/grid',
+                    to:'/formlayout',
                     resourceLink: "/videos/aml.mp4",
                     items: [{
                         id: "sectionId1",
@@ -195,7 +195,7 @@ const App = () => {
                         shortDesc: "Action taken for Maintenance Log",
                         description: "Mx Action taken on discrepancy",
                         tagText: "Mx Action, Action Log",
-                        to:'/file',
+                        to:'/crud',
                         company: {
                             companyId: "GOL",
                             name: "GOL"
@@ -208,7 +208,7 @@ const App = () => {
                                 shortDesc: "Replace / remove asset",
                                 description: "Replace / remove asset part of action taken for Maintenance Log",
                                 tagText: "Asset, Part, Replace Asset",
-                                to:'/crud',
+                                to:'/file',
                                 company: {
                                     companyId: "GOL",
                                     name: "GOL"
