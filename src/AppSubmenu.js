@@ -61,7 +61,6 @@ const AppSubmenu = (props) => {
             'target': item.target,
             'onClick': (e) => onMenuItemClick(e, item, index),
             'onMouseEnter': () => onMenuItemMouseEnter(index),
-            payload:{title:""}
         }
 
         const menuitemIconClassName = classNames('layout-menuitem-icon', item.items ? index === activeIndex ? "pi pi-fw pi-minus" : "pi pi-fw pi-plus" : "");
@@ -82,7 +81,10 @@ const AppSubmenu = (props) => {
             return <button type="button" {...commonLinkProps}>{content}</button>
         }
 
-        return <NavLink to={item.to} exact activeClassName="active-route" {...commonLinkProps}>{content}</NavLink>;
+        return <NavLink to={{
+            pathname: item.to,
+            state: { ...item }
+        }} exact activeClassName="active-route" {...commonLinkProps}>{content}</NavLink>;
     };
 
     const isMenuActive = (item, index) => {

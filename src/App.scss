@@ -7,3 +7,9 @@ $gutter: 1rem;
 @import '@fullcalendar/daygrid/main.css';
 @import '@fullcalendar/timegrid/main.css';
 @import './AppDemo.scss';
+
+.layout-menu ul a.active-route, .layout-menu ul .p-link.active-route {
+  font-weight: 700;
+  font-weight: bold ;
+  font-size: medium;
+}

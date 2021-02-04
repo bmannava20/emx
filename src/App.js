@@ -40,7 +40,7 @@ import { CalendarDemo } from './pages/CalendarDemo';
 import { Invoice } from './pages/Invoice';
 import { Help } from './pages/Help';
 import { EmptyPage } from './pages/EmptyPage';
-
+import CustomerService from './service/CustomerService';
 import PrimeReact from 'primereact/utils';
 
 import 'primereact/resources/primereact.min.css';
@@ -64,13 +64,22 @@ const App = () => {
     const [configActive, setConfigActive] = useState(false);
     const [inputStyle, setInputStyle] = useState('outlined');
     const [ripple, setRipple] = useState(false);
-
+    // const [menu, setMenu] = useState([]);
     let menuClick = false;
     let searchClick = false;
     let userMenuClick = false;
     let notificationMenuClick = false;
     let rightMenuClick = false;
     let configClick = false;
+
+    useEffect(() => {
+        // const customerService = new CustomerService();
+        // customerService.getSidebar().then(data => setMenu([data]));
+    }, []);
+
+    // useEffect(()=>{
+    //     console.log(menu)
+    // },[menu])
 
     const menu = [
         /*{
@@ -187,7 +196,7 @@ const App = () => {
                         companyId: "GOL",
                         name: "GOL"
                     },
-                    to:'/formlayout',
+                    to:'/formlayout/chapter1',
                     resourceLink: "/videos/aml.mp4",
                     items: [{
                         id: "sectionId1",
@@ -195,7 +204,7 @@ const App = () => {
                         shortDesc: "Action taken for Maintenance Log",
                         description: "Mx Action taken on discrepancy",
                         tagText: "Mx Action, Action Log",
-                        to:'/crud',
+                        to:'/formlayout/sectionId1',
                         company: {
                             companyId: "GOL",
                             name: "GOL"
@@ -208,7 +217,7 @@ const App = () => {
                                 shortDesc: "Replace / remove asset",
                                 description: "Replace / remove asset part of action taken for Maintenance Log",
                                 tagText: "Asset, Part, Replace Asset",
-                                to:'/file',
+                                to:'/formlayout/subsectionId1',
                                 company: {
                                     companyId: "GOL",
                                     name: "GOL"
@@ -216,10 +225,10 @@ const App = () => {
                                 resourceLink: "/videos/replaceasset.mp4"
                             },
                             {
-                                id: "subsectionId1",
+                                id: "subsectionId2",
                                 title: "Action Taken Task",
                                 shortDesc: "Task Performed",
-                                to:'/table',
+                                to:'/formlayout/subsectionId2',
                                 description: "Task  performed part of Maintenance Log",
                                 tagText: "Task, Action Taken",
                                 company: {
@@ -245,7 +254,7 @@ const App = () => {
 
     const routers = [
         { path: '/', component: Dashboard, exact: true, meta: { breadcrumb: [{ parent: 'Dashboard', label: 'Dashboard' }] } },
-        { path: '/formlayout', component: FormLayoutDemo, meta: { breadcrumb: [{ parent: 'UI Kit', label: 'Form Layout' }] } },
+        { path: '/formlayout/:id', component: FormLayoutDemo, meta: { breadcrumb: [{ parent: 'UI Kit', label: 'Form Layout' }] } },
         { path: '/input', component: InputDemo, meta: { breadcrumb: [{ parent: 'UI Kit', label: 'Input' }] } },
         { path: '/floatlabel', component: FloatLabelDemo, meta: { breadcrumb: [{ parent: 'UI Kit', label: 'Float Label' }] } },
         { path: '/button', component: ButtonDemo, meta: { breadcrumb: [{ parent: 'UI Kit', label: 'Button' }] } },
@@ -509,8 +518,7 @@ const App = () => {
                 <AppFooter />
             </div>
 
-            <AppMenu model={menu} menuMode={menuMode} active={menuActive} mobileMenuActive={staticMenuMobileActive} onMenuClick={onMenuClick} onMenuitemClick={onMenuitemClick} onRootMenuitemClick={onRootMenuitemClick}></AppMenu>
-
+            {menu && <AppMenu model={menu} menuMode={menuMode} active={menuActive} mobileMenuActive={staticMenuMobileActive} onMenuClick={onMenuClick} onMenuitemClick={onMenuitemClick} onRootMenuitemClick={onRootMenuitemClick}></AppMenu>}
             <AppRightMenu rightMenuActive={rightMenuActive} onRightMenuClick={onRightMenuClick}></AppRightMenu>
 
             <AppConfig configActive={configActive} menuMode={menuMode} onMenuModeChange={onMenuModeChange} menuTheme={menuTheme} onMenuThemeChange={onMenuThemeChange}

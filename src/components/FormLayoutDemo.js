@@ -1,128 +1,68 @@
-import React, {useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Dropdown } from 'primereact/dropdown';
-import {FileUpload} from "primereact/fileupload";
+import { FileUpload } from "primereact/fileupload";
+import { useHistory } from 'react-router-dom';
 
 export const FormLayoutDemo = () => {
+    const history = useHistory();
     const toast = useRef(null);
-    const [dropdownItem, setDropdownItem] = useState(null);
+    const [dropdownItem, setDropdownItem] = useState("");
+    const [isEdit, setIsEdit] = useState(false);
+    const [data, setData] = useState(null);
     const dropdownItems = [
-        { name: 'Option 1', code: 'Option 1' },
-        { name: 'Option 2', code: 'Option 2' },
-        { name: 'Option 3', code: 'Option 3' }
+        { name: "chapter1", code: "chapter1" },
+        { name: 'chapter2', code: 'chapter2' },
+        { name: 'chapter3', code: 'chapter3' }
     ];
+
     const onUpload = () => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
     }
+
+
+    useEffect(() => {
+        console.log(history.location.state);
+        setData(history.location.state)
+    }, [history.location.state])
+
     return (
         <div className="p-grid">
-            {/*<div className="p-col-12 p-md-6">
-                <div className="card p-fluid">
-                    <h5>Vertical</h5>
-                    <div className="p-field">
-                        <label htmlFor="name1">Name</label>
-                        <InputText id="name1" type="text" />
-                    </div>
-                    <div className="p-field">
-                        <label htmlFor="email1">Email</label>
-                        <InputText id="email1" type="text" />
-                    </div>
-                    <div className="p-field">
-                        <label htmlFor="age1">Age</label>
-                        <InputText id="age1" type="text" />
-                    </div>
-                </div>
-
-                <div className="card p-fluid">
-                    <h5>Vertical Grid</h5>
-                    <div className="p-formgrid p-grid">
-                        <div className="p-field p-col">
-                            <label htmlFor="name2">Name</label>
-                            <InputText id="name2" type="text" />
-                        </div>
-                        <div className="p-field p-col">
-                            <label htmlFor="email2">Email</label>
-                            <InputText id="email2" type="text" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="p-col-12 p-md-6">
-                <div className="card p-fluid">
-                    <h5>Horizontal</h5>
-                    <div className="p-field p-grid">
-                        <label htmlFor="name3" className="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Name</label>
-                        <div className="p-col-12 p-md-10">
-                            <InputText id="name3" type="text" />
-                        </div>
-                    </div>
-                    <div className="p-field p-grid">
-                        <label htmlFor="email3" className="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Email</label>
-                        <div className="p-col-12 p-md-10">
-                            <InputText id="email3" type="text" />
-                        </div>
-                    </div>
-                </div>
-
-                <div className="card">
-                    <h5>Inline</h5>
-                    <div className="p-formgroup-inline">
-                        <div className="p-field">
-                            <label htmlFor="firstname1" className="p-sr-only">Firstname</label>
-                            <InputText id="firstname1" type="text" placeholder="Firstname" />
-                        </div>
-                        <div className="p-field">
-                            <label htmlFor="lastname1" className="p-sr-only">Lastname</label>
-                            <InputText id="lastname1" type="text" placeholder="Lastname" />
-                        </div>
-                        <Button label="Submit"></Button>
-                    </div>
-                </div>
-
-                <div className="card">
-                    <h5>Help Text</h5>
-                    <div className="p-field p-fluid">
-                        <label htmlFor="username">Username</label>
-                        <InputText id="username" type="text" />
-                        <small>Enter your username to reset your password.</small>
-                    </div>
-                </div>
-            </div>*/}
-
             <div className="p-col-12">
                 <div className="card">
-                    <h5>AAA</h5>
+                    <div className="p-fluid p-formgrid p-grid">
+                        <h5 className="p-field p-col-12 p-md-11">{data && data.title}</h5>
+                        <div className="p-field p-col-12 p-md-1">{!isEdit ? <Button label="Edit" onClick={() => { setIsEdit(!isEdit) }}></Button> : <Button onClick={() => { setIsEdit(!isEdit) }} label="Save"></Button>}</div>
+                    </div>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-12 p-md-6">
                             <label htmlFor="firstname2">Title</label>
-                            <InputText id="firstname2" type="text" />
+                            {!isEdit ? <label>&nbsp;:&nbsp;{data && data.title}</label> : <InputText id="firstname2" type="text" disabled={!isEdit} value={data && data.title} onChange={(e) => { console.log(e.target.value); setData({ ...data, title: e.target.value }) }} />}
                         </div>
                         <div className="p-field p-col-12 p-md-6">
                             <label htmlFor="lastname2">Tag text/Names</label>
-                            <InputText id="lastname2" type="text" />
+                            {!isEdit ? <label>&nbsp;:&nbsp;{data && data.tagText}</label> : <InputText id="firstname2" type="text" disabled={!isEdit} value={data && data.tagText} onChange={(e) => { console.log(e.target.value); setData({ ...data, tagText: e.target.value }) }} />}
                         </div>
                         <div className="p-field p-col-12 p-md-6">
                             <label htmlFor="videoLink">Video Link</label>
                             {/*<InputText id="videoLink" type="text" />*/}
-                            <FileUpload name="demo[]" url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} />
+                            {!isEdit ? <label>{data && data.resourceLink}</label> : <InputText id="firstname2" type="text" disabled={!isEdit} value={data && data.resourceLink} onChange={(e) => { console.log(e.target.value); setData({ ...data, resourceLink: e.target.value }) }} />}
+                            {/* <FileUpload name="demo[]" disabled={!isEdit} url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /> */}
                         </div>
                         <div className="p-field p-col-12 p-md-3">
                             <label htmlFor="state">Company ID's</label>
-                            <Dropdown id="state" value={dropdownItem} onChange={(e) => setDropdownItem(e.value)} options={dropdownItems} optionLabel="name" placeholder="Select One"></Dropdown>
+                            {!isEdit ? <label>&nbsp;:&nbsp;{data && data.company.companyId}</label> : <Dropdown id="state" value={dropdownItem} disabled={!isEdit} onChange={(e) => setDropdownItem(e.value)} options={dropdownItems} optionLabel="name" placeholder="Select One"></Dropdown>}
                         </div>
                         <div className="p-field p-col-12">
                             <label htmlFor="shortDesc">Short Description</label>
-                            <InputTextarea id="shortDesc" rows="4" />
+                            {!isEdit ? <label>&nbsp;:&nbsp;{data && data.shortDesc}</label> : <InputTextarea id="shortDesc" rows="4" disabled={!isEdit} value={data && data.shortDesc} onChange={(e) => { console.log(e.target.value); setData({ ...data, shortDesc: e.target.value }) }} />}
                         </div>
                         <div className="p-field p-col-12">
                             <label htmlFor="longDesc">Long Description</label>
-                            <InputTextarea id="longDesc" rows="4" />
+                            {!isEdit ? <label>&nbsp;:&nbsp;{data && data.description}</label> : <InputTextarea id="longDesc" rows="4" disabled={!isEdit} value={data && data.description} onChange={(e) => { console.log(e.target.value); setData({ ...data, description: e.target.value }) }} />}
                         </div>
-
-
                     </div>
                 </div>
             </div>

@@ -17,4 +17,8 @@ export default class CustomerService {
     getCustomersXLarge() {
         return axios.get('assets/demo/data/customers-xlarge.json').then(res => res.data.data);
     }
+
+    getSidebar() {
+        return axios.get('assets/demo/data/sidebar.json').then(res => res.data.data);
+    }
 }
