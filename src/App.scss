@@ -11,6 +11,29 @@ $gutter: 1rem;
 .layout-menu ul a.active-route, .layout-menu ul .p-link.active-route {
   font-weight: 700;
   font-size: medium;
-  background-color: #ffffff;
+  background-color: #0097ac;
   color:#006a79;
+}
+
+.required-field {
+  border: 1px solid red!important;
+}
+.form-control {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.form-control {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.custom-select, .form-input-ctrl {
+  font-weight: 400;
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  border: 1px solid #bbb;
+  padding: 6px 25px 6px 5px;
+  color: #000;
+  height: 39px;
 }

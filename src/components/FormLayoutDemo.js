@@ -33,13 +33,13 @@ export const FormLayoutDemo = () => {
             <div className="p-col-12">
                 <div className="card">
                     <div className="p-fluid p-formgrid p-grid">
-                        <h5 className="p-field p-col-12 p-md-11">{data && data.title}</h5>
+                        <h5 className="p-field p-col-12 p-md-11">{data && data.title} ({data && data.company.companyId})</h5>
                         <div className="p-field p-col-12 p-md-1">{!isEdit ? <Button label="Edit" onClick={() => { setIsEdit(!isEdit) }}></Button> : <Button onClick={() => { setIsEdit(!isEdit) }} label="Save"></Button>}</div>
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-12 p-md-6">
                             <label htmlFor="firstname2">Title</label>
-                            {!isEdit ? <label>&nbsp;:&nbsp;{data && data.title}</label> : <InputText id="firstname2" type="text" disabled={!isEdit} value={data && data.title} onChange={(e) => { console.log(e.target.value); setData({ ...data, title: e.target.value }) }} />}
+                            {!isEdit ? <label>&nbsp;:&nbsp;{data && data.title}</label> : <InputText className={"form-input-ctrl undefined required-field form-control"}  id="firstname2" type="text" disabled={!isEdit} value={data && data.title} onChange={(e) => { console.log(e.target.value); setData({ ...data, title: e.target.value }) }} />}
                         </div>
                         <div className="p-field p-col-12 p-md-6">
                             <label htmlFor="lastname2">Tag text/Names</label>
@@ -62,6 +62,19 @@ export const FormLayoutDemo = () => {
                         <div className="p-field p-col-12">
                             <label htmlFor="longDesc">Long Description</label>
                             {!isEdit ? <label>&nbsp;:&nbsp;{data && data.description}</label> : <InputTextarea id="longDesc" rows="4" disabled={!isEdit} value={data && data.description} onChange={(e) => { console.log(e.target.value); setData({ ...data, description: e.target.value }) }} />}
+                        </div>
+                        <div className="p-field p-col-12 p-md-6">
+                            <label htmlFor="videoLink">Video Link</label>
+                            {/*<InputText id="videoLink" type="text" />*/}
+                            {!isEdit ? <label>{data && data.resourceLink}</label> : <InputText id="firstname2" type="text" disabled={!isEdit} value={data && data.resourceLink} onChange={(e) => { console.log(e.target.value); setData({ ...data, resourceLink: e.target.value }) }} />}
+                            {/* <FileUpload name="demo[]" disabled={!isEdit} url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /> */}
+
+                        </div>
+                        <div>
+                        <video width="320" height="240" controls>
+                           {/* <source src="{data && data.resourceLink}" type="video/mp4">
+                                <source src="{data && data.resourceLink}" type="video/ogg">*/}
+                        </video>
                         </div>
                     </div>
                 </div>
