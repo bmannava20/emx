@@ -484,13 +484,12 @@ a {
     text-align: center;
     display: block;
     outline: 0 none;
-    padding: 1rem;
     margin-left: 1rem;
     margin-right: 1rem;
     transition: background-color 0.2s, box-shadow 0.2s; }
   .layout-sidebar .logo-image {
-    width: 2rem;
-    height: 2rem;
+    width: 14rem;
+    height: 4rem;
     vertical-align: middle;
     margin-right: .5rem; }
   .layout-sidebar .app-name {
