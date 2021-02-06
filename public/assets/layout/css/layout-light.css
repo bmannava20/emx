@@ -483,6 +483,7 @@ a {
   .layout-sidebar .logo {
     text-align: center;
     display: block;
+    margin:0px;
     outline: 0 none;
     margin-left: 1rem;
     margin-right: 1rem;
@@ -500,7 +501,10 @@ a {
 .layout-menu-container {
   overflow: auto;
   flex: 1;
-  padding: 1rem; }
+  padding: 1rem;
+  background-color: #f8f9fa;
+
+}
 
 .layout-menu {
   margin: 0;

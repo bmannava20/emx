@@ -7,12 +7,29 @@ $gutter: 1rem;
 @import '@fullcalendar/daygrid/main.css';
 @import '@fullcalendar/timegrid/main.css';
 @import './AppDemo.scss';
+/*
 
 .layout-menu ul a.active-route, .layout-menu ul .p-link.active-route {
   font-weight: 700;
   font-size: medium;
-  background-color: #0097ac;
-  color:#006a79;
+  background-color: #0097AC;
+  color: #fff;
+}
+.layout-sidebar-darkgray .layout-sidebar .layout-menu .layout-root-menuitem > ul > li.active-menuitem {
+  background: #fff;
+  color:#000
+}
+
+.layout-sidebar-darkgray .layout-sidebar .layout-menu .layout-root-menuitem > ul > li:hover {
+  background: #fff;
+  color:#000
+}
+
+.layout-menu ul a.active-route, .layout-menu ul .p-link {
+  font-weight: 700;
+  font-size: medium;
+  background-color: #0097AC;
+  color: #000;
 }
 
 .required-field {
@@ -36,4 +53,18 @@ $gutter: 1rem;
   padding: 6px 25px 6px 5px;
   color: #000;
   height: 39px;
+}
+
+label {
+  color: #848484;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+}
+.layout-sidebar{
+  background-color: #ffffff!important;
+}*/
+.layout-sidebar-darkgray .layout-sidebar {
+  background: #343a40;
+  border-right: 0 none;
+  background-image: linear-gradient(180deg, #f0f3f5 10%, #2e3439 100%);
 }
