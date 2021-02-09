@@ -19,6 +19,9 @@ const AppTopbar = (props) => {
             </div>
 
             <div className="topbar-right">
+                <button type="button" className="p-link" onClick={props.onSearchClick}>
+                    <i className="pi pi-plus"></i>  Add New
+                </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {/*<ul className="topbar-menu">
                     <li className="search-item">
                         <button type="button" className="p-link" onClick={props.onSearchClick}>
