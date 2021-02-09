@@ -1,11 +1,7 @@
 import React from 'react';
-import classNames from 'classnames';
 import AppBreadcrumb from './AppBreadcrumb';
 
 const AppTopbar = (props) => {
-
-    const notificationsItemClassName = classNames('notifications-item', { 'active-menuitem': props.topbarNotificationMenuActive });
-    const profileItemClassName = classNames('profile-item', { 'active-menuitem fadeInDown': props.topbarUserMenuActive });
 
     return (
         <div className="layout-topbar">
@@ -19,11 +15,11 @@ const AppTopbar = (props) => {
                     <AppBreadcrumb routers={props.routers} />
                 </div>
 
-                <img id="logo-mobile" className="mobile-logo" src="assets/layout/images/logo-dark.svg" />
+                <img id="logo-mobile" className="mobile-logo" src="assets/layout/images/logo-dark.svg" alt="diamond-layout" />
             </div>
 
-            {/*<div className="topbar-right">
-                <ul className="topbar-menu">
+            <div className="topbar-right">
+                {/*<ul className="topbar-menu">
                     <li className="search-item">
                         <button type="button" className="p-link" onClick={props.onSearchClick}>
                             <i className="pi pi-search"></i>
@@ -127,8 +123,8 @@ const AppTopbar = (props) => {
                             <i className="pi pi-align-right"></i>
                         </button>
                     </li>
-                </ul>
-            </div>*/}
+                </ul>*/}
+            </div>
         </div>
     );
 }

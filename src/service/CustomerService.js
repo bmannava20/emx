@@ -19,6 +19,6 @@ export default class CustomerService {
     }
 
     getSidebar() {
-        return axios.get('assets/demo/data/sidebar.json').then(res => res.data.data);
+        return axios.get('assets/demo/data/sidebar.json').then(res => res.data);
     }
 }

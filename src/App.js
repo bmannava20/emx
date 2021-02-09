@@ -8,7 +8,7 @@ import AppConfig from './AppConfig';
 import AppMenu from './AppMenu';
 import AppSearch from './AppSearch';
 import AppRightMenu from './AppRightMenu';
-
+import AppTopMainBar from './TopBar';
 import { Dashboard } from './components/Dashboard';
 import { FormLayoutDemo } from './components/FormLayoutDemo';
 import { InputDemo } from './components/InputDemo';
@@ -64,7 +64,7 @@ const App = () => {
     const [configActive, setConfigActive] = useState(false);
     const [inputStyle, setInputStyle] = useState('outlined');
     const [ripple, setRipple] = useState(false);
-    // const [menu, setMenu] = useState([]);
+    const [menuList, setMenu] = useState([]);
     let menuClick = false;
     let searchClick = false;
     let userMenuClick = false;
@@ -73,13 +73,9 @@ const App = () => {
     let configClick = false;
 
     useEffect(() => {
-        // const customerService = new CustomerService();
-        // customerService.getSidebar().then(data => setMenu([data]));
+        const customerService = new CustomerService();
+        customerService.getSidebar().then(data => setMenu(data.items));
     }, []);
-
-    // useEffect(()=>{
-    //     console.log(menu)
-    // },[menu])
 
     const menu = [
         /*{
@@ -185,62 +181,7 @@ const App = () => {
         // },
         {
             /*label: "Hierarchy", icon: "pi pi-fw pi-align-left",*/
-            items: [
-                {
-                    chapterId: "chapter1",
-                    title: "AML",
-                    shortDesc: "Aircraft Maintenance Log",
-                    description: "The maintenance log feature provides the ability to manage discrepancies that are observed on assets outside the context of a bill of work.",
-                    tagText: "AML, Maintenance Log, Log",
-                    company: {
-                        companyId: "GOL",
-                        name: "GOL"
-                    },
-                    to:'/formlayout/chapter1',
-                    resourceLink: "/videos/aml.mp4",
-                    items: [{
-                        id: "sectionId1",
-                        title: "Mx Action",
-                        shortDesc: "Action taken for Maintenance Log",
-                        description: "Mx Action taken on discrepancy",
-                        tagText: "Mx Action, Action Log",
-                        to:'/formlayout/sectionId1',
-                        company: {
-                            companyId: "GOL",
-                            name: "GOL"
-                        },
-                        resourceLink: "/videos/mxaction.mp4",
-                        items: [
-                            {
-                                id: "subsectionId1",
-                                title: "Mx Asset",
-                                shortDesc: "Replace / remove asset",
-                                description: "Replace / remove asset part of action taken for Maintenance Log",
-                                tagText: "Asset, Part, Replace Asset",
-                                to:'/formlayout/subsectionId1',
-                                company: {
-                                    companyId: "GOL",
-                                    name: "GOL"
-                                },
-                                resourceLink: "/videos/replaceasset.mp4"
-                            },
-                            {
-                                id: "subsectionId2",
-                                title: "Action Taken Task",
-                                shortDesc: "Task Performed",
-                                to:'/formlayout/subsectionId2',
-                                description: "Task  performed part of Maintenance Log",
-                                tagText: "Task, Action Taken",
-                                company: {
-                                    companyId: "GOL",
-                                    name: "GOL"
-                                },
-                                resourceLink: "/videos/actiontaken.mp4"
-                            }
-                        ]
-                    }]
-                }
-            ]
+            items: menuList
         },
         /*{ separator: true },
         {
@@ -500,34 +441,37 @@ const App = () => {
         colorScheme === 'light' ? menuTheme : '');
 
     return (
-        <div className={containerClassName} data-theme={colorScheme} onClick={onDocumentClick}>
-            <div className="layout-content-wrapper">
-                <AppTopBar routers={routers} topbarNotificationMenuActive={topbarNotificationMenuActive} topbarUserMenuActive={topbarUserMenuActive} onMenuButtonClick={onMenuButtonClick} onSearchClick={toggleSearch}
-                    onTopbarNotification={onTopbarNotificationMenuButtonClick} onTopbarUserMenu={onTopbarUserMenuButtonClick} onRightMenuClick={onRightMenuButtonClick} onRightMenuButtonClick={onRightMenuButtonClick}></AppTopBar>
+        <div>
+            <AppTopMainBar />
+            <div className={containerClassName} data-theme={colorScheme} onClick={onDocumentClick}>
+                <div className="layout-content-wrapper">
+                    <AppTopBar routers={routers} topbarNotificationMenuActive={topbarNotificationMenuActive} topbarUserMenuActive={topbarUserMenuActive} onMenuButtonClick={onMenuButtonClick} onSearchClick={toggleSearch}
+                        onTopbarNotification={onTopbarNotificationMenuButtonClick} onTopbarUserMenu={onTopbarUserMenuButtonClick} onRightMenuClick={onRightMenuButtonClick} onRightMenuButtonClick={onRightMenuButtonClick}></AppTopBar>
 
-                <div className="layout-content">
-                    {
-                        routers.map((router, index) => {
-                            if (router.exact) {
-                                return <Route key={`router${index}`} path={router.path} exact component={router.component} />
-                            }
-                            return <Route key={`router${index}`} path={router.path} component={router.component} />
-                        })
-                    }
+                    <div className="layout-content">
+                        {
+                            routers.map((router, index) => {
+                                if (router.exact) {
+                                    return <Route key={`router${index}`} path={router.path} exact component={router.component} />
+                                }
+                                return <Route key={`router${index}`} path={router.path} component={router.component} />
+                            })
+                        }
+                    </div>
+                    <AppFooter />
                 </div>
-                <AppFooter />
+
+                {menu && <AppMenu model={menu} menuMode={menuMode} active={menuActive} mobileMenuActive={staticMenuMobileActive} onMenuClick={onMenuClick} onMenuitemClick={onMenuitemClick} onRootMenuitemClick={onRootMenuitemClick}></AppMenu>}
+                <AppRightMenu rightMenuActive={rightMenuActive} onRightMenuClick={onRightMenuClick}></AppRightMenu>
+
+                <AppConfig configActive={configActive} menuMode={menuMode} onMenuModeChange={onMenuModeChange} menuTheme={menuTheme} onMenuThemeChange={onMenuThemeChange}
+                    colorScheme={colorScheme} onColorSchemeChange={onColorSchemeChange} onConfigClick={onConfigClick} onConfigButtonClick={onConfigButtonClick}
+                    rippleActive={ripple} onRippleChange={onRippleChange} inputStyle={inputStyle} onInputStyleChange={onInputStyleChange}></AppConfig>
+
+                <AppSearch searchActive={searchActive} onSearchClick={onSearchClick} onSearchHide={onSearchHide} />
+
+                <div className="layout-mask modal-in"></div>
             </div>
-
-            {menu && <AppMenu model={menu} menuMode={menuMode} active={menuActive} mobileMenuActive={staticMenuMobileActive} onMenuClick={onMenuClick} onMenuitemClick={onMenuitemClick} onRootMenuitemClick={onRootMenuitemClick}></AppMenu>}
-            <AppRightMenu rightMenuActive={rightMenuActive} onRightMenuClick={onRightMenuClick}></AppRightMenu>
-
-            <AppConfig configActive={configActive} menuMode={menuMode} onMenuModeChange={onMenuModeChange} menuTheme={menuTheme} onMenuThemeChange={onMenuThemeChange}
-                colorScheme={colorScheme} onColorSchemeChange={onColorSchemeChange} onConfigClick={onConfigClick} onConfigButtonClick={onConfigButtonClick}
-                rippleActive={ripple} onRippleChange={onRippleChange} inputStyle={inputStyle} onInputStyleChange={onInputStyleChange}></AppConfig>
-
-            <AppSearch searchActive={searchActive} onSearchClick={onSearchClick} onSearchHide={onSearchHide} />
-
-            <div className="layout-mask modal-in"></div>
         </div>
     );
 }

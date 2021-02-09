@@ -74,15 +74,14 @@ const AppSubmenu = (props) => {
         );
 
 
-        if (item.url) {
-            return <a href={item.url} rel="noopener noreferrer" {...commonLinkProps}>{content}</a>
-        }
-        else if (!item.to) {
-            return <button type="button" {...commonLinkProps}>{content}</button>
-        }
-
+        // if (item.url) {
+        //     return <a href={item.url} rel="noopener noreferrer" {...commonLinkProps}>{content}</a>
+        // }
+        // else if (!item.to) {
+        //     return <button type="button" {...commonLinkProps}>{content}</button>
+        // }
         return <NavLink to={{
-            pathname: item.to,
+            pathname: `/formlayout/${item.id}`,
             state: { ...item }
         }} exact activeClassName="active-route" {...commonLinkProps}>{content}</NavLink>;
     };
@@ -105,7 +104,7 @@ const AppSubmenu = (props) => {
                     );
 
                     return (
-                        <li key={item.title || i} className={menuitemClassName} role="menuitem">
+                        <li key={i} className={menuitemClassName} role="menuitem">
                             {link}
                             {rootMenuItem}
                             <CSSTransition classNames="layout-menu" timeout={transitionTimeout} in={isMenuActive(item, i)} unmountOnExit>
