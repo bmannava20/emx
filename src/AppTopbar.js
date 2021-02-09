@@ -19,11 +19,11 @@ const AppTopbar = (props) => {
                     <AppBreadcrumb routers={props.routers} />
                 </div>
 
-                <img id="logo-mobile" className="mobile-logo" src="assets/layout/images/logo-dark.svg" alt="diamond-layout" />
+                <img id="logo-mobile" className="mobile-logo" src="assets/layout/images/logo-dark.svg" />
             </div>
 
-            <div className="topbar-right">
-                {/*<ul className="topbar-menu">
+            {/*<div className="topbar-right">
+                <ul className="topbar-menu">
                     <li className="search-item">
                         <button type="button" className="p-link" onClick={props.onSearchClick}>
                             <i className="pi pi-search"></i>
@@ -127,8 +127,8 @@ const AppTopbar = (props) => {
                             <i className="pi pi-align-right"></i>
                         </button>
                     </li>
-                </ul>*/}
-            </div>
+                </ul>
+            </div>*/}
         </div>
     );
 }

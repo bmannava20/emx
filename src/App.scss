@@ -68,3 +68,52 @@ label {
   border-right: 0 none;
   background-image: linear-gradient(180deg, #f0f3f5 10%, #2e3439 100%);
 }
+
+
+.required-field {
+  border: 1px solid red!important;
+}
+.form-control {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.form-control {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.custom-select, .form-input-ctrl {
+  font-weight: 400;
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  border: 1px solid #bbb;
+  padding: 6px 25px 6px 5px;
+  color: #000;
+  height: 39px;
+}
+
+label {
+  color: #848484;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+}
+
+.p-button {
+  color: #fff;
+  background: #006a79;
+  border: 1px solid #006a79;
+  opacity: .9;
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  text-align: center;
+  height: 39px;
+  padding: 0 25px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border-radius: 0;
+}
+.drpdownwidth{
+  width:208%
+}
