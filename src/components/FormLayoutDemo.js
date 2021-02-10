@@ -33,7 +33,7 @@ export const FormLayoutDemo = () => {
                 <div className="card">
                     <div className="p-fluid p-formgrid p-grid">
                         <h5 className="p-field p-col-12 p-md-11">{data && data.title} ({data && data.company && data.company.companyId})</h5>
-                        <div className="p-field p-col-12 p-md-1">{!isEdit ? <Button label="Edit" onClick={() => { setIsEdit(!isEdit) }}></Button> : <Button onClick={() => { setIsEdit(!isEdit) }} label="Save"></Button>}</div>
+                        <div className="p-field p-col-12 p-md-1">{!isEdit ? <Button label="Edit" onClick={() => { setIsEdit(!isEdit) }}></Button> : <Button onClick={() => { setIsEdit(!isEdit) }} label="Cancel"></Button>}</div>
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-12 p-md-6">
