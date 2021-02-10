@@ -53,8 +53,8 @@ export const FormLayoutDemo = () => {
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-12 p-md-6">
                             {!isEdit ? <video width="320" height="240" controls>
-                                {/* <source src="{data && data.resourceLink}" type="video/mp4">
-                                    <source src="{data && data.resourceLink}" type="video/ogg">*/}
+                                <source src="sample.mp4" type="video/mp4"></source>
+                                <source src="sample.mp4" type="video/ogg"></source>
                             </video> : (<div><label>{data && data.resourceLink}</label><label htmlFor="videoLink">Video Link</label><FileUpload name="demo[]" disabled={!isEdit} url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>)}
                             {/* <FileUpload name="demo[]" disabled={!isEdit} url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /> */}
 
