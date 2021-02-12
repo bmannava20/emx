@@ -1,4 +1,5 @@
 .idea/
+src/.DS_Store
 CHANGELOG.md
 node_modules/
 node_modules/

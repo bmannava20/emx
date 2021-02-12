@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const AppTopMainBar = (props) => {
     return (
-        <div className="layout-topbar">
+        <div id="background-blue" className="layout-topbar ">
             <div className="topbar-left">
                 <Link to="/" className="logo">
                     <img id="app-logo" height={50} className="logo-image" src="assets/layout/images/emx.png" alt="diamond layout" />

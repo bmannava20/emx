@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { InputText } from 'primereact/inputtext';
 import { RadioButton } from 'primereact/radiobutton';
 import classNames from 'classnames';
-import {InputTextarea} from "primereact/inputtextarea";
-import {FileUpload} from "primereact/fileupload";
-import {Button} from "primereact/button";
-import {Dropdown} from "primereact/dropdown";
+import { FileUpload } from "primereact/fileupload";
+import { Button } from "primereact/button";
+import { Dropdown } from "primereact/dropdown";
+
 const AppNew = (props) => {
     const [onSelect, setOnSelect] = useState(null)
     let searchInputEl = null;
@@ -29,142 +29,61 @@ const AppNew = (props) => {
 
     const innerClass = classNames('p-field p-col-12 p-md-11')
 
-    const ChapaterContent = (<div>
-
-       <table>
-           <tbody>
-           <tr>
-            <td><label> Title </label></td>
-            <td><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} class /></td>
-           </tr>
-
-           <tr>
-               <td><label> Short description </label></td>
-               <td><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} class /></td>
-           </tr>
-           <tr>
-               <td><label> Tagtext </label></td>
-               <td><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} class /></td>
-           </tr>
-           <tr>
-               <td><label> Company IDs </label></td>
-               <td><Dropdown  className={"form-input-ctrl required-field form-control"}  optionLabel="name" placeholder="Select One"></Dropdown></td>
-           </tr>
-
-           <tr>
-               <td><label> Video </label></td>
-               <td><FileUpload name="demo[]" url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></td>
-           </tr>
-
-           <tr>
-               <td><label> Long description </label></td>
-               <td><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} class /></td>
-           </tr>
-           <tr>
-               <td><label></label></td>
-               <td>
-                   <Button label="Reset"></Button>
-                   <Button label="Submit"></Button>
-               </td>
-           </tr>
-           </tbody>
-       </table>
-
-    </div>)
-
-    const SectionContent = <div>
-        {/*<table><tbody>
-            <tr>
-                <td><label> Title </label></td>
-                <td><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} class /></td>
-            </tr>
-
-            <tr>
-                <td><label> Short description </label></td>
-                <td><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} class /></td>
-            </tr>
-            <tr>
-                <td><label> Tagtext </label></td>
-                <td><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} class /></td>
-            </tr>
-            <tr>
-                <td><label> Company IDs </label></td>
-                <td><Dropdown className={"form-input-ctrl required-field form-control"}  optionLabel="name" placeholder="Select One"></Dropdown></td>
-            </tr>
-            <tr>
-                <td><label> Chapter </label></td>
-                <td><Dropdown className={"form-input-ctrl required-field form-control"}  optionLabel="name" placeholder="Select One"></Dropdown></td>
-            </tr>
-            <tr>
-                <td><label> Video </label></td>
-                <td><FileUpload name="demo[]" url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></td>
-            </tr>
-
-            <tr>
-                <td><label> Long description </label></td>
-                <td><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} class /></td>
-            </tr>
-            <tr>
-                <td><label></label></td>
-                <td>
-                    <Button label="Submit"></Button>
-                </td>
-            </tr></tbody>
-        </table>*/}
-    </div>
-
     const SubSectionContent = <div>
-        {/*<table><tbody>
-            <tr>
-                <td><label> Title </label></td>
-                <td><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} class /></td>
-            </tr>
 
-            <tr>
-                <td><label> Short description </label></td>
-                <td><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} class /></td>
-            </tr>
-            <tr>
-                <td><label> Tagtext </label></td>
-                <td><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} class /></td>
-            </tr>
-            <tr>
-                <td><label> Company IDs </label></td>
-                <td><Dropdown className={"form-input-ctrl required-field form-control"}  optionLabel="name" placeholder="Select One"></Dropdown></td>
-            </tr>
-            <tr>
-                <td><label> Chapter </label></td>
-                <td><Dropdown  className={"form-input-ctrl required-field form-control"}  optionLabel="name" placeholder="Select One"></Dropdown></td>
-            </tr>
-            <tr>
-                <td><label> Section </label></td>
-                <td><Dropdown className={"form-input-ctrl required-field form-control"}  optionLabel="name" placeholder="Select One"></Dropdown></td>
-            </tr>
-            <tr>
-                <td><label> Video </label></td>
-                <td><FileUpload name="demo[]" url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></td>
-            </tr>
+            <div>
+                <div><label> Title </label></div>
+                <div><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }}/></div>
+            </div>
 
-            <tr>
-                <td><label> Long description </label></td>
-                <td><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} class /></td>
-            </tr>
-            <tr>
-                <td><label></label></td>
-                <td>
+            <div>
+                <div><label> Short description </label></div>
+                <div><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }}/></div>
+            </div>
+            <div>
+                <div><label> Tagtext </label></div>
+                <div><InputText className={"form-input-ctrl form-control"} onChange={(e) => { console.log(e.target.value); }}/></div>
+            </div>
+            <div>
+                <div><label> Company IDs </label></div>
+                <div><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
+            </div>
+            {(onSelect === "Section" || onSelect === "SubSection") && <div>
+                <div><label> Chapter </label></div>
+                <div><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
+            </div>}
+            {onSelect === "SubSection" && <div>
+                <div><label> Section </label></div>
+                <div><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
+            </div>}
+            <div>
+                <div><label> Video </label></div>
+                <div><FileUpload name="demo[]" url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>
+            </div>
+
+            <div>
+                <div><label> Long description </label></div>
+                <div><InputText className={"form-input-ctrl form-control"} onChange={(e) => { console.log(e.target.value); }} /></div>
+            </div>
+
+            <div className="p-fluid p-formgrid p-grid">
+                <div className="p-field p-col-4 p-md-4 p-lg-6"></div>
+                <div className="p-field p-col-4 p-md-4 p-lg-3">
                     <Button label="Submit"></Button>
-                </td>
-            </tr></tbody>
-        </table>*/}
+                </div>
+                <div className="p-field p-col-4 p-md-4 p-lg-3">
+                    <Button label="Cancel"></Button>
+                </div>
+            </div>
     </div>
 
 
     const getContent = () => {
         switch (onSelect) {
             case "Chapter":
-                return ChapaterContent
+                return SubSectionContent
             case "Section":
-                return SectionContent
+                return SubSectionContent
             case "SubSection":
                 return SubSectionContent
             default:
