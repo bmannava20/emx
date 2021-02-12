@@ -15,14 +15,6 @@ const AppNew = (props) => {
         console.log(e, "select");
     }
     const toast = useRef(null);
-    const onInputKeydown = (event) => {
-        const key = event.which;
-
-        //escape, tab and enter
-        if (key === 27 || key === 9 || key === 13) {
-            props.onSearchHide(event);
-        }
-    };
 
     const onEnter = () => {
         if (searchInputEl) {
@@ -40,6 +32,7 @@ const AppNew = (props) => {
     const ChapaterContent = (<div>
 
        <table>
+           <tbody>
            <tr>
             <td><label> Title </label></td>
             <td><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} class /></td>
@@ -70,15 +63,17 @@ const AppNew = (props) => {
            <tr>
                <td><label></label></td>
                <td>
+                   <Button label="Reset"></Button>
                    <Button label="Submit"></Button>
                </td>
            </tr>
+           </tbody>
        </table>
 
     </div>)
 
     const SectionContent = <div>
-        <table>
+        {/*<table><tbody>
             <tr>
                 <td><label> Title </label></td>
                 <td><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} class /></td>
@@ -114,12 +109,12 @@ const AppNew = (props) => {
                 <td>
                     <Button label="Submit"></Button>
                 </td>
-            </tr>
-        </table>
+            </tr></tbody>
+        </table>*/}
     </div>
 
     const SubSectionContent = <div>
-        <table>
+        {/*<table><tbody>
             <tr>
                 <td><label> Title </label></td>
                 <td><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} class /></td>
@@ -159,8 +154,8 @@ const AppNew = (props) => {
                 <td>
                     <Button label="Submit"></Button>
                 </td>
-            </tr>
-        </table>
+            </tr></tbody>
+        </table>*/}
     </div>
 
 
