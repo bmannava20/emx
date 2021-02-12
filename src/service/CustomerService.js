@@ -21,4 +21,7 @@ export default class CustomerService {
     getSidebar() {
         return axios.get('assets/demo/data/sidebar.json').then(res => res.data);
     }
+    getSection() {
+        return axios.get('assets/demo/data/section.json').then(res => res.data);
+    }
 }

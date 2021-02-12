@@ -1,40 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { RadioButton } from 'primereact/radiobutton';
 const AppSearch = (props) => {
-
+    const [onSelect, setOnSelect] = useState(null)
     let searchInputEl = null;
-    function setValue(e){
-
+    function setValue(e) {
+        setOnSelect(e);
+        console.log(e, "select");
     }
 
-    const onInputKeydown = (event) => {
-        const key = event.which;
 
-        //escape, tab and enter
-        if (key === 27 || key === 9 || key === 13) {
-            props.onSearchHide(event);
+    const ChapaterContent = (<div className="p-field p-col-12 p-md-6">
+        <label>Chapter</label>
+        <InputText rows="5.5" onChange={(e) => { console.log(e.target.value); }} />
+    </div>)
+
+    const SectionContent = <div className="p-field p-col-12 p-md-6">
+        <label>Section</label>
+        <InputText rows="5.5" onChange={(e) => { console.log(e.target.value); }} />
+    </div>
+
+    const SubSectionContent = <div className="p-field p-col-12 p-md-6">
+        <label>SubSection</label>
+        <InputText rows="5.5" onChange={(e) => { console.log(e.target.value); }} />
+    </div>
+
+
+    const getContent = () => {
+        switch (onSelect) {
+            case "Chapter":
+                return ChapaterContent
+            case "Section":
+                return SectionContent
+            case "SubSection":
+                return SubSectionContent
+            default:
+                return ""
         }
-    };
-
-    const onEnter = () => {
-        if (searchInputEl) {
-            searchInputEl.focus();
-        }
-    };
-
+    }
     return (
         <div className="layout-search">
-            <CSSTransition classNames="search-container" timeout={{ enter: 400, exit: 400 }} in={props.searchActive} unmountOnExit onEnter={onEnter}>
+            <CSSTransition className="search-container" timeout={{ enter: 400, exit: 400 }} in={props.searchActive} unmountOnExit onEnter={onEnter}>
                 <div className="search-container" onClick={props.onSearchClick}>
-
-                    <RadioButton value="val1" name="chapter" onChange={(e) => setValue(e.value)}  /> &nbsp;&nbsp;Chapter &nbsp;&nbsp;&nbsp;
-                    <RadioButton value="val2" name="section" onChange={(e) => setValue(e.value)}  /> &nbsp;&nbsp;Section &nbsp;&nbsp;&nbsp;
-                    <RadioButton value="val2" name="subsection" onChange={(e) => setValue(e.value)}  /> &nbsp;&nbsp; SubSection
-
+                    <div className="p-fluid p-formgrid p-grid">
+                        <div className="p-field p-col-12 p-md-6">
+                            <RadioButton value="Chapter" name="chapter" onChange={(e) => setValue(e.value)} /> &nbsp;&nbsp;Chapter1 &nbsp;&nbsp;&nbsp;
+                            <RadioButton value="Section" name="section" onChange={(e) => setValue(e.value)} /> &nbsp;&nbsp;Section1 &nbsp;&nbsp;&nbsp;
+                            <RadioButton value="SubSection" name="subsection" onChange={(e) => setValue(e.value)} /> &nbsp;&nbsp; SubSection1
+                        </div>
+                        {getContent()}
+                    </div>
                 </div>
             </CSSTransition>
         </div>

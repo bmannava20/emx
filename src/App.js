@@ -6,40 +6,10 @@ import AppTopBar from './AppTopbar';
 import AppFooter from './AppFooter';
 import AppConfig from './AppConfig';
 import AppMenu from './AppMenu';
-import AppSearch from './AppSearch';
+import AppNew from './AppNew';
 import AppRightMenu from './AppRightMenu';
 import AppTopMainBar from './TopBar';
-import { Dashboard } from './components/Dashboard';
 import { FormLayoutDemo } from './components/FormLayoutDemo';
-import { InputDemo } from './components/InputDemo';
-import { FloatLabelDemo } from './components/FloatLabelDemo';
-import { ButtonDemo } from './components/ButtonDemo';
-import { TableDemo } from './components/TableDemo';
-import { ListDemo } from './components/ListDemo';
-import { TreeDemo } from './components/TreeDemo';
-import { PanelDemo } from './components/PanelDemo';
-import { OverlayDemo } from './components/OverlayDemo';
-import { MediaDemo } from './components/MediaDemo';
-import { MenuDemo } from './components/MenuDemo';
-import { MessagesDemo } from './components/MessagesDemo';
-import { FileDemo } from './components/FileDemo';
-import { ChartDemo } from './components/ChartDemo';
-import { MiscDemo } from './components/MiscDemo';
-import { Documentation } from './components/Documentation';
-import { IconsDemo } from './utilities/IconsDemo';
-import { Widgets } from './utilities/Widgets';
-import { GridDemo } from './utilities/GridDemo';
-import { SpacingDemo } from './utilities/SpacingDemo';
-import { ElevationDemo } from './utilities/ElevationDemo';
-import { TextDemo } from './utilities/TextDemo';
-import { TypographyDemo } from './utilities/TypographyDemo';
-import { DisplayDemo } from './utilities/DisplayDemo';
-import { FlexBoxDemo } from './utilities/FlexBoxDemo';
-import { CrudDemo } from './pages/CrudDemo';
-import { CalendarDemo } from './pages/CalendarDemo';
-import { Invoice } from './pages/Invoice';
-import { Help } from './pages/Help';
-import { EmptyPage } from './pages/EmptyPage';
 import CustomerService from './service/CustomerService';
 import PrimeReact from 'primereact/utils';
 
@@ -468,7 +438,7 @@ const App = () => {
                     colorScheme={colorScheme} onColorSchemeChange={onColorSchemeChange} onConfigClick={onConfigClick} onConfigButtonClick={onConfigButtonClick}
                     rippleActive={ripple} onRippleChange={onRippleChange} inputStyle={inputStyle} onInputStyleChange={onInputStyleChange}></AppConfig>
 
-                <AppSearch searchActive={searchActive} onSearchClick={onSearchClick} onSearchHide={onSearchHide} />
+                <AppNew searchActive={searchActive} onSearchClick={onSearchClick} onSearchHide={onSearchHide} />
 
                 <div className="layout-mask modal-in"></div>
             </div>
