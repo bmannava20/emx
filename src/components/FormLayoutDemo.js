@@ -20,12 +20,11 @@ export const FormLayoutDemo = () => {
 
     useEffect(() => {
         const customerService = new CustomerService();
-        customerService.getSection().then(data => { console.log("called", typeof data); setData(data) });
+        customerService.getSection().then(data => { setData(data) });
     }, [history.location.state]);
 
 
     useEffect(() => {
-        console.log(data && data.resourceLink);
         setDropdownItem(data && data.chapter)
     }, [data])
 
@@ -55,7 +54,7 @@ export const FormLayoutDemo = () => {
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-12 p-md-6">
-                            {!isEdit ? <video width="320" height="240" controls>
+                            {!isEdit ? <video width="520" height="520" controls>
                                 {/* <source  src={data && data.resourceLink} type="video/youtube" ></source> */}
                                 <source src="/assets/video/videoplayback.mp4" type="video/mp4"></source>
                                 <source src="/assets/video/videoplayback.mp4" type="video/ogg"></source>
@@ -74,20 +73,21 @@ export const FormLayoutDemo = () => {
                         </div>
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
-                        <div className="p-field p-col-9 p-md-9"></div>
-                        <div className="p-field p-col-2 p-md-1">
-                            {!isEdit ? "" : <Button label="Reset"></Button>}
-                        </div>
+                        <div className="p-field  p-col-9"></div>
+                            <div className=" p-col-1 ">
+                                {!isEdit ? "" : <Button label="Reset"></Button>}
+                            </div>
 
-                        <div className="p-field p-col-2 p-md-1">
-                            {!isEdit ? "" : <Button label="Cancel"></Button>}
-                        </div>
-                        <div className="p-field p-col-2 p-md-1">
-                            {!isEdit ? "" : <Button label="Submit"></Button>}
+                            <div className=" p-col-1 ">
+                                {!isEdit ? "" : <Button label="Cancel"></Button>}
+                            </div>
+                            <div className=" p-col-1 ">
+                                {!isEdit ? "" : <Button label="Submit"></Button>}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+             </div>
+
     )
 }

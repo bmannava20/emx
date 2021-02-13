@@ -1379,7 +1379,6 @@ left: 0;
     .layout-search .search-container input {
       appearance: none;
       font-size: 1.5rem;
-      text-indent: 2.5rem;
       padding: .5rem;
       width: 100%; }
     .layout-search .search-container i {

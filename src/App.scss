@@ -19,50 +19,6 @@ $gutter: 1rem;
   background: #eee;
   color:#000
 }
-/*
-.layout-sidebar-darkgray .layout-sidebar .layout-menu .layout-root-menuitem > ul > li:hover {
-  background: #fff;
-  color:#000
-}
-
-.layout-menu ul a.active-route, .layout-menu ul .p-link {
-  font-weight: 700;
-  font-size: medium;
-  background-color: #0097AC;
-  color: #000;
-}
-
-.required-field {
-  border: 1px solid red!important;
-}
-.form-control {
-  box-shadow: none;
-  border-radius: 0;
-}
-
-.form-control {
-  box-shadow: none;
-  border-radius: 0;
-}
-
-.custom-select, .form-input-ctrl {
-  font-weight: 400;
-  font-family: Helvetica,Arial,sans-serif;
-  font-size: 13px;
-  border: 1px solid #bbb;
-  padding: 6px 25px 6px 5px;
-  color: #000;
-  height: 39px;
-}
-
-label {
-  color: #848484;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 13px;
-}
-.layout-sidebar{
-  background-color: #ffffff!important;
-}*/
 .layout-sidebar-darkgray .layout-sidebar {
   background: #343a40;
   border-right: 0 none;
@@ -109,7 +65,7 @@ label {
   font-weight: 400;
   text-align: center;
   height: 39px;
-  padding: 0 25px;
+  padding: 0 5px;
   margin-right: 5px;
   margin-bottom: 5px;
   border-radius: 0;
