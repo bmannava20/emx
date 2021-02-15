@@ -66,7 +66,7 @@ const AppSubmenu = (props) => {
         const menuitemIconClassName = classNames('layout-menuitem-icon', item.items ? index === activeIndex ? "pi pi-fw pi-minus" : "pi pi-fw pi-plus" : "");
         const content = (
             <>
-                <i className={menuitemIconClassName}></i>
+                <i style={{width:'18px'}} className={menuitemIconClassName}></i>
                 <span className="layout-menuitem-text">{item.title}</span>
                 {item.items && <i className="pi pi-fw pi-angle-down layout-submenu-toggler"></i>}
                 <Ripple />
