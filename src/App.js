@@ -330,7 +330,7 @@ const App = () => {
     };
 
     const onSearchClick = () => {
-        searchClick = true;
+        searchClick = !searchClick;
     };
 
     const onSearchHide = () => {
@@ -412,9 +412,11 @@ const App = () => {
 
     return (
         <div>
-            <AppTopMainBar />
+            <div className="header sticky">
+                <AppTopMainBar />
+            </div>
             <div className={containerClassName} data-theme={colorScheme} onClick={onDocumentClick}>
-                <div className="layout-content-wrapper">
+                <div className="layout-content-wrapper mt-4">
                     <AppTopBar routers={routers} topbarNotificationMenuActive={topbarNotificationMenuActive} topbarUserMenuActive={topbarUserMenuActive} onMenuButtonClick={onMenuButtonClick} onSearchClick={toggleSearch}
                         onTopbarNotification={onTopbarNotificationMenuButtonClick} onTopbarUserMenu={onTopbarUserMenuButtonClick} onRightMenuClick={onRightMenuButtonClick} onRightMenuButtonClick={onRightMenuButtonClick}></AppTopBar>
 

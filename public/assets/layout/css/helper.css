@@ -1,0 +1,29 @@
+
+/* Page content */
+.content {
+    padding: 16px;
+}
+  
+  /* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%
+}
+  
+.mt-4{
+  margin-top:4em;
+}
+  /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 102px;
+}
+  
+#dropdown, #action{
+  position:unset;
+  opacity: unset;
+}
+
+.fill-width{
+  width:100%;
+}

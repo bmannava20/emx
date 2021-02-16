@@ -34,7 +34,7 @@ export const FormLayoutDemo = () => {
                 <div className="card">
                     <div className="p-fluid p-formgrid p-grid">
                         <h5 className="p-field p-col-12 p-md-11">{data && data.title} ({data && data.company && data.company.companyId})</h5>
-                        <div className="p-field p-col-12 p-md-1">{!isEdit ? <Button label="Edit" onClick={() => { setIsEdit(!isEdit) }}></Button> : <Button onClick={() => { setIsEdit(!isEdit) }} label="Cancel"></Button>}</div>
+                        <div className="p-field p-col-12 p-md-1">{!isEdit ? <Button  id="action" label="Edit" onClick={() => { setIsEdit(!isEdit) }}></Button> : <Button  id="action" onClick={() => { setIsEdit(!isEdit) }} label="Cancel"></Button>}</div>
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-12 p-md-6">
@@ -44,7 +44,7 @@ export const FormLayoutDemo = () => {
                         </div>
                         <div className="p-field p-col-12 p-md-3">
                             {!isEdit ? "" : (<div> <label htmlFor="companyID">Company ID's</label>
-                                <Dropdown id="companyID" className={"form-input-ctrl required-field form-control drpdownwidth"} value={dropdownItem} disabled={!isEdit} onChange={(e) => setDropdownItem(e.value)} options={data && data.chapters} optionLabel="title" placeholder="Select One"></Dropdown></div>)}
+                                <Dropdown id="dropdown" className={"form-input-ctrl required-field form-control drpdownwidth"} value={dropdownItem} disabled={!isEdit} onChange={(e) => setDropdownItem(e.value)} options={data && data.chapters} optionLabel="title" placeholder="Select One"></Dropdown></div>)}
                         </div>
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
@@ -53,17 +53,19 @@ export const FormLayoutDemo = () => {
                         </div>
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
-                        <div className="p-field p-col-12 p-md-6">
+                        <div className="p-field p-col-12">
                             {!isEdit ? <video width="520" height="520" controls>
                                 {/* <source  src={data && data.resourceLink} type="video/youtube" ></source> */}
                                 <source src="/assets/video/videoplayback.mp4" type="video/mp4"></source>
                                 <source src="/assets/video/videoplayback.mp4" type="video/ogg"></source>
                                 Your browser does not support the video tag.
-                            </video> : (<div><label>{data && data.resourceLink}</label><label htmlFor="videoLink">Video Link</label><FileUpload name="demo[]" disabled={!isEdit} url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>)}
+                            </video> : (<div><label htmlFor="videoLink">Video Link</label><FileUpload name="demo[]" disabled={!isEdit} url="./upload.php" emptyTemplate={<div>{data && data.resourceLink}</div>} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>)}
                             {/* <FileUpload name="demo[]" disabled={!isEdit} url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /> */}
 
                         </div>
-                        <div className="p-field p-col-12 p-md-6">
+                    </div>
+                    <div className="p-fluid p-formgrid p-grid">
+                        <div className="p-field p-col-12">
 
                             {!isEdit ? "" : (<div><label htmlFor="tagText">Tag text/Names</label> <InputTextarea rows="5.5" id="tagText" type="text" className={"form-control"} disabled={!isEdit} value={data && data.tagText} onChange={(e) => { console.log(e.target.value); setData({ ...data, tagText: e.target.value }) }} /></div>)}
                         </div>
@@ -72,17 +74,18 @@ export const FormLayoutDemo = () => {
                             {!isEdit ? <label>{data && data.description}</label> : (<div><label htmlFor="longDesc">Long Description</label> <InputTextarea id="longDesc" rows="8" className={"form-control"} disabled={!isEdit} value={data && data.description} onChange={(e) => { console.log(e.target.value); setData({ ...data, description: e.target.value }) }} /></div>)}
                         </div>
                     </div>
+
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field  p-col-9"></div>
                             <div className=" p-col-1 ">
-                                {!isEdit ? "" : <Button label="Reset"></Button>}
+                                {!isEdit ? "" : <Button  id="action" label="Reset"></Button>}
                             </div>
 
                             <div className=" p-col-1 ">
-                                {!isEdit ? "" : <Button label="Cancel"></Button>}
+                                {!isEdit ? "" : <Button  id="action" label="Cancel"></Button>}
                             </div>
                             <div className=" p-col-1 ">
-                                {!isEdit ? "" : <Button label="Submit"></Button>}
+                                {!isEdit ? "" : <Button  id="action" label="Submit"></Button>}
                             </div>
                         </div>
                     </div>

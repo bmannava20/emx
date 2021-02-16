@@ -8,7 +8,7 @@ import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
 
 const AppNew = (props) => {
-    const [onSelect, setOnSelect] = useState(null)
+    const [onSelect, setOnSelect] = useState("Chapter")
     let searchInputEl = null;
     function setValue(e) {
         setOnSelect(e);
@@ -29,50 +29,48 @@ const AppNew = (props) => {
 
     const innerClass = classNames('p-field p-col-12 p-md-11')
 
-    const SubSectionContent = <div>
-
-            <div>
-                <div><label> Title </label></div>
-                <div><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }}/></div>
+    const SubSectionContent = <div className="p-fluid p-formgrid p-grid">
+            <div className="p-fluid p-formgrid p-grid fill-width">
+                <div  className="p-field p-col-2"><label> Title </label></div>
+                <div  className="p-field p-col-10"><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }}/></div>
             </div>
-
-            <div>
-                <div><label> Short description </label></div>
-                <div><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }}/></div>
+            <div className="p-fluid p-formgrid p-grid fill-width">
+                <div className="p-field p-col-2"><label> Short description </label></div>
+                <div className="p-field p-col-10"><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }}/></div>
             </div>
-            <div>
-                <div><label> Tagtext </label></div>
-                <div><InputText className={"form-input-ctrl form-control"} onChange={(e) => { console.log(e.target.value); }}/></div>
+            <div className="p-fluid p-formgrid p-grid fill-width">
+                <div  className="p-field p-col-2"><label> Tagtext </label></div>
+                <div className="p-field p-col-10"><InputText className={"form-input-ctrl form-control"} onChange={(e) => { console.log(e.target.value); }}/></div>
             </div>
-            <div>
-                <div><label> Company IDs </label></div>
-                <div><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
+            <div className="p-fluid p-formgrid p-grid fill-width">
+                <div className="p-field p-col-2"><label> Company IDs </label></div>
+                <div className="p-field p-col-10"><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
             </div>
-            {(onSelect === "Section" || onSelect === "SubSection") && <div>
-                <div><label> Chapter </label></div>
-                <div><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
+            {(onSelect === "Section" || onSelect === "SubSection") && <div className="p-fluid p-formgrid p-grid fill-width">
+                <div className="p-field p-col-2"><label> Chapter </label></div>
+                <div className="p-field p-col-10"><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
             </div>}
-            {onSelect === "SubSection" && <div>
-                <div><label> Section </label></div>
-                <div><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
+            {onSelect === "SubSection" && <div className="p-fluid p-formgrid p-grid fill-width">
+                <div className="p-field p-col-2"><label> Section </label></div>
+                <div  className="p-field p-col-10"><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
             </div>}
-            <div>
-                <div><label> Video </label></div>
-                <div><FileUpload name="demo[]" url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>
+            <div className="p-fluid p-formgrid p-grid fill-width">
+                <div className="p-field p-col-2"><label> Video </label></div>
+                <div className="p-field p-col-10"><FileUpload name="demo[]" url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>
             </div>
 
-            <div>
-                <div><label> Long description </label></div>
-                <div><InputText className={"form-input-ctrl form-control"} onChange={(e) => { console.log(e.target.value); }} /></div>
+            <div className="p-fluid p-formgrid p-grid fill-width">
+                <div className="p-field p-col-2"><label> Long description </label></div>
+                <div className="p-field p-col-10"><InputText className={"form-input-ctrl form-control"} onChange={(e) => { console.log(e.target.value); }} /></div>
             </div>
 
-            <div className="p-fluid p-formgrid p-grid">
+            <div className="p-fluid p-formgrid p-grid fill-width">
                 <div className="p-field p-col-4 p-md-4 p-lg-6"></div>
                 <div className="p-field p-col-4 p-md-4 p-lg-3">
                     <Button label="Submit"></Button>
                 </div>
                 <div className="p-field p-col-4 p-md-4 p-lg-3">
-                    <Button label="Cancel"></Button>
+                    <Button label="Cancel" onClick={props.onSearchClick}></Button>
                 </div>
             </div>
     </div>
@@ -100,9 +98,9 @@ const AppNew = (props) => {
                             display: 'flex',
                             alignItems: 'center'
                         }}>
-                            <RadioButton value="Chapter" name="chapter" onChange={(e) => setValue(e.value)} />&nbsp;Chapter&nbsp;
-                            <RadioButton value="Section" name="section" onChange={(e) => setValue(e.value)} />&nbsp;Section&nbsp;
-                            <RadioButton value="SubSection" name="subsection" onChange={(e) => setValue(e.value)} />&nbsp;SubSection&nbsp;
+                            <RadioButton value="Chapter" checked={onSelect === 'Chapter'} name="chapter" onChange={(e) => setValue(e.value)} />&nbsp;Chapter&nbsp;
+                            <RadioButton value="Section" checked={onSelect === 'Section'} name="section" onChange={(e) => setValue(e.value)} />&nbsp;Section&nbsp;
+                            <RadioButton value="SubSection" checked={onSelect === 'SubSection'} name="subsection" onChange={(e) => setValue(e.value)} />&nbsp;SubSection&nbsp;
                         </div>
                         <div className={innerClass}>
                             {getContent()}
