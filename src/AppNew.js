@@ -12,7 +12,6 @@ const AppNew = (props) => {
     let searchInputEl = null;
     function setValue(e) {
         setOnSelect(e);
-        console.log(e, "select");
     }
     const toast = useRef(null);
 
@@ -31,20 +30,8 @@ const AppNew = (props) => {
 
     const SubSectionContent = <div className="p-fluid p-formgrid p-grid">
             <div className="p-fluid p-formgrid p-grid fill-width">
-                <div  className="p-field p-col-2"><label> Title </label></div>
+                <div  className="p-field p-col-2"><label> {onSelect} </label></div>
                 <div  className="p-field p-col-10"><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }}/></div>
-            </div>
-            <div className="p-fluid p-formgrid p-grid fill-width">
-                <div className="p-field p-col-2"><label> Short description </label></div>
-                <div className="p-field p-col-10"><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }}/></div>
-            </div>
-            <div className="p-fluid p-formgrid p-grid fill-width">
-                <div  className="p-field p-col-2"><label> Tagtext </label></div>
-                <div className="p-field p-col-10"><InputText className={"form-input-ctrl form-control"} onChange={(e) => { console.log(e.target.value); }}/></div>
-            </div>
-            <div className="p-fluid p-formgrid p-grid fill-width">
-                <div className="p-field p-col-2"><label> Company IDs </label></div>
-                <div className="p-field p-col-10"><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
             </div>
             {(onSelect === "Section" || onSelect === "SubSection") && <div className="p-fluid p-formgrid p-grid fill-width">
                 <div className="p-field p-col-2"><label> Chapter </label></div>
@@ -54,6 +41,21 @@ const AppNew = (props) => {
                 <div className="p-field p-col-2"><label> Section </label></div>
                 <div  className="p-field p-col-10"><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
             </div>}
+            <div className="p-fluid p-formgrid p-grid fill-width">
+                <div className="p-field p-col-2"><label> Short description </label></div>
+                <div className="p-field p-col-10"><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }}/></div>
+            </div>
+
+            <div className="p-fluid p-formgrid p-grid fill-width">
+                <div className="p-field p-col-2"><label> Company IDs </label></div>
+                <div className="p-field p-col-10"><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
+            </div>
+
+            <div className="p-fluid p-formgrid p-grid fill-width">
+                <div  className="p-field p-col-2"><label> Tagtext </label></div>
+                <div className="p-field p-col-10"><InputText className={"form-input-ctrl form-control"} onChange={(e) => { console.log(e.target.value); }}/></div>
+            </div>
+
             <div className="p-fluid p-formgrid p-grid fill-width">
                 <div className="p-field p-col-2"><label> Video </label></div>
                 <div className="p-field p-col-10"><FileUpload name="demo[]" url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>
