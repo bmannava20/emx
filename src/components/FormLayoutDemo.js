@@ -53,7 +53,7 @@ export const FormLayoutDemo = () => {
                         </div>
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
-                        <div className="p-field p-col-12 p-md-6">
+                        <div className="p-field p-col-12 p-md-12">
                             {!isEdit ? <video width="520" height="520" controls>
                                 {/* <source  src={data && data.resourceLink} type="video/youtube" ></source> */}
                                 <source src="/assets/video/videoplayback.mp4" type="video/mp4"></source>
@@ -65,7 +65,7 @@ export const FormLayoutDemo = () => {
                         </div>
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
-                        <div className="p-field p-col-12 p-md-6">
+                        <div className="p-field p-col-12 p-md-12">
 
                             {!isEdit ? "" : (<div><label htmlFor="tagText">Tag text/Names</label> <InputTextarea rows="5.5" id="tagText" type="text" className={"form-control"} disabled={!isEdit} value={data && data.tagText} onChange={(e) => { console.log(e.target.value); setData({ ...data, tagText: e.target.value }) }} /></div>)}
                         </div>

@@ -27,3 +27,20 @@
 .fill-width{
   width:100%;
 }
+
+.addnew{
+  height:600px;
+}
+
+.center-radio{
+  width: 100%;
+  display: flex;
+  padding: 15px;
+  justify-content: center;
+  cursor:pointer;
+}
+
+.center{
+    display: flex;
+    align-items: center
+}
