@@ -12,7 +12,7 @@ import AppTopMainBar from './TopBar';
 import { FormLayoutDemo } from './components/FormLayoutDemo';
 import CustomerService from './service/CustomerService';
 import PrimeReact from 'primereact/utils';
-
+import 'dotenv';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
