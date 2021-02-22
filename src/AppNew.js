@@ -30,36 +30,36 @@ const AppNew = (props) => {
 
     const SubSectionContent = <div className="p-fluid p-formgrid p-grid addnew fill-width">
         <div className="p-fluid p-formgrid p-grid fill-width">
-            <div className="p-field p-col-2"><label> {onSelect} </label></div>
-            <div className="p-field p-col-10"><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} /></div>
+            <div className="p-field p-col-3 center"><label> {onSelect} </label></div>
+            <div className="p-field p-col-9"><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} /></div>
         </div>
         {(onSelect === "Section" || onSelect === "SubSection") && <div className="p-fluid p-formgrid p-grid fill-width">
-            <div className="p-field p-col-2"><label> Chapter </label></div>
-            <div className="p-field p-col-10"><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
+            <div className="p-field p-col-3 center"><label> Chapter </label></div>
+            <div className="p-field p-col-9"><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
         </div>}
         {onSelect === "SubSection" && <div className="p-fluid p-formgrid p-grid fill-width">
-            <div className="p-field p-col-2"><label> Section </label></div>
-            <div className="p-field p-col-10"><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
+            <div className="p-field p-col-3 center"><label> Section </label></div>
+            <div className="p-field p-col-9"><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
         </div>}
         <div className="p-fluid p-formgrid p-grid fill-width">
-            <div className="p-field p-col-2"><label> Short description </label></div>
-            <div className="p-field p-col-10"><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} /></div>
+            <div className="p-field p-col-3 center"><label> Short description </label></div>
+            <div className="p-field p-col-9"><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} /></div>
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
-            <div className="p-field p-col-2"><label> Company IDs </label></div>
-            <div className="p-field p-col-10"><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
+            <div className="p-field p-col-3 center"><label> Company IDs </label></div>
+            <div className="p-field p-col-9"><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
-            <div className="p-field p-col-2"><label> Tagtext </label></div>
-            <div className="p-field p-col-10"><InputText className={"form-input-ctrl form-control"} onChange={(e) => { console.log(e.target.value); }} /></div>
+            <div className="p-field p-col-3 center"><label> Tagtext </label></div>
+            <div className="p-field p-col-9"><InputText className={"form-input-ctrl form-control"} onChange={(e) => { console.log(e.target.value); }} /></div>
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
-            <div className="p-field p-col-2"><label> Video </label></div>
-            <div className="p-field p-col-10"><FileUpload name="demo[]" url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>
+            <div className="p-field p-col-3 center"><label> Video </label></div>
+            <div className="p-field p-col-9"><FileUpload name="demo[]" url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
-            <div className="p-field p-col-2"><label> Long description </label></div>
-            <div className="p-field p-col-10"><InputText className={"form-input-ctrl form-control"} onChange={(e) => { console.log(e.target.value); }} /></div>
+            <div className="p-field p-col-3 center"><label> Long description </label></div>
+            <div className="p-field p-col-9"><InputText className={"form-input-ctrl form-control"} onChange={(e) => { console.log(e.target.value); }} /></div>
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-4 p-md-4 p-lg-6"></div>
