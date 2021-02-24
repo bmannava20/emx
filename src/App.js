@@ -11,12 +11,15 @@ import AppRightMenu from './AppRightMenu';
 import AppTopMainBar from './TopBar';
 import { FormLayoutDemo } from './components/FormLayoutDemo';
 import CustomerService from './service/CustomerService';
+import GetDataService from "./service/GetDataService";
 import PrimeReact from 'primereact/utils';
-import 'dotenv';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import './App.scss';
+import axios from 'axios';
+require('dotenv').config();
+
 
 const App = () => {
 
@@ -35,6 +38,7 @@ const App = () => {
     const [inputStyle, setInputStyle] = useState('outlined');
     const [ripple, setRipple] = useState(false);
     const [menuList, setMenu] = useState([]);
+    const [companyData, setCompanyData] = useState([]);
     let menuClick = false;
     let searchClick = false;
     let userMenuClick = false;
@@ -43,8 +47,20 @@ const App = () => {
     let configClick = false;
 
     useEffect(() => {
-        const customerService = new CustomerService();
-        customerService.getSidebar().then(data => setMenu(data.items));
+        // const customerService = new CustomerService();
+        // customerService.getSidebar().then(data => setMenu(data.items));
+    }, []);
+
+    useEffect(() => {
+        console.log(process.env.TRAINING_APP_BASE_URL)
+        const getDataService = new GetDataService(process.env.TRAINING_APP_BASE_URL);
+        getDataService.getSidebarData('JOR').then((data) => {
+            console.log('data >>',data)
+            setMenu(data.contents);
+            setCompanyData(data.companies);
+        }).catch((err)=>{
+            console.log('err >>',err)
+        });
     }, []);
 
     const menu = [
@@ -301,7 +317,7 @@ const App = () => {
                     colorScheme={colorScheme} onColorSchemeChange={onColorSchemeChange} onConfigClick={onConfigClick} onConfigButtonClick={onConfigButtonClick}
                     rippleActive={ripple} onRippleChange={onRippleChange} inputStyle={inputStyle} onInputStyleChange={onInputStyleChange}></AppConfig>
 
-                <AppNew searchActive={searchActive} onSearchClick={onSearchClick} onSearchHide={onSearchHide} />
+                <AppNew companyData={companyData} searchActive={searchActive} onSearchClick={onSearchClick} onSearchHide={onSearchHide}  />
 
                 <div className="layout-mask modal-in"></div>
             </div>

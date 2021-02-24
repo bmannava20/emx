@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { InputText } from 'primereact/inputtext';
 import { RadioButton } from 'primereact/radiobutton';
@@ -6,10 +6,20 @@ import classNames from 'classnames';
 import { FileUpload } from "primereact/fileupload";
 import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
-
+import AddServiceData from "./service/AddServiceData";
+import GetDataService from "./service/GetDataService";
 const AppNew = (props) => {
+    const [curData,setCurData] = useState({});
     const [onSelect, setOnSelect] = useState("Chapter")
     let searchInputEl = null;
+    // eslint-disable-next-line no-unused-vars
+    const [chapterData,setChapterData] = useState([]);
+    const [sectionData,setSectionData] = useState([]);
+    const companyIds = props.companyData.map(company=>{
+        company.label = company.name;
+        company.value = company.id;
+        return company;
+    })
     function setValue(e) {
         setOnSelect(e);
     }
@@ -21,6 +31,55 @@ const AppNew = (props) => {
         }
     };
 
+    useEffect(()=>{
+        console.log(curData);
+    },[curData])
+
+    useEffect(()=>{
+        if(onSelect == 'Section' || onSelect == 'SubSection'){
+            const getDataService = new GetDataService();
+            getDataService.getChapterDropDwnData(curData.companyId).then(res=>{
+                console.log(res,'>>>>>> data');
+                //setChapterData(res.data);
+            })
+        }
+
+
+    },[curData.companyId])
+
+    useEffect(()=>{
+        if(onSelect == 'SubSection'){
+            const getDataService = new GetDataService();
+            getDataService.getSectionDropDwnData(curData.Chapter).then(res=>{
+                console.log(res,'>>>>>> data');
+                //setSectionData(res.data);
+            })
+        }
+    },[curData.Chapter])
+
+    const addChapter = (data)=>{
+        const {title,tagtext,shortDesc,resourceLink,description,companyId} = data;
+
+        const addService = new AddServiceData();
+        addService.addChapterData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}}).then(res=>{
+            console.log(res);
+        })
+    }
+
+    const addSection = (data)=>{
+        const addService = new AddServiceData();
+        addService.addSectionData(data).then(res=>{
+            console.log(res);
+        })
+    }
+
+    const addSubSection = (data)=>{
+        const addService = new AddServiceData();
+        addService.addSubSectionData(data).then(res=>{
+            console.log(res);
+        })
+    }
+
     const onUpload = () => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
     }
@@ -31,27 +90,44 @@ const AppNew = (props) => {
     const SubSectionContent = <div className="p-fluid p-formgrid p-grid addnew fill-width">
         <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> {onSelect} </label></div>
-            <div className="p-field p-col-9"><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} /></div>
-        </div>
-        {(onSelect === "Section" || onSelect === "SubSection") && <div className="p-fluid p-formgrid p-grid fill-width">
-            <div className="p-field p-col-3 center"><label> Chapter </label></div>
-            <div className="p-field p-col-9"><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
-        </div>}
-        {onSelect === "SubSection" && <div className="p-fluid p-formgrid p-grid fill-width">
-            <div className="p-field p-col-3 center"><label> Section </label></div>
-            <div className="p-field p-col-9"><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
-        </div>}
-        <div className="p-fluid p-formgrid p-grid fill-width">
-            <div className="p-field p-col-3 center"><label> Short description </label></div>
-            <div className="p-field p-col-9"><InputText className={"form-input-ctrl required-field form-control"} onChange={(e) => { console.log(e.target.value); }} /></div>
+            <div className="p-field p-col-9">
+                <InputText
+                    className={"form-input-ctrl required-field form-control"}
+                    onChange={(e) => { console.log(e.target.value);setCurData({...curData,'title':e.target.value}) }} />
+            </div>
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> Company IDs </label></div>
-            <div className="p-field p-col-9"><Dropdown className={"form-input-ctrl required-field form-control"} optionLabel="name" placeholder="Select One"></Dropdown></div>
+            <div className="p-field p-col-9"><Dropdown value={curData.companyId} className={"form-input-ctrl required-field form-control"} onChange={e => {
+                setCurData({...curData, 'companyId': e.value });
+            }} options={companyIds} optionLabel="name" placeholder="Select One"></Dropdown></div>
+        </div>
+        {(onSelect === "Section" || onSelect === "SubSection") && <div className="p-fluid p-formgrid p-grid fill-width">
+            <div className="p-field p-col-3 center"><label> Chapter </label></div>
+            <div className="p-field p-col-9">
+                <Dropdown className={"form-input-ctrl required-fielsd form-control"} options={chapterData} onChange={e => {
+                    setCurData({...curData,[onSelect]: e.value});
+                }} optionLabel="name" placeholder="Select One"></Dropdown></div>
+        </div>}
+
+        {onSelect === "SubSection" && <div className="p-fluid p-formgrid p-grid fill-width">
+            <div className="p-field p-col-3 center"><label> Section </label></div>
+            <div className="p-field p-col-9">
+                <Dropdown className={"form-input-ctrl required-field form-control"} onChange={e => {
+                    setCurData({...curData, 'section': e.value });
+                }} optionLabel="name" placeholder="Select One"></Dropdown></div>
+        </div>}
+        <div className="p-fluid p-formgrid p-grid fill-width">
+            <div className="p-field p-col-3 center"><label> Short description </label></div>
+            <div className="p-field p-col-9"><InputText className={"form-input-ctrl required-field form-control"}  onChange={e => {
+                setCurData({ ...curData, 'shortDesc': e.target.value });
+            }} /></div>
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> Tagtext </label></div>
-            <div className="p-field p-col-9"><InputText className={"form-input-ctrl form-control"} onChange={(e) => { console.log(e.target.value); }} /></div>
+            <div className="p-field p-col-9"><InputText className={"form-input-ctrl form-control"}  onChange={e => {
+                setCurData({...curData, 'tagtext': e.target.value });
+            }} /></div>
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> Video </label></div>
@@ -59,12 +135,22 @@ const AppNew = (props) => {
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> Long description </label></div>
-            <div className="p-field p-col-9"><InputText className={"form-input-ctrl form-control"} onChange={(e) => { console.log(e.target.value); }} /></div>
+            <div className="p-field p-col-9"><InputText className={"form-input-ctrl form-control"}  onChange={e => {
+                setCurData( { ...curData, 'description': e.target.value });
+            }} /></div>
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-4 p-md-4 p-lg-6"></div>
             <div className="p-field p-col-4 p-md-4 p-lg-3">
-                <Button label="Submit"></Button>
+                <Button label="Submit" onClick={()=>{
+                  if(onSelect == 'Chapter') {
+                      addChapter(curData)
+                  } else if (onSelect == 'Section'){
+                      addSection(curData)
+                  } else if(onSelect == 'SubSection'){
+                      addSubSection(curData)
+                  }
+                }}></Button>
             </div>
             <div className="p-field p-col-4 p-md-4 p-lg-3">
                 <Button label="Cancel" onClick={props.onSearchClick}></Button>

@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import CustomerService from '../service/CustomerService';
 import { FormLayoutEdit } from './FormLayoutEdit';
 import { FormLayoutView } from './FormLayoutView';
+import GetDataService from "../service/GetDataService";
 
 export const FormLayoutDemo = () => {
     const history = useHistory();
@@ -19,9 +20,25 @@ export const FormLayoutDemo = () => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
     }
 
+    // useEffect(() => {
+    //     const customerService = new CustomerService();
+    //     customerService.getSection().then(data => { setData(data) });
+    // }, [history.location.state])
+
+
     useEffect(() => {
-        const customerService = new CustomerService();
-        customerService.getSection().then(data => { setData(data) });
+        const curData = history.location.state;
+        console.log(curData,'curData of form');
+        const getDataService = new GetDataService();
+        if(curData && curData.typeIdentifier === 'CHAPTER'){
+            getDataService.retrieveChapter(curData.id).then(data => { setData(data) });
+        }
+        if(curData && curData.typeIdentifier === 'SECTION'){
+            getDataService.retrieveSection(curData.id).then(data => { setData(data) });
+        }
+        if(curData && curData.typeIdentifier === 'SUBSECTION'){
+            getDataService.retrieveSubsection(curData.id).then(data => { setData(data) });
+        }
     }, [history.location.state]);
 
 
