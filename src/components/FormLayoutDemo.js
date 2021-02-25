@@ -41,7 +41,7 @@ export const FormLayoutDemo = () => {
     },[data])
 
     const onDelete = ()=>{
-        if (window.confirm('Are you sure you want to save this thing into the database?')) {
+        if (window.confirm('Are you sure, you want to delete this record?')) {
             // Save it!
             const getDataService = new GetDataService();
 

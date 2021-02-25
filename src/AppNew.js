@@ -59,12 +59,13 @@ const AppNew = (props) => {
             getDataService.getSectionDropDwnData(curData.chapter,curData.companyId).then(res=>{
                 console.log(res,'>>>>>> data');
                 return res.map(item=>{
+                    item.label = item.title;
                     item.value = item.id;
                     return item
                 })
             }).then(res=>{
                 console.log(res,'>>>>>> data');
-                setSectionData(res.data);
+                setSectionData([...res]);
             })
         }
     },[curData.chapter])
@@ -125,7 +126,7 @@ const AppNew = (props) => {
         {onSelect === "SubSection" && <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> Section </label></div>
             <div className="p-field p-col-9">
-                <Dropdown className={"form-input-ctrl required-field form-control"} options={sectionData} onChange={e => {
+                <Dropdown value={curData.section} className={"form-input-ctrl required-field form-control"} options={[...sectionData]} onChange={e => {
                     setCurData({...curData, 'section': e.value });
                 }} optionLabel="title" placeholder="Select One"></Dropdown></div>
         </div>}
