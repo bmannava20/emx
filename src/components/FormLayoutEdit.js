@@ -6,7 +6,7 @@ import { FileUpload } from "primereact/fileupload";
 import { useHistory } from 'react-router-dom';
 import CustomerService from '../service/CustomerService';
 
-export const FormLayoutEdit = () => {
+export const FormLayoutEdit = (props) => {
     const history = useHistory();
     const toast = useRef(null);
     const [dropdownItem, setDropdownItem] = useState("");
@@ -17,14 +17,8 @@ export const FormLayoutEdit = () => {
     }
 
     useEffect(() => {
-        const customerService = new CustomerService();
-        customerService.getSection().then(data => { setData(data) });
-    }, [history.location.state]);
-
-
-    useEffect(() => {
-        setDropdownItem(data && data.chapter)
-    }, [data])
+        setData(props.data)
+    }, [props])
 
     return (
         <div className="p-grid">

@@ -14,7 +14,7 @@ const AppNew = (props) => {
     let searchInputEl = null;
     // eslint-disable-next-line no-unused-vars
     const [chapterData,setChapterData] = useState([]);
-    const [sectionData,setSectionData] = useState([]);
+    const [sectionData,setSectionData] = useState([])
     const companyIds = props.companyData.map(company=>{
         company.label = company.name;
         company.value = company.id;
@@ -36,26 +36,38 @@ const AppNew = (props) => {
     },[curData])
 
     useEffect(()=>{
-        if(onSelect == 'Section' || onSelect == 'SubSection'){
+        if((onSelect == 'Section' || onSelect == 'SubSection') && curData.companyId){
             const getDataService = new GetDataService();
             getDataService.getChapterDropDwnData(curData.companyId).then(res=>{
                 console.log(res,'>>>>>> data');
-                //setChapterData(res.data);
+                return res.map(item=>{
+                    item.label = item.title;
+                    item.value = item.id;
+                    return item
+                })
+            }).then(res =>{
+                console.log('chapterData',res);
+                setChapterData([...res]);
             })
         }
-
-
     },[curData.companyId])
 
+
     useEffect(()=>{
-        if(onSelect == 'SubSection'){
+        if(onSelect == 'SubSection' && curData.chapter && curData.companyId){
             const getDataService = new GetDataService();
-            getDataService.getSectionDropDwnData(curData.Chapter).then(res=>{
+            getDataService.getSectionDropDwnData(curData.chapter,curData.companyId).then(res=>{
                 console.log(res,'>>>>>> data');
-                //setSectionData(res.data);
+                return res.map(item=>{
+                    item.value = item.id;
+                    return item
+                })
+            }).then(res=>{
+                console.log(res,'>>>>>> data');
+                setSectionData(res.data);
             })
         }
-    },[curData.Chapter])
+    },[curData.chapter])
 
     const addChapter = (data)=>{
         const {title,tagtext,shortDesc,resourceLink,description,companyId} = data;
@@ -105,17 +117,17 @@ const AppNew = (props) => {
         {(onSelect === "Section" || onSelect === "SubSection") && <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> Chapter </label></div>
             <div className="p-field p-col-9">
-                <Dropdown className={"form-input-ctrl required-fielsd form-control"} options={chapterData} onChange={e => {
-                    setCurData({...curData,[onSelect]: e.value});
-                }} optionLabel="name" placeholder="Select One"></Dropdown></div>
+                <Dropdown value={curData.chapter} className={"form-input-ctrl required-field form-control"} options={[...chapterData]} onChange={e => {
+                    setCurData({...curData,'chapter': e.value});
+                }} optionLabel="title" placeholder="Select One"></Dropdown></div>
         </div>}
 
         {onSelect === "SubSection" && <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> Section </label></div>
             <div className="p-field p-col-9">
-                <Dropdown className={"form-input-ctrl required-field form-control"} onChange={e => {
+                <Dropdown className={"form-input-ctrl required-field form-control"} options={sectionData} onChange={e => {
                     setCurData({...curData, 'section': e.value });
-                }} optionLabel="name" placeholder="Select One"></Dropdown></div>
+                }} optionLabel="title" placeholder="Select One"></Dropdown></div>
         </div>}
         <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> Short description </label></div>

@@ -11,11 +11,11 @@ export default class GetDataService {
     }
 
     getChapterDropDwnData(companyId) {
-        return axios.get(`${this.baseUrl}/training/api/training/initializeAddSection/${companyId}`).then(res => res.data);
+        return axios.get(`${this.baseUrl}/training/api/training/getChaptersForCompany/${companyId}`).then(res => res.data);
     }
 
     getSectionDropDwnData(chapterId, companyId) {
-        return axios.get(`${this.baseUrl}/training/api/training/retrieveSectionsForChapter/${chapterId}/${companyId}`).then(res => res.data);
+        return axios.get(`${this.baseUrl}/training/api/training/getSectionsForChapter/${chapterId}/${companyId}`).then(res => res.data);
     }
 
     retrieveChapter(companyId) {
@@ -28,6 +28,17 @@ export default class GetDataService {
 
     retrieveSubsection(companyId) {
         return axios.get(`${this.baseUrl}/training/api/training/retrieveSubsection/${companyId}`).then(res => res.data);
+    }
+
+    //delete
+    deleteChapter(id){
+        return axios.delete(`${this.baseUrl}/training/api/training/deleteChapter/${id}`).then(res => res.data);
+    }
+    deleteSection(id){
+        return axios.delete(`${this.baseUrl}/training/api/training/deleteSection/${id}`).then(res => res.data);
+    }
+    deleteSubsection(id){
+        return axios.delete(`${this.baseUrl}/training/api/training/deleteSubsection/${id}`).then(res => res.data);
     }
 
 }

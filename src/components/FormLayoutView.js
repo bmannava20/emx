@@ -7,7 +7,7 @@ import { FileUpload } from "primereact/fileupload";
 import { useHistory } from 'react-router-dom';
 import CustomerService from '../service/CustomerService';
 
-export const FormLayoutView = () => {
+export const FormLayoutView = (props) => {
     const history = useHistory();
     const toast = useRef(null);
     const [dropdownItem, setDropdownItem] = useState("");
@@ -17,16 +17,9 @@ export const FormLayoutView = () => {
     const onUpload = () => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
     }
-
-    useEffect(() => {
-        const customerService = new CustomerService();
-        customerService.getSection().then(data => { setData(data) });
-    }, [history.location.state]);
-
-
-    useEffect(() => {
-        setDropdownItem(data && data.chapter)
-    }, [data])
+    useEffect(()=>{
+      setData(props.data);
+    },[props])
 
     return (
         <div className="p-grid">
@@ -52,8 +45,8 @@ export const FormLayoutView = () => {
                         <div className="p-field p-col-12 p-md-12">
                             {!isEdit ? <video width="520" height="520" controls>
                                 {/* <source  src={data && data.resourceLink} type="video/youtube" ></source> */}
-                                <source src="/assets/video/videoplayback.mp4" type="video/mp4"></source>
-                                <source src="/assets/video/videoplayback.mp4" type="video/ogg"></source>
+                                <source src="https://ram--emx-trn.s3.us-east-2.amazonaws.com/1280.mp4" type="video/mp4"></source>
+                                <source src="https://ram--emx-trn.s3.us-east-2.amazonaws.com/1280.mp4" type="video/ogg"></source>
                                 Your browser does not support the video tag.
                             </video> : (<div><label htmlFor="videoLink">Video Link</label><FileUpload name="demo[]" disabled={!isEdit} url="./upload.php" emptyTemplate={<div>{data && data.resourceLink}</div>} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>)}
                             {/* <FileUpload name="demo[]" disabled={!isEdit} url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /> */}
