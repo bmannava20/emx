@@ -32,21 +32,18 @@ const AppNew = (props) => {
     };
 
     useEffect(()=>{
-        console.log(curData);
     },[curData])
 
     useEffect(()=>{
         if((onSelect == 'Section' || onSelect == 'SubSection') && curData.companyId){
             const getDataService = new GetDataService();
             getDataService.getChapterDropDwnData(curData.companyId).then(res=>{
-                console.log(res,'>>>>>> data');
                 return res.map(item=>{
                     item.label = item.title;
                     item.value = item.id;
                     return item
                 })
             }).then(res =>{
-                console.log('chapterData',res);
                 setChapterData([...res]);
             })
         }
@@ -57,14 +54,12 @@ const AppNew = (props) => {
         if(onSelect == 'SubSection' && curData.chapter && curData.companyId){
             const getDataService = new GetDataService();
             getDataService.getSectionDropDwnData(curData.chapter,curData.companyId).then(res=>{
-                console.log(res,'>>>>>> data');
                 return res.map(item=>{
                     item.label = item.title;
                     item.value = item.id;
                     return item
                 })
             }).then(res=>{
-                console.log(res,'>>>>>> data');
                 setSectionData([...res]);
             })
         }
@@ -75,21 +70,20 @@ const AppNew = (props) => {
 
         const addService = new AddServiceData();
         addService.addChapterData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}}).then(res=>{
-            console.log(res);
         })
     }
 
     const addSection = (data)=>{
+        const {chapter, title,tagtext,shortDesc,resourceLink,description,companyId} = data;
         const addService = new AddServiceData();
-        addService.addSectionData(data).then(res=>{
-            console.log(res);
+        addService.addSectionData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}, chapter:{id: chapter}}).then(res=>{
         })
     }
 
     const addSubSection = (data)=>{
+        const {title,tagtext,shortDesc,resourceLink,description,companyId} = data;
         const addService = new AddServiceData();
         addService.addSubSectionData(data).then(res=>{
-            console.log(res);
         })
     }
 
@@ -106,7 +100,7 @@ const AppNew = (props) => {
             <div className="p-field p-col-9">
                 <InputText
                     className={"form-input-ctrl required-field form-control"}
-                    onChange={(e) => { console.log(e.target.value);setCurData({...curData,'title':e.target.value}) }} />
+                    onChange={(e) => { setCurData({...curData,'title':e.target.value}) }} />
             </div>
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
