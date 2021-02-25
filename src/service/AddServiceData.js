@@ -15,6 +15,6 @@ export default class AddServiceData {
     }
 
     addSubSectionData(data) {
-        return axios.post(`${this.baseUrl}/training/api/training/addSubSection`,data).then(res => res.data.data);
+        return axios.post(`${this.baseUrl}/training/api/training/addSubsection`,data).then(res => res.data.data);
     }
 }

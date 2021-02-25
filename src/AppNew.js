@@ -81,9 +81,9 @@ const AppNew = (props) => {
     }
 
     const addSubSection = (data)=>{
-        const {title,tagtext,shortDesc,resourceLink,description,companyId} = data;
+        const {section, title,tagtext,shortDesc,resourceLink,description,companyId} = data;
         const addService = new AddServiceData();
-        addService.addSubSectionData(data).then(res=>{
+        addService.addSubSectionData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}, section:{id: section}}).then(res=>{
         })
     }
 
