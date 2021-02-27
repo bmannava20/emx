@@ -56,7 +56,7 @@ export const FormLayoutView = (props) => {
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-12 p-md-12">
 
-                            {!isEdit ? "" : (<div><label htmlFor="tagText">Tag text/Names</label> <InputTextarea rows="5.5" id="tagText" type="text" className={"form-control"} disabled={!isEdit} value={data && data.tagText} onChange={(e) => { console.log(e.target.value); setData({ ...data, tagText: e.target.value }) }} /></div>)}
+                            {!isEdit ? "" : (<div><label htmlFor="tagText">Tag text/Names</label> <InputTextarea rows="4" id="tagText" type="text" className={"form-control"} disabled={!isEdit} value={data && data.tagText} onChange={(e) => { console.log(e.target.value); setData({ ...data, tagText: e.target.value }) }} /></div>)}
                         </div>
                         <div className="p-field p-col-12">
 
@@ -67,14 +67,14 @@ export const FormLayoutView = (props) => {
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field  p-col-9"></div>
                             <div className=" p-col-1 ">
-                                {!isEdit ? "" : <Button  id="action" label="Reset"></Button>}
+                                {!isEdit ? "" : <Button  id="reset" label="Reset"></Button>}
                             </div>
 
                             <div className=" p-col-1 ">
-                                {!isEdit ? "" : <Button  id="action" label="Cancel"></Button>}
+                                {!isEdit ? "" : <Button  id="cancel" label="Cancel"></Button>}
                             </div>
                             <div className=" p-col-1 ">
-                                {!isEdit ? "" : <Button  id="action" label="Submit"></Button>}
+                                {!isEdit ? "" :  <Button id="submit" label="Submit"></Button>}
                             </div>
                         </div>
                     </div>

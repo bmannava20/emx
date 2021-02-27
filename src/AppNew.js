@@ -1,20 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { useHistory } from "react-router-dom";
 import { InputText } from 'primereact/inputtext';
 import { RadioButton } from 'primereact/radiobutton';
+import { InputTextarea } from 'primereact/inputtextarea';
 import classNames from 'classnames';
 import { FileUpload } from "primereact/fileupload";
 import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
 import AddServiceData from "./service/AddServiceData";
 import GetDataService from "./service/GetDataService";
+
 const AppNew = (props) => {
     const [curData,setCurData] = useState({});
     const [onSelect, setOnSelect] = useState("Chapter")
     let searchInputEl = null;
     // eslint-disable-next-line no-unused-vars
     const [chapterData,setChapterData] = useState([]);
-    const [sectionData,setSectionData] = useState([])
+    const [sectionData,setSectionData] = useState([]);
+    const history = useHistory();
     const companyIds = props.companyData.map(company=>{
         company.label = company.name;
         company.value = company.id;
@@ -70,6 +74,7 @@ const AppNew = (props) => {
 
         const addService = new AddServiceData();
         addService.addChapterData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}}).then(res=>{
+            history.go(0)
         })
     }
 
@@ -77,6 +82,7 @@ const AppNew = (props) => {
         const {chapter, title,tagtext,shortDesc,resourceLink,description,companyId} = data;
         const addService = new AddServiceData();
         addService.addSectionData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}, chapter:{id: chapter}}).then(res=>{
+            history.go(0)
         })
     }
 
@@ -84,6 +90,7 @@ const AppNew = (props) => {
         const {section, title,tagtext,shortDesc,resourceLink,description,companyId} = data;
         const addService = new AddServiceData();
         addService.addSubsectionData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}, section:{id: section}}).then(res=>{
+            history.go(0)
         })
     }
 
@@ -126,7 +133,7 @@ const AppNew = (props) => {
         </div>}
         <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> Short description </label></div>
-            <div className="p-field p-col-9"><InputText className={"form-input-ctrl required-field form-control"}  onChange={e => {
+            <div className="p-field p-col-9"><InputTextarea rows={5} cols={30} className={"form-input-ctrl required-field form-control"}  onChange={e => {
                 setCurData({ ...curData, 'shortDesc': e.target.value });
             }} /></div>
         </div>
@@ -142,7 +149,7 @@ const AppNew = (props) => {
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> Long description </label></div>
-            <div className="p-field p-col-9"><InputText className={"form-input-ctrl form-control"}  onChange={e => {
+            <div className="p-field p-col-9"><InputTextarea id="longDescription"  rows={5} cols={30}  className={"form-input-ctrl form-control"}  onChange={e => {
                 setCurData( { ...curData, 'description': e.target.value });
             }} /></div>
         </div>

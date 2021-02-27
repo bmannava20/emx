@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useHistory } from "react-router-dom";
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Dropdown } from 'primereact/dropdown';
 import { FileUpload } from "primereact/fileupload";
-import { useHistory } from 'react-router-dom';
 import CustomerService from '../service/CustomerService';
 import { FormLayoutEdit } from './FormLayoutEdit';
 import { FormLayoutView } from './FormLayoutView';
 import GetDataService from "../service/GetDataService";
+import UpdateDataService from "../service/UpdateDataService";
 
 export const FormLayoutDemo = () => {
     const history = useHistory();
@@ -43,22 +44,38 @@ export const FormLayoutDemo = () => {
     const onDelete = ()=>{
         if (window.confirm('Are you sure, you want to delete this record?')) {
             // Save it!
+
             const getDataService = new GetDataService();
 
             if(data && data.typeIdentifier === 'CHAPTER'){
-                getDataService.deleteChapter(data.id).then(data => {console.log("chapter",data); });
+                getDataService.deleteChapter(data.id).then(data => {console.log("chapter",data); history.go(0) });
             }
             if(data && data.typeIdentifier === 'SECTION'){
-                getDataService.deleteSection(data.id).then(data => {console.log("section",data);  });
+                getDataService.deleteSection(data.id).then(data => {console.log("section",data); history.go(0)  });
             }
             if(data && data.typeIdentifier === 'SUBSECTION'){
-                getDataService.deleteSubsection(data.id).then(data => {console.log("subsection",data); });
+                getDataService.deleteSubsection(data.id).then(data => {console.log("subsection",data);history.go(0)  });
             }
             console.log('yes');
         } else {
             // Do nothing!
             console.log('no');
         }
+    }
+    const submitEditFormData = (data) =>{
+        console.log(data);
+        const updateDataService = new UpdateDataService();
+
+        if(data && data.typeIdentifier === 'CHAPTER'){
+            updateDataService.updateChapterData(data).then(res => {console.log("chapter",res); history.go(0) });
+        }
+        if(data && data.typeIdentifier === 'SECTION'){
+            updateDataService.updateSectionData(data).then(data => {console.log("section",data);history.go(0)   });
+        }
+        if(data && data.typeIdentifier === 'SUBSECTION'){
+            updateDataService.updateSubSectionData(data).then(data => {console.log("subsection",data);history.go(0)  });
+        }
+
     }
     return (
         <div className="p-grid">
@@ -74,18 +91,20 @@ export const FormLayoutDemo = () => {
                         </div>
                     </div>
 
-                    {isEdit ? <FormLayoutEdit data={data} /> : <FormLayoutView data={data} />}
+                    {isEdit ? <FormLayoutEdit data={data} setData={setData}/> : <FormLayoutView data={data} />}
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field  p-col-9"></div>
                         <div className=" p-col-1 ">
-                            {!isEdit ? "" : <Button id="action" label="Reset"></Button>}
+                            {!isEdit ? "" : <Button id="reset" label="Reset"></Button>}
                         </div>
 
                         <div className=" p-col-1 ">
-                            {!isEdit ? "" : <Button id="action" label="Cancel"></Button>}
+                            {!isEdit ? "" : <Button id="cancel" label="Cancel"></Button>}
                         </div>
                         <div className=" p-col-1 ">
-                            {!isEdit ? "" : <Button id="action" label="Submit"></Button>}
+                            {!isEdit ? "" : <Button id="submit" label="Submit"  onClick={()=>{
+                                submitEditFormData(data);
+                            }}></Button>}
                         </div>
                     </div>
                 </div>

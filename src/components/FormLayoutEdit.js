@@ -5,20 +5,65 @@ import { Dropdown } from 'primereact/dropdown';
 import { FileUpload } from "primereact/fileupload";
 import { useHistory } from 'react-router-dom';
 import CustomerService from '../service/CustomerService';
+import GetDataService from "../service/GetDataService";
 
 export const FormLayoutEdit = (props) => {
     const history = useHistory();
     const toast = useRef(null);
     const [dropdownItem, setDropdownItem] = useState("");
-    const [data, setData] = useState(null);
+
+    const [companyData, setCompanyData] = useState([]);
+    const [chapterData,setChapterData] = useState([]);
+    const [sectionData,setSectionData] = useState([])
 
     const onUpload = () => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
     }
 
     useEffect(() => {
-        setData(props.data)
+        const getDataService = new GetDataService(process.env.TRAINING_APP_BASE_URL);
+        getDataService.getSidebarData('JOR').then((data) => {
+            setCompanyData(data.companies);
+        }).catch((err)=>{
+        });
+    }, []);
+
+    useEffect(() => {
+        setDropdownItem(props.data && props.data.company);
+        props.setData(props.data)
     }, [props])
+
+    useEffect(()=>{
+        if((props.data.typeIdentifier == 'SECTION' || props.data.typeIdentifier == 'SUBSECTION') && props.data.company){
+            const getDataService = new GetDataService();
+            getDataService.getChapterDropDwnData(props.data.company.id).then(res=>{
+                return res.map(item=>{
+                    item.label = item.title;
+                    item.value = item.id;
+                    return item
+                })
+            }).then(res =>{
+                setChapterData([...res]);
+            })
+        }
+    },[props.data.company])
+
+
+    useEffect(()=>{
+
+        if(props.data.typeIdentifier == 'SUBSECTION' && props.data.chapter && props.data.company){
+            const getDataService = new GetDataService();
+            getDataService.getSectionDropDwnData(props.data.chapter,props.data.company.id).then(res=>{
+                return res.map(item=>{
+                    item.label = item.title;
+                    item.value = item.id;
+                    return item
+                })
+            }).then(res=>{
+                setSectionData([...res]);
+            })
+        }
+    },[props.data.chapter])
 
     return (
         <div className="p-grid">
@@ -26,30 +71,47 @@ export const FormLayoutEdit = (props) => {
                 <div className="card">
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-2 center"><label>Title</label></div>
-                        <div className="p-field p-col-7">  <InputText className={"form-input-ctrl required-field form-control"} id="tittle" type="text" value={data && data.title} onChange={(e) => { console.log(e.target.value); setData({ ...data, title: e.target.value }) }} /></div>
+                        <div className="p-field p-col-7">  <InputText className={"form-input-ctrl required-field form-control"} id="tittle" type="text" value={props.data && props.data.title} onChange={(e) => { props.setData({ ...props.data, title: e.target.value }) }} /></div>
 
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
                             <div className="p-field p-col-2 center"> <label htmlFor="companyID">Company ID's</label></div>
-                            <div className="p-field p-col-7"><Dropdown id="companyID" className={"form-input-ctrl required-field form-control"} value={dropdownItem} onChange={(e) => setDropdownItem(e.value)} options={data && data.chapters} optionLabel="title" placeholder="Select One"></Dropdown></div>
+                            <div className="p-field p-col-7"><Dropdown id="companyID" className={"form-input-ctrl required-field form-control"} value={props.data.company} options={companyData} onChange={(e) => {
+                                props.setData({...props.data,company:e.value})
+                            }} optionLabel="name" placeholder="Select One"></Dropdown></div>
 
                     </div>
+                    {(props.data.typeIdentifier === "SECTION" || props.data.typeIdentifier === "SUBSECTION") && <div className="p-fluid p-formgrid p-grid fill-width">
+                        <div className="p-field p-col-2 center"><label> Chapter </label></div>
+                        <div className="p-field p-col-7">
+                            <Dropdown value={props.data.chapter.id} className={"form-input-ctrl required-field form-control"} options={[...chapterData]} onChange={e => {
+                                props.setData({...props.data,'chapter': e.value});
+                            }} optionLabel="title" placeholder="Select One"></Dropdown></div>
+                    </div>}
+
+                    {props.data.typeIdentifier === "SUBSECTION" && <div className="p-fluid p-formgrid p-grid fill-width">
+                        <div className="p-field p-col-2 center"><label> Section </label></div>
+                        <div className="p-field p-col-7">
+                            <Dropdown value={props.data.section} className={"form-input-ctrl required-field form-control"} options={[...sectionData]} onChange={e => {
+                                props.setData({...props.data, 'section': e.value });
+                            }} optionLabel="title" placeholder="Select One"></Dropdown></div>
+                    </div>}
                     <div className="p-fluid p-formgrid p-grid">
                             <div className="p-field p-col-2 center"><label htmlFor="shortDesc">Short Description</label> </div>
-                            <div className="p-field p-col-7"><InputTextarea id="shortDesc" rows="4" className={"form-control required-field"} value={data && data.shortDesc} onChange={(e) => { console.log(e.target.value); setData({ ...data, shortDesc: e.target.value }) }} /></div>
+                            <div className="p-field p-col-7"><InputTextarea id="shortDesc" rows="4" className={"form-control required-field"} value={props.data && props.data.shortDesc} onChange={(e) => { props.setData({ ...props.data, shortDesc: e.target.value }) }} /></div>
 
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
                             <div className="p-field p-col-2 center"><label htmlFor="videoLink">Video Link</label></div>
-                            <div className="p-field p-col-7">    <FileUpload name="demo[]" url="./upload.php" emptyTemplate={<div>{data && data.resourceLink}</div>} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>
+                            <div className="p-field p-col-7">    <FileUpload name="demo[]" url="./upload.php" emptyTemplate={<div>{props.data && props.data.resourceLink}</div>} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-2 center"><label htmlFor="tagText">Tag text/Names</label></div>
-                        <div className="p-field p-col-7"> <InputTextarea rows="5.5" id="tagText" type="text" className={"form-control"} value={data && data.tagText} onChange={(e) => { console.log(e.target.value); setData({ ...data, tagText: e.target.value }) }} /></div>
+                        <div className="p-field p-col-7"> <InputTextarea rows="5.5" id="tagtext" type="text" className={"form-control"} value={props.data && props.data.tagtext} onChange={(e) => { props.setData({ ...props.data, tagText: e.target.value }) }} /></div>
                     </div>
                     <div className="p-fluid p-formgrid p-grid ">
                         <div className="p-field p-col-2 center"><label htmlFor="longDesc">Long Description</label></div>
-                        <div className="p-field p-col-7"><InputTextarea id="longDesc" rows="8" className={"form-control"} value={data && data.description} onChange={(e) => { console.log(e.target.value); setData({ ...data, description: e.target.value }) }} /></div>
+                        <div className="p-field p-col-7"><InputTextarea id="longDesc" rows="8" className={"form-control"} value={props.data && props.data.description} onChange={(e) => { props.setData({ ...props.data, description: e.target.value }) }} /></div>
                     </div>
                 </div>
             </div>

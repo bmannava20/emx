@@ -18,16 +18,16 @@ export default class GetDataService {
         return axios.get(`${this.baseUrl}/getSectionsForChapter/${chapterId}/${companyId}`).then(res => res.data);
     }
 
-    retrieveChapter(companyId) {
-        return axios.get(`${this.baseUrl}/retrieveChapter/${companyId}`).then(res => res.data);
+    retrieveChapter(id) {
+        return axios.get(`${this.baseUrl}/retrieveChapter/${id}`).then(res => res.data);
     }
 
-    retrieveSection(companyId) {
-        return axios.get(`${this.baseUrl}/retrieveSection/${companyId}`).then(res => res.data);
+    retrieveSection(id) {
+        return axios.get(`${this.baseUrl}/retrieveSection/${id}`).then(res => res.data);
     }
 
-    retrieveSubsection(companyId) {
-        return axios.get(`${this.baseUrl}/retrieveSubsection/${companyId}`).then(res => res.data);
+    retrieveSubsection(id) {
+        return axios.get(`${this.baseUrl}/retrieveSubsection/${id}`).then(res => res.data);
     }
 
     //delete
