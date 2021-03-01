@@ -81,7 +81,8 @@ export const FormLayoutEdit = (props) => {
                             }} optionLabel="name" placeholder="Select One"></Dropdown></div>
 
                     </div>
-                    {(props.data.typeIdentifier === "SECTION" || props.data.typeIdentifier === "SUBSECTION") && <div className="p-fluid p-formgrid p-grid fill-width">
+                    {(props.data.typeIdentifier === "SECTION" || props.data.typeIdentifier === "SUBSECTION") &&
+                    <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-2 center"><label> Chapter </label></div>
                         <div className="p-field p-col-7">
                             <Dropdown value={props.data.chapter.id} className={"form-input-ctrl required-field form-control"} options={[...chapterData]} onChange={e => {
