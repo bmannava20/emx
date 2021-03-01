@@ -56,10 +56,8 @@ export const FormLayoutDemo = () => {
             if(data && data.typeIdentifier === 'SUBSECTION'){
                 getDataService.deleteSubsection(data.id).then(data => {console.log("subsection",data);history.go(0)  });
             }
-            console.log('yes');
         } else {
-            // Do nothing!
-            console.log('no');
+
         }
     }
     const submitEditFormData = (data) =>{
@@ -67,13 +65,13 @@ export const FormLayoutDemo = () => {
         const updateDataService = new UpdateDataService();
 
         if(data && data.typeIdentifier === 'CHAPTER'){
-            updateDataService.updateChapterData(data).then(res => {console.log("chapter",res); history.go(0) });
+            updateDataService.updateChapterData(data).then(res => {  });
         }
         if(data && data.typeIdentifier === 'SECTION'){
-            updateDataService.updateSectionData(data).then(data => {console.log("section",data);history.go(0)   });
+            updateDataService.updateSectionData(data).then(data => {   });
         }
         if(data && data.typeIdentifier === 'SUBSECTION'){
-            updateDataService.updateSubSectionData(data).then(data => {console.log("subsection",data);history.go(0)  });
+            updateDataService.updateSubSectionData(data).then(data => {  });
         }
 
     }

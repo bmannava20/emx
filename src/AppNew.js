@@ -10,11 +10,13 @@ import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
 import AddServiceData from "./service/AddServiceData";
 import GetDataService from "./service/GetDataService";
+import { Toast } from 'primereact/toast';
 
 const AppNew = (props) => {
     const [curData,setCurData] = useState({});
     const [onSelect, setOnSelect] = useState("Chapter")
     let searchInputEl = null;
+    const toast = useRef(null);
     // eslint-disable-next-line no-unused-vars
     const [chapterData,setChapterData] = useState([]);
     const [sectionData,setSectionData] = useState([]);
@@ -27,7 +29,6 @@ const AppNew = (props) => {
     function setValue(e) {
         setOnSelect(e);
     }
-    const toast = useRef(null);
 
     const onEnter = () => {
         if (searchInputEl) {
@@ -35,7 +36,16 @@ const AppNew = (props) => {
         }
     };
 
+    const showError = (message) => {
+        toast.current.show({severity:'error', summary: message.title, detail:message.description, life: 3000});
+    }
+
     useEffect(()=>{
+        setCurData({});
+    },[onSelect])
+
+    useEffect(()=>{
+        //console.log(curData);
     },[curData])
 
     useEffect(()=>{
@@ -69,12 +79,52 @@ const AppNew = (props) => {
         }
     },[curData.chapter])
 
+    const showErrorMsg = (data,type)=>{
+        const {section,chapter, title,shortDesc,resourceLink,description,companyId} = data;
+        console.log(data);
+        if(!title){
+            showError({
+                title: `${type}  required field`,
+                message:'Please enter title !!'
+            })
+            return true;
+
+        }else if(!companyId){
+            showError({
+                title:'Company Id required',
+                message:'Please enter Company id !!'
+            })
+            return true;
+
+        }else if((type == 'Section' || type == 'SubSection') && !chapter){
+            showError({
+                title:'Chapter is required ',
+                message:'Please enter Chapter id !!'
+            })
+            return true;
+        } else if((type == 'SubSection') && (!section)){
+            showError({
+                title:'Section required ',
+                message:'Please enter Section id !!'
+            })
+            return true;
+        }else if(!shortDesc){
+            showError({
+                title:'Short Desc required ',
+                message:'Please enter Short Description !!'
+            })
+            return true;
+        }
+
+        return false;
+    }
     const addChapter = (data)=>{
         const {title,tagtext,shortDesc,resourceLink,description,companyId} = data;
 
+
         const addService = new AddServiceData();
         addService.addChapterData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}}).then(res=>{
-            history.go(0)
+            //history.go(0)
         })
     }
 
@@ -82,7 +132,7 @@ const AppNew = (props) => {
         const {chapter, title,tagtext,shortDesc,resourceLink,description,companyId} = data;
         const addService = new AddServiceData();
         addService.addSectionData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}, chapter:{id: chapter}}).then(res=>{
-            history.go(0)
+            //history.go(0)
         })
     }
 
@@ -90,7 +140,7 @@ const AppNew = (props) => {
         const {section, title,tagtext,shortDesc,resourceLink,description,companyId} = data;
         const addService = new AddServiceData();
         addService.addSubsectionData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}, section:{id: section}}).then(res=>{
-            history.go(0)
+            //history.go(0)
         })
     }
 
@@ -106,6 +156,7 @@ const AppNew = (props) => {
             <div className="p-field p-col-3 center"><label> {onSelect} </label></div>
             <div className="p-field p-col-9">
                 <InputText
+                    value={curData.title}
                     className={"form-input-ctrl required-field form-control"}
                     onChange={(e) => { setCurData({...curData,'title':e.target.value}) }} />
             </div>
@@ -139,7 +190,7 @@ const AppNew = (props) => {
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> Tagtext </label></div>
-            <div className="p-field p-col-9"><InputText className={"form-input-ctrl form-control"}  onChange={e => {
+            <div className="p-field p-col-9"><InputText className={"form-input-ctrl form-control"}  value={curData.tagText} onChange={e => {
                 setCurData({...curData, 'tagtext': e.target.value });
             }} /></div>
         </div>
@@ -149,7 +200,7 @@ const AppNew = (props) => {
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> Long description </label></div>
-            <div className="p-field p-col-9"><InputTextarea id="longDescription"  rows={5} cols={30}  className={"form-input-ctrl form-control"}  onChange={e => {
+            <div className="p-field p-col-9"><InputTextarea id="longDescription"  rows={5} cols={30} value={curData.description} className={"form-input-ctrl form-control"}  onChange={e => {
                 setCurData( { ...curData, 'description': e.target.value });
             }} /></div>
         </div>
@@ -157,18 +208,21 @@ const AppNew = (props) => {
             <div className="p-field p-col-4 p-md-4 p-lg-6"></div>
             <div className="p-field p-col-4 p-md-4 p-lg-3">
                 <Button label="Submit" onClick={()=>{
-                  if(onSelect == 'Chapter') {
-                      addChapter(curData)
-                  } else if (onSelect == 'Section'){
-                      addSection(curData)
-                  } else if(onSelect == 'SubSection'){
-                      addSubSection(curData)
-                  }
+                    if(!showErrorMsg(curData,onSelect)){
+                        if(onSelect == 'Chapter') {
+                            addChapter(curData)
+                        } else if (onSelect == 'Section'){
+                            addSection(curData)
+                        } else if(onSelect == 'SubSection'){
+                            addSubSection(curData)
+                        }
+                    }
                 }}></Button>
             </div>
             <div className="p-field p-col-4 p-md-4 p-lg-3">
                 <Button label="Cancel" onClick={props.onSearchClick}></Button>
             </div>
+            <Toast ref={toast} />
         </div>
     </div>
 

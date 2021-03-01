@@ -34,7 +34,7 @@ export const FormLayoutEdit = (props) => {
     }, [props])
 
     useEffect(()=>{
-        if((props.data.typeIdentifier == 'SECTION' || props.data.typeIdentifier == 'SUBSECTION') && props.data.company){
+        if(props.data && (props.data.typeIdentifier == 'SECTION' || props.data.typeIdentifier == 'SUBSECTION') && props.data.company){
             const getDataService = new GetDataService();
             getDataService.getChapterDropDwnData(props.data.company.id).then(res=>{
                 return res.map(item=>{
@@ -46,12 +46,12 @@ export const FormLayoutEdit = (props) => {
                 setChapterData([...res]);
             })
         }
-    },[props.data.company])
+    },[props.data && props.data.company])
 
 
     useEffect(()=>{
 
-        if(props.data.typeIdentifier == 'SUBSECTION' && props.data.chapter && props.data.company){
+        if(props.data && props.data.typeIdentifier == 'SUBSECTION' && props.data.chapter && props.data.company){
             const getDataService = new GetDataService();
             getDataService.getSectionDropDwnData(props.data.chapter,props.data.company.id).then(res=>{
                 return res.map(item=>{
@@ -63,7 +63,7 @@ export const FormLayoutEdit = (props) => {
                 setSectionData([...res]);
             })
         }
-    },[props.data.chapter])
+    },[props.data && props.data.chapter])
 
     return (
         <div className="p-grid">
@@ -76,24 +76,24 @@ export const FormLayoutEdit = (props) => {
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
                             <div className="p-field p-col-2 center"> <label htmlFor="companyID">Company ID's</label></div>
-                            <div className="p-field p-col-7"><Dropdown id="companyID" className={"form-input-ctrl required-field form-control"} value={props.data.company} options={companyData} onChange={(e) => {
+                            <div className="p-field p-col-7"><Dropdown id="companyID" className={"form-input-ctrl required-field form-control"} value={props.data && props.data.company} options={companyData} onChange={(e) => {
                                 props.setData({...props.data,company:e.value})
                             }} optionLabel="name" placeholder="Select One"></Dropdown></div>
 
                     </div>
-                    {(props.data.typeIdentifier === "SECTION" || props.data.typeIdentifier === "SUBSECTION") &&
+                    {(props.data && props.data.typeIdentifier === "SECTION" || props.data.typeIdentifier === "SUBSECTION") &&
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-2 center"><label> Chapter </label></div>
                         <div className="p-field p-col-7">
-                            <Dropdown value={props.data.chapter.id} className={"form-input-ctrl required-field form-control"} options={[...chapterData]} onChange={e => {
+                            <Dropdown value={props.data && props.data.chapter} className={"form-input-ctrl required-field form-control"} options={[...chapterData]} onChange={e => {
                                 props.setData({...props.data,'chapter': e.value});
                             }} optionLabel="title" placeholder="Select One"></Dropdown></div>
                     </div>}
 
-                    {props.data.typeIdentifier === "SUBSECTION" && <div className="p-fluid p-formgrid p-grid fill-width">
+                    {props.data && props.data.typeIdentifier === "SUBSECTION" && <div className="p-fluid p-formgrid p-grid fill-width">
                         <div className="p-field p-col-2 center"><label> Section </label></div>
                         <div className="p-field p-col-7">
-                            <Dropdown value={props.data.section} className={"form-input-ctrl required-field form-control"} options={[...sectionData]} onChange={e => {
+                            <Dropdown value={props.data && props.data.section} className={"form-input-ctrl required-field form-control"} options={[...sectionData]} onChange={e => {
                                 props.setData({...props.data, 'section': e.value });
                             }} optionLabel="title" placeholder="Select One"></Dropdown></div>
                     </div>}
@@ -108,7 +108,7 @@ export const FormLayoutEdit = (props) => {
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-2 center"><label htmlFor="tagText">Tag text/Names</label></div>
-                        <div className="p-field p-col-7"> <InputTextarea rows="5.5" id="tagtext" type="text" className={"form-control"} value={props.data && props.data.tagtext} onChange={(e) => { props.setData({ ...props.data, tagText: e.target.value }) }} /></div>
+                        <div className="p-field p-col-7"> <InputTextarea rows="5.5" id="tagtext" className={"form-control"} value={props.data && props.data.tagtext} onChange={(e) => { props.setData({ ...props.data, tagText: e.target.value }) }} /></div>
                     </div>
                     <div className="p-fluid p-formgrid p-grid ">
                         <div className="p-field p-col-2 center"><label htmlFor="longDesc">Long Description</label></div>
