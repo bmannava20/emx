@@ -13,7 +13,9 @@ import GetDataService from "./service/GetDataService";
 import { Toast } from 'primereact/toast';
 
 const AppNew = (props) => {
-    const [curData,setCurData] = useState({});
+    const [curData,setCurData] = useState({
+        title:""
+    });
     const [onSelect, setOnSelect] = useState("Chapter")
     let searchInputEl = null;
     const toast = useRef(null);
@@ -45,7 +47,7 @@ const AppNew = (props) => {
     },[onSelect])
 
     useEffect(()=>{
-        //console.log(curData);
+        console.log(curData,'curData');
     },[curData])
 
     useEffect(()=>{
@@ -124,15 +126,18 @@ const AppNew = (props) => {
 
         const addService = new AddServiceData();
         addService.addChapterData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}}).then(res=>{
-            //history.go(0)
+            console.log('res',res);
+            history.push({pathname:`/formlayout/${res.id}`, state:res});
+            history.go(0);
         })
     }
 
     const addSection = (data)=>{
         const {chapter, title,tagtext,shortDesc,resourceLink,description,companyId} = data;
         const addService = new AddServiceData();
-        addService.addSectionData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}, chapter:{id: chapter}}).then(res=>{
-            //history.go(0)
+        addService.addSectionData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}, chapter:{id: chapter}}).then(res=> {
+            history.push({pathname: `/formlayout/${res.id}`, state: res});
+            history.go(0);
         })
     }
 
@@ -140,7 +145,8 @@ const AppNew = (props) => {
         const {section, title,tagtext,shortDesc,resourceLink,description,companyId} = data;
         const addService = new AddServiceData();
         addService.addSubsectionData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}, section:{id: section}}).then(res=>{
-            //history.go(0)
+            history.push({pathname:`/formlayout/${res.id}`, state:res});
+            history.go(0);
         })
     }
 

@@ -85,7 +85,7 @@ export const FormLayoutEdit = (props) => {
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-2 center"><label> Chapter </label></div>
                         <div className="p-field p-col-7">
-                            <Dropdown value={props.data && props.data.chapter} className={"form-input-ctrl required-field form-control"} options={[...chapterData]} onChange={e => {
+                            <Dropdown id="chapter" value={props.data && props.data.chapter} className={"form-input-ctrl required-field form-control"} options={[...chapterData]} onChange={e => {
                                 props.setData({...props.data,'chapter': e.value});
                             }} optionLabel="title" placeholder="Select One"></Dropdown></div>
                     </div>}
@@ -108,7 +108,7 @@ export const FormLayoutEdit = (props) => {
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-2 center"><label htmlFor="tagText">Tag text/Names</label></div>
-                        <div className="p-field p-col-7"> <InputTextarea rows="5.5" id="tagtext" className={"form-control"} value={props.data && props.data.tagtext} onChange={(e) => { props.setData({ ...props.data, tagText: e.target.value }) }} /></div>
+                        <div className="p-field p-col-7"> <InputTextarea rows="5.5" id="tagtext" className={"form-control"} value={props.data && props.data.tagtext} onChange={(e) => { props.setData({ ...props.data, tagtext: e.target.value }) }} /></div>
                     </div>
                     <div className="p-fluid p-formgrid p-grid ">
                         <div className="p-field p-col-2 center"><label htmlFor="longDesc">Long Description</label></div>
