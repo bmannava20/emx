@@ -60,17 +60,17 @@ export const FormLayoutDemo = () => {
     }
     const submitEditFormData = (data) =>{
         console.log(data);
-        const {chapter, title,tagtext,shortDesc,resourceLink,description,company,section} = data;
+        const {id,chapter, title,tagtext,shortDesc,resourceLink,description,company,section} = data;
         const updateDataService = new UpdateDataService();
 
         if(data && data.typeIdentifier === 'CHAPTER'){
-            updateDataService.updateChapterData({title,tagtext,shortDesc,resourceLink,description,company}).then(res => {   });
+            updateDataService.updateChapterData({id,title,tagtext,shortDesc,resourceLink,description,company}).then(res => {   });
         }
         if(data && data.typeIdentifier === 'SECTION'){
-            updateDataService.updateSectionData({title,tagtext,shortDesc,resourceLink,description,company, chapter}).then(data => {   });
+            updateDataService.updateSectionData({id,title,tagtext,shortDesc,resourceLink,description,company, chapter}).then(data => {   });
         }
         if(data && data.typeIdentifier === 'SUBSECTION'){
-            updateDataService.updateSubSectionData({title,tagtext,shortDesc,resourceLink,description,company,chapter, section}).then(data => {  });
+            updateDataService.updateSubSectionData({id,title,tagtext,shortDesc,resourceLink,description,company, chapter}).then(data => {  });
         }
 
     }
