@@ -6,16 +6,16 @@ const AppTopbar = (props) => {
     return (
         <div className="layout-topbar">
             <div className="topbar-left">
-                <button type="button" className="menu-button p-link" onClick={props.onMenuButtonClick}>
-                    <i className="pi pi-chevron-left"></i>
-                </button>
-                <span className="topbar-separator"></span>
+                 <button type="button" className="menu-button p-link" onClick={props.onMenuButtonClick}>
+                        <i className="pi pi-chevron-left"></i>
+                    </button>
+               {/* <span className="topbar-separator"></span>
 
-                <div className="layout-breadcrumb viewname" style={{ textTransform: 'uppercase' }}>
-                    <AppBreadcrumb routers={props.routers} />
-                </div>
+                    <div className="layout-breadcrumb viewname" style={{ textTransform: 'uppercase' }}>
+                        <AppBreadcrumb routers={props.routers} />
+                    </div>
 
-                {/*<img id="logo-mobile" className="mobile-logo" src="assets/layout/images/logo-dark.svg" alt="diamond-layout" />*/}
+                <img id="logo-mobile" className="mobile-logo" src="assets/layout/images/logo-dark.svg" alt="diamond-layout" />*/}
             </div>
 
             <div className="topbar-right">
