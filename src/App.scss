@@ -53,6 +53,7 @@ label {
   color: #848484;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 13px;
+  font-weight: normal;
 }
 
 .p-button {
@@ -69,4 +70,35 @@ label {
   margin-right: 5px;
   margin-bottom: 5px;
   border-radius: 0;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  color: #495057;
+  background: #0d89ec;
+}
+.p-inputtextarea
+{
+  color: #000;
+  background-color: inherit;
+  border-color: #bbb;
+  font-weight: normal;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+}
+.p-dropdown-label {
+  color: #000;
+  background-color: inherit;
+  border-color: #bbb;
+  font-weight: normal;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+
+}
+.p-fileupload-content >div{
+  color: #000;
+  background-color: inherit;
+  border-color: #bbb;
+  font-weight: normal;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
 }

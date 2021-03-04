@@ -87,7 +87,7 @@ const AppNew = (props) => {
 
     const showErrorMsg = (data,type)=>{
         const {section,chapter, title,shortDesc,resourceLink,description,companyId} = data;
-        console.log(data);
+
         if(!title){
             showError({
                 title: `${type}  required field`,
