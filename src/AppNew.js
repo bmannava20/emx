@@ -146,9 +146,9 @@ const AppNew = (props) => {
     }
 
     const addSubSection = (data)=>{
-        const {section, title,tagtext,shortDesc,resourceLink,description,companyId} = data;
+        const {section, chapter,title,tagtext,shortDesc,resourceLink,description,companyId} = data;
         const addService = new AddServiceData();
-        addService.addSubsectionData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}, section:{id: section}}).then(res=>{
+        addService.addSubsectionData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId},chapter:{id: chapter},section:{id: section}}).then(res=>{
             history.push({pathname:`/formlayout/${res.id}`, state:res});
             history.go(0);
         })

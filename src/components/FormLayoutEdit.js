@@ -90,10 +90,10 @@ export const FormLayoutEdit = (props) => {
                             }} optionLabel="title" placeholder="Select One"></Dropdown></div>
                     </div>}
 
-                    {props.data && props.data.typeIdentifier === "SUBSECTION" && <div className="p-fluid p-formgrid p-grid fill-width">
+                    {props.data && props.data.typeIdentifier === "SUBSECTION" && <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-2 center"><label> Section </label></div>
                         <div className="p-field p-col-7">
-                            <Dropdown value={props.data && props.data.section} className={"form-input-ctrl required-field form-control"} options={[...sectionData]} onChange={e => {
+                            <Dropdown value={props.data && props.data.section } className={"form-input-ctrl required-field form-control"} options={[...sectionData]} onChange={e => {
                                 props.setData({...props.data, 'section': e.value });
                             }} optionLabel="title" placeholder="Select One"></Dropdown></div>
                     </div>}

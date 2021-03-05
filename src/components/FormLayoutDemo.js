@@ -40,7 +40,7 @@ export const FormLayoutDemo = () => {
 
 
     useEffect(()=>{
-      console.log(data);
+
     },[data])
 
 
@@ -70,7 +70,7 @@ export const FormLayoutDemo = () => {
             updateDataService.updateSectionData({id,title,tagtext,shortDesc,resourceLink,description,company, chapter}).then(data => {   });
         }
         if(data && data.typeIdentifier === 'SUBSECTION'){
-            updateDataService.updateSubSectionData({id,title,tagtext,shortDesc,resourceLink,description,company, chapter}).then(data => {  });
+            updateDataService.updateSubSectionData({id,title,tagtext,shortDesc,resourceLink,description,company:{id: company}, chapter:{id: chapter}, section:{id: section}}).then(data => {  });
         }
 
     }

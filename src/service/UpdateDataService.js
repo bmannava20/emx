@@ -3,7 +3,12 @@ import axios from 'axios';
 export default class UpdateDataService {
     baseUrl;
     constructor(BASE_URL) {
-        this.baseUrl =`http://localhost:8080/training/api/training`;
+        if(window.location.hostname === 'localhost'){
+            this.baseUrl =`http://localhost:8080/training/api/training`;
+        }else{
+            this.baseUrl = `${window.location.host}/training/api/training} `
+        }
+
     }
 
     updateChapterData(data) {
