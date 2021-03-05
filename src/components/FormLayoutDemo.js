@@ -81,10 +81,10 @@ export const FormLayoutDemo = () => {
                     <div className="p-fluid p-formgrid p-grid">
                         <h5 className="p-field p-col-12 p-md-10">{data && data.title} ({data && data.company && data.company.companyId})</h5>
                         <div className="p-field p-col-3 p-md-1">
-                            <Button disabled={!data} className={!data && 'opacity-blur'} id="action" label="Delete" onClick={() => { setDisplayConfirmation(!displayConfirmation);}}></Button>
+                            <Button disabled={!data} style={{'opacity': !data ? 0.5 : 1}} id="action" label="Delete" onClick={() => { setDisplayConfirmation(!displayConfirmation);}}></Button>
                         </div>
                         <div className="p-field p-col-9 p-md-1">
-                               {!isEdit ? <Button disabled={!data} className={!data && 'opacity-blur'} id="action" label="Edit" onClick={() => { setIsEdit(!isEdit) }}></Button> : <Button className={!data && 'opacity-blur'} disabled={!data} id="action" onClick={() => { setIsEdit(!isEdit) }} label="Cancel"></Button>}
+                               {!isEdit ? <Button disabled={!data} style={{'opacity': !data ? 0.5 : 1}} id="action" label="Edit" onClick={() => { setIsEdit(!isEdit) }}></Button> : <Button className={!data && 'opacity-blur'} disabled={!data} id="action" onClick={() => { setIsEdit(!isEdit) }} label="Cancel"></Button>}
                         </div>
                     </div>
 
