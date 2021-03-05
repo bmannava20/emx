@@ -53,7 +53,7 @@ export const FormLayoutEdit = (props) => {
 
         if(props.data && props.data.typeIdentifier == 'SUBSECTION' && props.data.chapter && props.data.company){
             const getDataService = new GetDataService();
-            getDataService.getSectionDropDwnData(props.data.chapter,props.data.company.id).then(res=>{
+            getDataService.getSectionDropDwnData(props.data.chapter && props.data.chapter.id ? props.data.chapter.id : props.data.chapter ,props.data.company.id).then(res=>{
                 return res.map(item=>{
                     item.label = item.title;
                     item.value = item.id;
@@ -93,7 +93,7 @@ export const FormLayoutEdit = (props) => {
                     {props.data && props.data.typeIdentifier === "SUBSECTION" && <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-2 center"><label> Section </label></div>
                         <div className="p-field p-col-7">
-                            <Dropdown value={props.data && props.data.section } className={"form-input-ctrl required-field form-control"} options={[...sectionData]} onChange={e => {
+                            <Dropdown id="section" value={props.data && props.data.section && props.data.section.id ? props.data.section.id : props.data.section } className={"form-input-ctrl required-field form-control"} options={[...sectionData]} onChange={e => {
                                 props.setData({...props.data, 'section': e.value });
                             }} optionLabel="title" placeholder="Select One"></Dropdown></div>
                     </div>}

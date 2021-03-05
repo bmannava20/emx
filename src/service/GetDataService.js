@@ -31,7 +31,11 @@ export default class GetDataService {
     }
 
     retrieveSubsection(id) {
-        return axios.get(`${this.baseUrl}/retrieveSubsection/${id}`).then(res => res.data);
+        return axios.get(`${this.baseUrl}/retrieveSubsection/${id}`).then(res => {
+            let subsection = res.data;
+            subsection.chapter = res.data.section.chapter;
+            return subsection;
+        });
     }
 
     //delete
