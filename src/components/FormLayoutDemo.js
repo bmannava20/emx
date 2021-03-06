@@ -25,8 +25,13 @@ export const FormLayoutDemo = () => {
 
 
     useEffect(() => {
-        const curData = history.location.state;
+        let curData = history.location.state;
         const getDataService = new GetDataService();
+        if(curData) {
+            localStorage.setItem('curData', JSON.stringify(curData));
+        }else {
+            curData = JSON.parse(localStorage.getItem('curData'));
+        }
         if(curData && curData.typeIdentifier === 'CHAPTER'){
             getDataService.retrieveChapter(curData.id).then(data => { setData(data) });
         }
@@ -36,12 +41,12 @@ export const FormLayoutDemo = () => {
         if(curData && curData.typeIdentifier === 'SUBSECTION'){
             getDataService.retrieveSubsection(curData.id).then(data => { setData(data) });
         }
-    }, [history.location.state]);
+    }, [history.location.pathname]);
 
 
     useEffect(()=>{
-
-    },[data])
+        console.log('history.location.state',history.location.state,history);
+    },[history.location.state])
 
 
     const onDelete = ()=>{
@@ -62,15 +67,19 @@ export const FormLayoutDemo = () => {
         console.log(data);
         const {id,chapter, title,tagtext,shortDesc,resourceLink,description,company,section} = data;
         const updateDataService = new UpdateDataService();
-
+        const companyData = typeof company == 'string' ? {id:company}:company
+        const chapterData = typeof chapter == 'string' ? {id:chapter}:chapter
+        const sectionData = typeof section == 'string' ? {id:section}:section
         if(data && data.typeIdentifier === 'CHAPTER'){
-            updateDataService.updateChapterData({id,title,tagtext,shortDesc,resourceLink,description,company}).then(res => {   });
+
+            updateDataService.updateChapterData({id,title,tagtext,shortDesc,resourceLink,description,company : companyData}).then(res => {   });
         }
         if(data && data.typeIdentifier === 'SECTION'){
-            updateDataService.updateSectionData({id,title,tagtext,shortDesc,resourceLink,description,company, chapter}).then(data => {   });
+            updateDataService.updateSectionData({id,title,tagtext,shortDesc,resourceLink,description,company :companyData, chapter:chapterData}).then(data => {   });
         }
         if(data && data.typeIdentifier === 'SUBSECTION'){
-            updateDataService.updateSubSectionData({id,title,tagtext,shortDesc,resourceLink,description,company, chapter, section}).then(data => {  });
+
+            updateDataService.updateSubSectionData({id,title,tagtext,shortDesc,resourceLink,description,company:companyData, chapter:chapterData, section:sectionData}).then(data => {  });
         }
 
     }
@@ -81,10 +90,10 @@ export const FormLayoutDemo = () => {
                     <div className="p-fluid p-formgrid p-grid">
                         <h5 className="p-field p-col-12 p-md-10">{data && data.title} ({data && data.company && data.company.companyId})</h5>
                         <div className="p-field p-col-3 p-md-1">
-                            <Button disabled={!data} style={{'opacity': !data ? 0.5 : 1}} id="action" label="Delete" onClick={() => { setDisplayConfirmation(!displayConfirmation);}}></Button>
+                            <Button disabled={!data} style={{'opacity': !data ? 0.5 : 1}} id="delete" label="Delete" onClick={() => { setDisplayConfirmation(!displayConfirmation);}}></Button>
                         </div>
                         <div className="p-field p-col-9 p-md-1">
-                               {!isEdit ? <Button disabled={!data} style={{'opacity': !data ? 0.5 : 1}} id="action" label="Edit" onClick={() => { setIsEdit(!isEdit) }}></Button> : <Button className={!data && 'opacity-blur'} disabled={!data} id="action" onClick={() => { setIsEdit(!isEdit) }} label="Cancel"></Button>}
+                               {!isEdit ? <Button disabled={!data} style={{'opacity': !data ? 0.5 : 1}} id="edit" label="Edit" onClick={() => { setIsEdit(!isEdit) }}></Button> : <Button className={!data && 'opacity-blur'} disabled={!data} id="action" onClick={() => { setIsEdit(!isEdit) }} label="Cancel"></Button>}
                         </div>
                     </div>
 
