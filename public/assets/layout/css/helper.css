@@ -24,12 +24,17 @@
   opacity: unset;
 }
 
+.opacity-blur{
+    opacity: 0.5;
+}
+
 .fill-width{
   width:100%;
 }
 
 .addnew{
   height:600px;
+  padding-left:25px;
 }
 
 .center-radio{
@@ -43,4 +48,117 @@
 .center{
     display: flex;
     align-items: center
+}
+
+
+label {
+    color: #848484;
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.p-button {
+    color: #fff;
+    background: #006a79;
+    border: 1px solid #006a79;
+    opacity: .9;
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: center;
+    height: 39px;
+    padding: 0 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 0;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+    color: #495057;
+    background: #0d89ec;
+}
+.p-inputtextarea
+{
+    color: #000;
+    border-color: #bbb;
+    font-weight: normal;
+    font-family: sans-serif;
+    font-size: 13px;
+    background-color: white;
+}
+.p-dropdown-label {
+    color: #000;
+    background-color: inherit;
+    border-color: #bbb;
+    font-weight: normal;
+    font-family: sans-serif;
+    font-size: 13px;
+    padding-left: 0px !important;
+}
+.p-fileupload-content >div{
+    color: #000;
+    background-color: inherit;
+    border-color: #bbb;
+    font-weight: normal;
+    font-family: sans-serif;
+    font-size: 13px;
+}
+.p-inputtext{
+    font-weight: normal;
+    font-family: sans-serif;
+    font-size: 13px;
+}
+
+.p-inputtext-height{
+    height: 43px;
+}
+
+
+.p-dropdown-panel .p-dropdown-items {
+    padding:0px;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    padding: 0.5rem;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+    color: white;
+    background: #0d89ec;
+}
+
+.layout-search .search-container {
+    height: 800px;
+    padding-top: 0px;
+}
+
+body,.layout-content-wrapper{
+    min-height: unset;
+}
+.layout-sidebar-darkgray .layout-sidebar .layout-menu li a, .layout-sidebar-darkgray .layout-sidebar .layout-menu li .p-link {
+    background: transparent;
+}
+.layout-menu {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.layout-sidebar-darkgray .layout-sidebar .layout-menu .layout-root-menuitem > ul > li.active-menuitem {
+    background: transparent;
+}
+.alignText{
+    vertical-align: top;
+}
+
+.p-inputtext:enabled:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    /* box-shadow: 0px 0px 2px 2px #d0cece; */
+    /* border-color: grey; */
+    border-color: #bbb;
+    box-shadow: 0 0 2px #c9c9c9;
+}
+
+.p-inputtext:enabled:hover {
+    border-color: #bbb;
 }
