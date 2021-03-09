@@ -86,28 +86,28 @@ export const FormLayoutDemo = () => {
     return (
         <div className="p-grid">
             <div className="p-col-12">
-                <div className="card">
+                <div>
                     <div className="p-fluid p-formgrid p-grid">
-                        <h5 className="p-field p-col-12 p-md-10">{data && data.title} ({data && data.company && data.company.companyId})</h5>
-                        <div className="p-field p-col-3 p-md-1">
+                        <h5 className="p-field p-col-12 p-md-8">{data && data.title} {data && data.company && data.company.companyId}</h5>
+                        <div className="p-field p-md-2">
                             <Button disabled={!data} style={{'opacity': !data ? 0.5 : 1}} id="delete" label="Delete" onClick={() => { setDisplayConfirmation(!displayConfirmation);}}></Button>
                         </div>
-                        <div className="p-field p-col-9 p-md-1">
+                        <div className="p-field p-md-2">
                                {!isEdit ? <Button disabled={!data} style={{'opacity': !data ? 0.5 : 1}} id="edit" label="Edit" onClick={() => { setIsEdit(!isEdit) }}></Button> : <Button className={!data && 'opacity-blur'} disabled={!data} id="action" onClick={() => { setIsEdit(!isEdit) }} label="Cancel"></Button>}
                         </div>
                     </div>
 
                     {isEdit ? <FormLayoutEdit data={data} setData={setData}/> : <FormLayoutView data={data} />}
                     <div className="p-fluid p-formgrid p-grid">
-                        <div className="p-field  p-col-9"></div>
-                        <div className=" p-col-1 ">
+                        <div className="p-field  p-col-6"></div>
+                        <div className=" p-col-2 ">
                             {!isEdit ? "" : <Button id="reset" label="Reset"></Button>}
                         </div>
 
-                        <div className=" p-col-1 ">
+                        <div className=" p-col-2 ">
                             {!isEdit ? "" : <Button id="cancel" label="Cancel"></Button>}
                         </div>
-                        <div className=" p-col-1 ">
+                        <div className=" p-col-2 ">
                             {!isEdit ? "" : <Button id="submit" label="Submit"  onClick={()=>{
                                 submitEditFormData(data);
                             }}></Button>}
@@ -126,8 +126,8 @@ export const FormLayoutDemo = () => {
             setDisplayConfirmation(false);
         }}>
             <div className="confirmation-content">
-                <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
-                <span>Are you sure you want to proceed?</span>
+                <span><i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} /></span>
+                <span className="alignText">Are you sure you want to proceed?</span>
             </div>
         </Dialog>
         </div>

@@ -68,10 +68,10 @@ export const FormLayoutEdit = (props) => {
     return (
         <div className="p-grid">
             <div className="p-col-12">
-                <div className="card">
+                <div >
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-2 center"><label>Title</label></div>
-                        <div className="p-field p-col-7">  <InputText className={"form-input-ctrl required-field form-control"} id="tittle" type="text" value={props.data && props.data.title} onChange={(e) => { props.setData({ ...props.data, title: e.target.value }) }} /></div>
+                        <div className="p-field p-col-7">  <InputText className={"form-input-ctrl required-field form-control p-inputtext-height"} id="tittle" type="text" value={props.data && props.data.title} onChange={(e) => { props.setData({ ...props.data, title: e.target.value }) }} /></div>
 
                     </div>
                     <div className="p-fluid p-formgrid p-grid">

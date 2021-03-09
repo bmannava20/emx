@@ -24,7 +24,7 @@ export const FormLayoutView = (props) => {
     return (
         <div className="p-grid">
             <div className="p-col-12">
-                <div className="card">
+                <div >
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-12 p-md-6">
 

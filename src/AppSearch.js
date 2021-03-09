@@ -43,7 +43,7 @@ const AppSearch = (props) => {
     }
     return (
         <div className="layout-search">
-            <CSSTransition className="search-container" timeout={{ enter: 400, exit: 400 }} in={props.searchActive} unmountOnExit onEnter={onEnter}>
+           {/* <CSSTransition className="search-container" timeout={{ enter: 400, exit: 400 }} in={props.searchActive} unmountOnExit onEnter={onEnter}>
                 <div className="search-container" onClick={props.onSearchClick}>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-12 p-md-6">
@@ -54,7 +54,7 @@ const AppSearch = (props) => {
                         {getContent()}
                     </div>
                 </div>
-            </CSSTransition>
+            </CSSTransition>*/}
         </div>
     );
 }

@@ -167,7 +167,7 @@ const AppNew = (props) => {
             <div className="p-field p-col-9">
                 <InputText
                     value={curData.title}
-                    className={"form-input-ctrl required-field form-control"}
+                    className={"form-input-ctrl required-field form-control p-inputtext-height"}
                     onChange={(e) => { setCurData({...curData,'title':e.target.value}) }} />
             </div>
         </div>
@@ -200,7 +200,7 @@ const AppNew = (props) => {
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> Tagtext </label></div>
-            <div className="p-field p-col-9"><InputText className={"form-input-ctrl form-control"}  value={curData.tagText} onChange={e => {
+            <div className="p-field p-col-9"><InputText className={"form-input-ctrl form-control p-inputtext-height"}  value={curData.tagText} onChange={e => {
                 setCurData({...curData, 'tagtext': e.target.value });
             }} /></div>
         </div>
