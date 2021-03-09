@@ -4,9 +4,9 @@ export default class UpdateDataService {
     baseUrl;
     constructor(BASE_URL) {
         if(window.location.hostname === 'localhost'){
-            this.baseUrl =`http://localhost:8080/training/api/training`;
+            this.baseUrl =`http://qatraining.mymxportal.com/training-api/api/training`;
         }else{
-            this.baseUrl = `${window.location.host}/training/api/training} `
+            this.baseUrl = `${window.location.protocol}//${window.location.host}/training-api/api/training`
         }
 
     }
