@@ -172,7 +172,7 @@ const AppNew = (props) => {
             </div>
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
-            <div className="p-field p-col-3 center"><label> Company IDs </label></div>
+            <div className="p-field p-col-3 center"><label> Company</label></div>
             <div className="p-field p-col-9"><Dropdown value={curData.companyId} className={"form-input-ctrl required-field form-control"} onChange={e => {
                 setCurData({...curData, 'companyId': e.value });
             }} options={companyIds} optionLabel="name" placeholder="Select One"></Dropdown></div>
@@ -193,13 +193,13 @@ const AppNew = (props) => {
                 }} optionLabel="title" placeholder="Select One"></Dropdown></div>
         </div>}
         <div className="p-fluid p-formgrid p-grid fill-width">
-            <div className="p-field p-col-3 center"><label> Short description </label></div>
+            <div className="p-field p-col-3 center"><label> Short Description </label></div>
             <div className="p-field p-col-9"><InputTextarea rows={5} cols={30} className={"form-input-ctrl required-field form-control"}  onChange={e => {
                 setCurData({ ...curData, 'shortDesc': e.target.value });
             }} /></div>
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
-            <div className="p-field p-col-3 center"><label> Tagtext </label></div>
+            <div className="p-field p-col-3 center"><label> Tag text/Names </label></div>
             <div className="p-field p-col-9"><InputText className={"form-input-ctrl form-control p-inputtext-height"}  value={curData.tagText} onChange={e => {
                 setCurData({...curData, 'tagtext': e.target.value });
             }} /></div>
@@ -209,7 +209,7 @@ const AppNew = (props) => {
             <div className="p-field p-col-9"><FileUpload name="demo[]" url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
-            <div className="p-field p-col-3 center"><label> Long description </label></div>
+            <div className="p-field p-col-3 center"><label> Long Description </label></div>
             <div className="p-field p-col-9"><InputTextarea id="longDescription"  rows={5} cols={30} value={curData.description} className={"form-input-ctrl form-control"}  onChange={e => {
                 setCurData( { ...curData, 'description': e.target.value });
             }} /></div>

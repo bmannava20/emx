@@ -75,7 +75,7 @@ export const FormLayoutEdit = (props) => {
 
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
-                            <div className="p-field p-col-2 center"> <label htmlFor="companyID">Company ID's</label></div>
+                            <div className="p-field p-col-2 center"> <label htmlFor="companyID">Company</label></div>
                             <div className="p-field p-col-7"><Dropdown id="companyID" className={"form-input-ctrl required-field form-control"} value={props.data && props.data.company} options={companyData} onChange={(e) => {
                                 props.setData({...props.data,company:e.value})
                             }} optionLabel="name" placeholder="Select One"></Dropdown></div>
