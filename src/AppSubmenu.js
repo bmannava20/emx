@@ -81,7 +81,7 @@ const AppSubmenu = (props) => {
             <>
                 <i style={{width:'18px',fontSize: '0.70rem'}} className={menuitemIconClassName}></i>
                 <span className="layout-menuitem-text">{item.title}</span>
-                {item.items && <i style={{fontSize: '0.70rem'}} className="pi pi-fw pi-angle-down layout-submenu-toggler"></i>}
+                {item.items && <i style={{fontSize: '0.85rem'}} className="pi pi-fw pi-angle-down layout-submenu-toggler"></i>}
                 <Ripple />
             </>
         );
@@ -101,7 +101,6 @@ const AppSubmenu = (props) => {
 
     const isMenuActive = (item, index) => {
         return item.items && ((props.root && (!isSlim() || (isSlim() && (props.mobileMenuActive || activeIndex !== null))) ? true : activeIndex === index) || item.isOpen);
-
         // return item.items && ((props.root && (!isSlim() || (isSlim() && (props.mobileMenuActive || activeIndex !== null))) ? true : activeIndex === index) || item.isOpen);
     }
 

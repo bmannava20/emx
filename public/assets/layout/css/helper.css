@@ -162,3 +162,6 @@ body,.layout-content-wrapper{
 .p-inputtext:enabled:hover {
     border-color: #bbb;
 }
+.p-breadcrumb {
+    border: none
+}
