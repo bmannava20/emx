@@ -7,8 +7,21 @@ import { Ripple } from 'primereact/ripple';
 const AppSubmenu = (props) => {
 
     const [activeIndex, setActiveIndex] = useState(null);
-
+    const [breadCrum,setBreadCrum] = useState({});
     const onMenuItemClick = (event, item, index) => {
+
+       //console.log(item,'------------------>',index);
+
+       if(item.typeIdentifier === "CHAPTER"){
+           localStorage.setItem('chapter',item.title);
+           localStorage.setItem('section','');
+           localStorage.setItem('subSection','');
+       }else if(item.typeIdentifier === "SECTION"){
+           localStorage.setItem('section',item.title);
+           localStorage.setItem('subSection','');
+       }else if(item.typeIdentifier === "SUBSECTION"){
+           localStorage.setItem('subSection',item.title);
+       }
         if (item.disabled) {
             event.preventDefault();
             return;
@@ -68,7 +81,7 @@ const AppSubmenu = (props) => {
             <>
                 <i style={{width:'18px',fontSize: '0.70rem'}} className={menuitemIconClassName}></i>
                 <span className="layout-menuitem-text">{item.title}</span>
-                {item.items && <i className="pi pi-fw pi-angle-down layout-submenu-toggler"></i>}
+                {item.items && <i style={{fontSize: '0.70rem'}} className="pi pi-fw pi-angle-down layout-submenu-toggler"></i>}
                 <Ripple />
             </>
         );

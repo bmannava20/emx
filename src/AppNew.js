@@ -256,12 +256,12 @@ const AppNew = (props) => {
                 <div onClick={props.onSearchClick}>
                     <div className={outerClass}>
                         <div className="p-fluid p-formgrid p-grid center-radio">
-                            <div className='center' onClick={() => setValue('Chapter')} ><RadioButton value="Chapter" checked={onSelect === 'Chapter'} name="chapter" />&nbsp;Chapter&nbsp;</div>
+                            <div className='center' onClick={() => setValue('Chapter')} ><RadioButton value="Chapter" checked={onSelect === 'Chapter'} name="chapter" />&nbsp;Chapter&nbsp;&nbsp;&nbsp;</div>
                             <div className='center' onClick={() => setValue('Section')}>
-                                <RadioButton value="Section" checked={onSelect === 'Section'} name="section" onChange={(e) => setValue(e.value)} />&nbsp;Section&nbsp;
+                                <RadioButton value="Section" checked={onSelect === 'Section'} name="section" onChange={(e) => setValue(e.value)} />&nbsp;Section&nbsp;&nbsp;&nbsp;
                             </div>
                             <div className='center' onClick={() => setValue('SubSection')}>
-                                <RadioButton value="SubSection" checked={onSelect === 'SubSection'} name="subsection" onChange={(e) => setValue(e.value)} />&nbsp;SubSection&nbsp;
+                                <RadioButton value="SubSection" checked={onSelect === 'SubSection'} name="subsection" onChange={(e) => setValue(e.value)} />&nbsp;Subsection&nbsp;
                             </div>
                         </div>
                         <div className={innerClass}>

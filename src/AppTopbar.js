@@ -1,21 +1,42 @@
 import React from 'react';
 import AppBreadcrumb from './AppBreadcrumb';
+import {BreadCrumb} from "primereact/breadcrumb";
 
 const AppTopbar = (props) => {
-
+    let items = [];
+    if(localStorage.getItem('chapter')){
+        items = [
+            { label: localStorage.getItem('chapter') },
+        ];
+    }
+    if(localStorage.getItem('section')){
+        items = [
+            { label: localStorage.getItem('chapter') },
+            { label: localStorage.getItem('section') },
+        ];
+    }
+    if(localStorage.getItem('subSection')){
+        items = [
+            { label: localStorage.getItem('chapter') },
+            { label: localStorage.getItem('section') },
+            { label: localStorage.getItem('subSection') },
+        ];
+    }
+    const home = { icon: 'pi pi-home', url: '' }
     return (
         <div className="layout-topbar">
             <div className="topbar-left">
                  <button type="button" className="menu-button p-link" onClick={props.onMenuButtonClick}>
                         <i className="pi pi-chevron-left"></i>
                     </button>
-               {/* <span className="topbar-separator"></span>
-
-                    <div className="layout-breadcrumb viewname" style={{ textTransform: 'uppercase' }}>
+                <span className="topbar-separator"></span>
+                <BreadCrumb model={items} home={home}/>
+                   {/* <div className="layout-breadcrumb viewname" >
                         <AppBreadcrumb routers={props.routers} />
-                    </div>
 
-                <img id="logo-mobile" className="mobile-logo" src="assets/layout/images/logo-dark.svg" alt="diamond-layout" />*/}
+                    </div>*/}
+
+                <img id="logo-mobile" className="mobile-logo" src="assets/layout/images/logo-dark.svg" alt="diamond-layout" />
             </div>
 
             <div className="topbar-right">

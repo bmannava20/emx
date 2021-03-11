@@ -52,10 +52,8 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        console.log(process.env.TRAINING_APP_BASE_URL)
         const getDataService = new GetDataService(process.env.TRAINING_APP_BASE_URL);
         getDataService.getSidebarData('JOR').then((data) => {
-            console.log('data >>',data)
             setMenu(data.contents);
             setCompanyData(data.companies);
         }).catch((err)=>{
