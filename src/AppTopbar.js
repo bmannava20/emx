@@ -6,20 +6,20 @@ const AppTopbar = (props) => {
     let items = [];
     if(localStorage.getItem('chapter')){
         items = [
-            { label: localStorage.getItem('chapter') },
+            { label: JSON.parse(localStorage.getItem('chapter')).title,url:`http://localhost:3000/#/formlayout/${JSON.parse(localStorage.getItem('chapter')).id}` },
         ];
     }
     if(localStorage.getItem('section')){
         items = [
-            { label: localStorage.getItem('chapter') },
-            { label: localStorage.getItem('section') },
+            { label: JSON.parse(localStorage.getItem('chapter')).title,url:`http://localhost:3000/#/formlayout/${JSON.parse(localStorage.getItem('chapter')).id}` },
+            { label: JSON.parse(localStorage.getItem('section')).title,url:`http://localhost:3000/#/formlayout/${JSON.parse(localStorage.getItem('section')).id}` },
         ];
     }
     if(localStorage.getItem('subSection')){
         items = [
-            { label: localStorage.getItem('chapter') },
-            { label: localStorage.getItem('section') },
-            { label: localStorage.getItem('subSection') },
+            { label: JSON.parse(localStorage.getItem('chapter')).title ,url:`http://localhost:3000/#/formlayout/${JSON.parse(localStorage.getItem('chapter')).id}`},
+            { label: JSON.parse(localStorage.getItem('section')).title ,url:`http://localhost:3000/#/formlayout/${JSON.parse(localStorage.getItem('section')).id}`},
+            { label: JSON.parse(localStorage.getItem('subSection')).title ,url:`http://localhost:3000/#/formlayout/${JSON.parse(localStorage.getItem('subSection')).id}`},
         ];
     }
     const home = { icon: 'pi pi-home', url: '' }

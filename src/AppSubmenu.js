@@ -13,14 +13,14 @@ const AppSubmenu = (props) => {
        //console.log(item,'------------------>',index);
 
        if(item.typeIdentifier === "CHAPTER"){
-           localStorage.setItem('chapter',item.title);
+           localStorage.setItem('chapter',JSON.stringify({title:item.title,id:item.id}));
            localStorage.setItem('section','');
            localStorage.setItem('subSection','');
        }else if(item.typeIdentifier === "SECTION"){
-           localStorage.setItem('section',item.title);
+           localStorage.setItem('section',JSON.stringify({title:item.title,id:item.id}));
            localStorage.setItem('subSection','');
        }else if(item.typeIdentifier === "SUBSECTION"){
-           localStorage.setItem('subSection',item.title);
+           localStorage.setItem('subSection',JSON.stringify({title:item.title,id:item.id}));
        }
         if (item.disabled) {
             event.preventDefault();
@@ -76,7 +76,7 @@ const AppSubmenu = (props) => {
             'onMouseEnter': () => onMenuItemMouseEnter(index),
         }
 
-        const menuitemIconClassName = classNames('layout-menuitem-icon', item.items ? index === activeIndex ? "pi pi-fw pi-minus" : "pi pi-fw pi-plus" : "");
+        const menuitemIconClassName = classNames('layout-menuitem-icon', item.items ?( index === activeIndex || item.isOpen) ? "pi pi-fw pi-minus" : "pi pi-fw pi-plus" : "");
         const content = (
             <>
                 <i style={{width:'18px',fontSize: '0.70rem'}} className={menuitemIconClassName}></i>

@@ -36,7 +36,7 @@ export const FormLayoutDemo = () => {
         if(curData && curData.typeIdentifier === 'SUBSECTION'){
             getDataService.retrieveSubsection(curData.id).then(data => { setData(data) });
         }
-    }, [history.location.pathname]);
+    }, [history.location]);
 
 
     useEffect(()=>{
