@@ -1,11 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import { InputTextarea } from 'primereact/inputtextarea';
-import { Dropdown } from 'primereact/dropdown';
-import { FileUpload } from "primereact/fileupload";
-import CustomerService from '../service/CustomerService';
 import { FormLayoutEdit } from './FormLayoutEdit';
 import { FormLayoutView } from './FormLayoutView';
 import GetDataService from "../service/GetDataService";

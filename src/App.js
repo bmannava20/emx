@@ -10,19 +10,19 @@ import AppNew from './AppNew';
 import AppRightMenu from './AppRightMenu';
 import AppTopMainBar from './TopBar';
 import { FormLayoutDemo } from './components/FormLayoutDemo';
-import CustomerService from './service/CustomerService';
 import GetDataService from "./service/GetDataService";
 import PrimeReact from 'primereact/utils';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import './App.scss';
-import axios from 'axios';
+import { useHistory } from "react-router-dom";
+
 require('dotenv').config();
 
 
 const App = () => {
-
+    const history = useHistory();
     const [menuActive, setMenuActive] = useState(false);
     const [menuMode, setMenuMode] = useState('static');
     const [colorScheme, setColorScheme] = useState('light');
@@ -39,6 +39,8 @@ const App = () => {
     const [ripple, setRipple] = useState(false);
     const [menuList, setMenu] = useState([]);
     const [companyData, setCompanyData] = useState([]);
+    const [id,setId] = useState(null);
+
     let menuClick = false;
     let searchClick = false;
     let userMenuClick = false;
@@ -47,19 +49,44 @@ const App = () => {
     let configClick = false;
 
     useEffect(() => {
-        // const customerService = new CustomerService();
-        // customerService.getSidebar().then(data => setMenu(data.items));
-    }, []);
+        const list = history.location.pathname.split('/');
+        console.log(list);
+        setId(list[list.length-1]);
+    }, [history]);
+
+
+    const getLatestList = (list,id)=>{
+        let flagParent = false;
+        const items = list.map(item =>{
+            if(item.items){
+                const { items ,flag} = getLatestList(item.items,id,flagParent);
+                item.items = items;
+                flagParent = flag;
+            }
+            if(item.id == id){
+                flagParent = true;
+            }
+            item.isOpen = flagParent;
+
+            return item;
+        })
+
+        return {items,flag:flagParent}
+    }
 
     useEffect(() => {
         const getDataService = new GetDataService(process.env.TRAINING_APP_BASE_URL);
         getDataService.getSidebarData('JOR').then((data) => {
-            setMenu(data.contents);
             setCompanyData(data.companies);
+            return data;
+        }).then(data=>{
+            const {items,flag} = getLatestList(data.contents,id);
+            console.log('list',items);
+            setMenu(items);
         }).catch((err)=>{
             console.log('err >>',err)
         });
-    }, []);
+    }, [id]);
 
     const menu = [
         {
