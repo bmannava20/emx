@@ -10,17 +10,15 @@ const AppSubmenu = (props) => {
     const [breadCrum,setBreadCrum] = useState({});
     const onMenuItemClick = (event, item, index) => {
 
-       //console.log(item,'------------------>',index);
-
        if(item.typeIdentifier === "CHAPTER"){
-           localStorage.setItem('chapter',JSON.stringify({title:item.title,id:item.id}));
+           localStorage.setItem('chapter',JSON.stringify(item));
            localStorage.setItem('section','');
            localStorage.setItem('subSection','');
        }else if(item.typeIdentifier === "SECTION"){
-           localStorage.setItem('section',JSON.stringify({title:item.title,id:item.id}));
+           localStorage.setItem('section',JSON.stringify(item));
            localStorage.setItem('subSection','');
        }else if(item.typeIdentifier === "SUBSECTION"){
-           localStorage.setItem('subSection',JSON.stringify({title:item.title,id:item.id}));
+           localStorage.setItem('subSection',JSON.stringify(item));
        }
         if (item.disabled) {
             event.preventDefault();

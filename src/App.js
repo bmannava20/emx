@@ -50,9 +50,21 @@ const App = () => {
 
     useEffect(() => {
         const list = history.location.pathname.split('/');
-        console.log(list);
         setId(list[list.length-1]);
-    }, [history]);
+    }, [history.location]);
+
+    useEffect(()=>{
+        const chapter = localStorage.getItem('chapter') ?  JSON.parse(localStorage.getItem('chapter')) : null;
+        const section = localStorage.getItem('section') ? JSON.parse(localStorage.getItem('section')):null;
+        const subSection = localStorage.getItem('subSection') ? JSON.parse(localStorage.getItem('subSection')):null;
+        if(id && chapter && id == chapter.id){
+            localStorage.setItem('curData',JSON.stringify(chapter));
+        } else if(id && section && id == section.id){
+            localStorage.setItem('curData',JSON.stringify(section));
+        } else if(id && subSection && id == subSection.id){
+            localStorage.setItem('curData',JSON.stringify(subSection));
+        }
+    },[history.location])
 
 
     const getLatestList = (list,id)=>{
@@ -81,7 +93,6 @@ const App = () => {
             return data;
         }).then(data=>{
             const {items,flag} = getLatestList(data.contents,id);
-            console.log('list',items);
             setMenu(items);
         }).catch((err)=>{
             console.log('err >>',err)

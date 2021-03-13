@@ -6,7 +6,7 @@ export default class UpdateDataService {
         if(window.location.hostname === 'localhost'){
             this.baseUrl =`http://qatraining.mymxportal.com/training-api/api/training`;
         }else{
-            this.baseUrl = `${window.location.protocol}//${window.location.host}/training-api/api/training`
+            this.baseUrl = `${process.env.REACT_APP_API_URL}/training-api/api/training`
         }
 
     }
