@@ -49,6 +49,13 @@ const App = () => {
     let configClick = false;
 
     useEffect(() => {
+        console.log(history.location);
+        if(history.location.pathname == "/"){
+            localStorage.clear();
+        }
+    }, [history.location])
+
+    useEffect(() => {
         const list = history.location.pathname.split('/');
         setId(list[list.length-1]);
     }, [history.location]);

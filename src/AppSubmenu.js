@@ -7,7 +7,6 @@ import { Ripple } from 'primereact/ripple';
 const AppSubmenu = (props) => {
 
     const [activeIndex, setActiveIndex] = useState(null);
-    const [breadCrum,setBreadCrum] = useState({});
     const onMenuItemClick = (event, item, index) => {
 
        if(item.typeIdentifier === "CHAPTER"){

@@ -93,19 +93,19 @@ export const FormLayoutDemo = () => {
                     </div>
 
                     {isEdit ? <FormLayoutEdit data={data} setData={setData}/> : <FormLayoutView data={data} />}
-                    <div className="p-fluid p-formgrid p-grid">
-                        <div className="p-field  p-col-6"></div>
-                        <div className=" p-col-2 ">
-                            {!isEdit ? "" : <Button id="reset" label="Reset"></Button>}
-                        </div>
-
-                        <div className=" p-col-2 ">
-                            {!isEdit ? "" : <Button id="cancel" label="Cancel"></Button>}
-                        </div>
-                        <div className=" p-col-2 ">
-                            {!isEdit ? "" : <Button id="submit" label="Submit"  onClick={()=>{
-                                submitEditFormData(data);
-                            }}></Button>}
+                    <div className="p-fluid p-formgrid p-grid p-row">
+                        <div className="p-field" style={{width:'100%',justifyContent:'flex-end'}}>
+                            <div className="p-lg-2 p-col-4">
+                                {!isEdit ? "" : <Button id="reset" label="Reset"></Button>}
+                            </div>
+                            <div className="p-lg-2 p-col-4">
+                                {!isEdit ? "" : <Button id="cancel" label="Cancel"></Button>}
+                            </div>
+                            <div className="p-lg-2 p-col-4">
+                                {!isEdit ? "" : <Button id="submit" label="Submit"  onClick={()=>{
+                                    submitEditFormData(data);
+                                }}></Button>}
+                            </div>
                         </div>
                     </div>
                 </div>

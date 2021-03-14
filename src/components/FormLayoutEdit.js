@@ -104,7 +104,16 @@ export const FormLayoutEdit = (props) => {
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
                             <div className="p-field p-col-2 center"><label htmlFor="videoLink">Video Link</label></div>
-                            <div className="p-field p-col-7">    <FileUpload name="demo[]" url="./upload.php" emptyTemplate={<div>{props.data && props.data.resourceLink}</div>} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>
+                            <div className="p-field p-col-7">    <FileUpload name="demo[]" url="./upload.php" emptyTemplate={<div>
+
+                                <video width="520" height="400" controls>
+                                    {/* <source  src={data && data.resourceLink} type="video/youtube" ></source> */}
+                                    <source src="https://ram--training-test.s3-us-west-1.amazonaws.com/m/outputoutput.mp4" type="video/mp4"></source>
+                                    <source src="https://ram--training-test.s3-us-west-1.amazonaws.com/m/outputoutput.mp4" type="video/ogg"></source>
+                                    Your browser does not support the video tag.
+                                </video>
+                                <i className="pi pi-trash p-mr-2"></i>
+                            </div>} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-2 center"><label htmlFor="tagText">Tag text/Names</label></div>
