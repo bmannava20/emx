@@ -6,18 +6,14 @@ import { FormLayoutView } from './FormLayoutView';
 import GetDataService from "../service/GetDataService";
 import UpdateDataService from "../service/UpdateDataService";
 import { Dialog } from 'primereact/dialog';
+import { Toast } from 'primereact/toast';
 
 export const FormLayoutDemo = () => {
     const history = useHistory();
-    const toast = useRef(null);
     const [isEdit, setIsEdit] = useState(false);
     const [data, setData] = useState(null);
     const [displayConfirmation,setDisplayConfirmation] = useState(false);
-
-    const onUpload = () => {
-        toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
-    }
-
+    const toast = useRef(null);
 
     useEffect(() => {
         let curData = history.location.state;
@@ -78,6 +74,51 @@ export const FormLayoutDemo = () => {
         }
 
     }
+    const showError = (message) => {
+        toast.current.show({severity:'error', summary: message.title, detail:message.description, life: 3000});
+    }
+
+
+    const showErrorMsg = (data,type)=>{
+        const {section,chapter, title,shortDesc,resourceLink,description,company} = data;
+
+        if(!title){
+            showError({
+                title: `${type}  required field`,
+                message:'Please enter title !!'
+            })
+            return true;
+
+        }else if(!company){
+            showError({
+                title:'Company required',
+                message:'Please enter Company!!'
+            })
+            return true;
+
+        }else if((type == 'Section' || type == 'SubSection') && !chapter){
+            showError({
+                title:'Chapter is required ',
+                message:'Please enter Chapter id !!'
+            })
+            return true;
+        } else if((type == 'SubSection') && (!section)){
+            showError({
+                title:'Section required ',
+                message:'Please enter Section id !!'
+            })
+            return true;
+        }else if(!shortDesc){
+            showError({
+                title:'Short Desc required ',
+                message:'Please enter Short Description !!'
+            })
+            return true;
+        }
+
+        return false;
+    }
+
     return (
         <div className="p-grid">
             <div className="p-col-12">
@@ -94,7 +135,7 @@ export const FormLayoutDemo = () => {
 
                     {isEdit ? <FormLayoutEdit data={data} setData={setData}/> : <FormLayoutView data={data} />}
                     <div className="p-fluid p-formgrid p-grid p-row">
-                        <div className="p-field" style={{width:'100%',justifyContent:'flex-end'}}>
+                        <div className="p-field" style={{width:'100%',display:'flex',justifyContent:'flex-end'}}>
                             <div className="p-lg-2 p-col-4">
                                 {!isEdit ? "" : <Button id="reset" label="Reset"></Button>}
                             </div>
@@ -103,28 +144,30 @@ export const FormLayoutDemo = () => {
                             </div>
                             <div className="p-lg-2 p-col-4">
                                 {!isEdit ? "" : <Button id="submit" label="Submit"  onClick={()=>{
-                                    submitEditFormData(data);
+                                    if(!showErrorMsg(data, data.typeIdentifier)){
+                                        submitEditFormData(data);
+                                    }
                                 }}></Button>}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <Dialog header="Confirmation" visible={displayConfirmation} modal style={{ width: '350px' }} footer={<div>
-            <Button label="No" icon="pi pi-times" onClick={() => {
+            <Dialog header="EmpowerMX" visible={displayConfirmation} modal style={{ width: '350px' }} footer={<div>
+            <Button label="No" className="p-1" onClick={() => {
                 setDisplayConfirmation(false);
-            }} className="p-button-text" />
-            <Button label="Yes" icon="pi pi-check" onClick={() => {
+            }} />
+            <Button label="Yes" className="p-1" onClick={() => {
                 onDelete();
             }} autoFocus />
         </div>} onHide={() => {
             setDisplayConfirmation(false);
         }}>
             <div className="confirmation-content">
-                <span><i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} /></span>
                 <span className="alignText">Are you sure you want to proceed?</span>
             </div>
         </Dialog>
+            <Toast ref={toast}/>
         </div>
 
     )
