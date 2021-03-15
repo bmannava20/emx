@@ -49,7 +49,6 @@ const App = () => {
     let configClick = false;
 
     useEffect(() => {
-        console.log(history.location);
         if(history.location.pathname == "/"){
             localStorage.clear();
         }

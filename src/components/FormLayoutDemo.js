@@ -55,7 +55,6 @@ export const FormLayoutDemo = () => {
 
     }
     const submitEditFormData = (data) =>{
-        console.log(data);
         const {id,chapter, title,tagtext,shortDesc,resourceLink,description,company,section} = data;
         const updateDataService = new UpdateDataService();
         const companyData = typeof company == 'string' ? {id:company}:company

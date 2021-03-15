@@ -51,7 +51,7 @@ const AppNew = (props) => {
     },[onSelect])
 
     useEffect(()=>{
-        console.log(curData,'curData');
+       // console.log(curData,'curData');
     },[curData])
 
     useEffect(()=>{
