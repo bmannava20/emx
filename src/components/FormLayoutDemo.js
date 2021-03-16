@@ -44,12 +44,15 @@ export const FormLayoutDemo = () => {
             const getDataService = new GetDataService();
 
             if(data && data.typeIdentifier === 'CHAPTER'){
+                localStorage.clear();
                 getDataService.deleteChapter(data.id).then(data => {console.log("chapter",data); history.go(0); });
             }
             if(data && data.typeIdentifier === 'SECTION'){
+                localStorage.setItem('section', '');
                 getDataService.deleteSection(data.id).then(data => {console.log("section",data); history.go(0)  });
             }
             if(data && data.typeIdentifier === 'SUBSECTION'){
+                localStorage.setItem('subSection', '');
                 getDataService.deleteSubsection(data.id).then(data => {console.log("subsection",data);history.go(0)  });
             }
 

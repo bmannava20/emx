@@ -130,7 +130,7 @@ const AppNew = (props) => {
 
         const addService = new AddServiceData();
         addService.addChapterData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}}).then(res=>{
-            console.log('res',res);
+            localStorage.setItem('chapter',JSON.stringify(res));
             history.push({pathname:`/formlayout/${res.id}`, state:res});
             history.go(0);
         })
@@ -140,6 +140,7 @@ const AppNew = (props) => {
         const {chapter, title,tagtext,shortDesc,resourceLink,description,companyId} = data;
         const addService = new AddServiceData();
         addService.addSectionData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}, chapter:{id: chapter}}).then(res=> {
+            localStorage.setItem('section',JSON.stringify(res));
             history.push({pathname: `/formlayout/${res.id}`, state: res});
             history.go(0);
         })
@@ -149,6 +150,7 @@ const AppNew = (props) => {
         const {section, chapter,title,tagtext,shortDesc,resourceLink,description,companyId} = data;
         const addService = new AddServiceData();
         addService.addSubsectionData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId},chapter:{id: chapter},section:{id: section}}).then(res=>{
+            localStorage.setItem('subSection',JSON.stringify(res));
             history.push({pathname:`/formlayout/${res.id}`, state:res});
             history.go(0);
         })
