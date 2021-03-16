@@ -34,9 +34,9 @@ const AppTopbar = (props) => {
                    {/* <div className="layout-breadcrumb viewname" >
                         <AppBreadcrumb routers={props.routers} />
 
-                    </div>*/}
+                    </div>
 
-                <img id="logo-mobile" className="mobile-logo" src="assets/layout/images/logo-dark.svg" alt="diamond-layout" />
+                <img id="logo-mobile" className="mobile-logo" src="assets/layout/images/logo-dark.svg" alt="diamond-layout" />*/}
             </div>
 
             <div className="topbar-right">

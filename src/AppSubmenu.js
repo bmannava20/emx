@@ -10,6 +10,7 @@ const AppSubmenu = (props) => {
     const onMenuItemClick = (event, item, index) => {
 
        if(item.typeIdentifier === "CHAPTER"){
+           localStorage.clear();
            localStorage.setItem('chapter',JSON.stringify(item));
            localStorage.setItem('section','');
            localStorage.setItem('subSection','');

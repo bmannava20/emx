@@ -130,6 +130,7 @@ const AppNew = (props) => {
 
         const addService = new AddServiceData();
         addService.addChapterData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}}).then(res=>{
+            localStorage.clear();
             localStorage.setItem('chapter',JSON.stringify(res));
             history.push({pathname:`/formlayout/${res.id}`, state:res});
             history.go(0);
