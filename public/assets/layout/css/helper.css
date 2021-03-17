@@ -129,6 +129,8 @@ label {
 .layout-search .search-container {
     height: 800px;
     padding-top: 0px;
+    padding: 1rem;
+
 }
 
 body,.layout-content-wrapper{
@@ -164,4 +166,39 @@ body,.layout-content-wrapper{
 }
 .p-breadcrumb {
     border: none
+}
+
+.p-1{
+    padding:1rem;
+}
+
+.p-dialog .p-dialog-header {
+    background: #54c5d5;
+    padding: 1.0rem;
+    color:white;
+}
+
+.confirmation-content{
+    margin:25px 0px 0px 0px;
+}
+
+video{
+    height: 100%;
+    width: 100%;
+    max-width:500px;
+}
+
+@media screen and (max-width: 991px){
+    .layout-wrapper .layout-search .search-container {
+        width: 100%;
+    }
+
+    .layout-wrapper .layout-topbar {
+        height: 9.125rem;
+    }
+
+    .p-field {
+        width: 100%!important;
+        margin-bottom: 1rem;
+    }
 }
