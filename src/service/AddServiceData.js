@@ -10,15 +10,24 @@ export default class AddServiceData {
         }
     }
 
-    addChapterData(data) {
-        return axios.post(`${this.baseUrl}/addChapter`,data).then(res => res.data);
+    addChapterData(data,file) {
+        let formData = new FormData();
+        formData.append('chapter',JSON.stringify(data));
+        formData.append('file',file);
+        return axios.post(`${this.baseUrl}/addChapter`, formData).then(res => res.data);
     }
 
-    addSectionData(data) {
-        return axios.post(`${this.baseUrl}/addSection`,data).then(res => res.data);
+    addSectionData(data,file) {
+        let formData = new FormData();
+        formData.append('section',JSON.stringify(data));
+        formData.append('file',file);
+        return axios.post(`${this.baseUrl}/addSection`,formData).then(res => res.data);
     }
 
-    addSubsectionData(data) {
-        return axios.post(`${this.baseUrl}/addSubsection`,data).then(res => res.data);
+    addSubsectionData(data,file) {
+        let formData = new FormData();
+        formData.append('subSection',JSON.stringify(data));
+        formData.append('file',file);
+        return axios.post(`${this.baseUrl}/addSubsection`,formData).then(res => res.data);
     }
 }

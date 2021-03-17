@@ -11,10 +11,21 @@ export const FormLayoutEdit = (props) => {
     const history = useHistory();
     const toast = useRef(null);
     const [dropdownItem, setDropdownItem] = useState("");
-
+    const [file,setFile] = useState(null);
     const [companyData, setCompanyData] = useState([]);
     const [chapterData,setChapterData] = useState([]);
     const [sectionData,setSectionData] = useState([])
+
+    const uploadHandler = ({files}) => {
+        const [file] = files;
+        const fileReader = new FileReader();
+        fileReader.onload = (e) => {
+            console.log(e.target.result);
+            // setFile(e.target.result);
+            props.setData({...props.data, 'file': e.target.result })
+        };
+        fileReader.readAsDataURL(file);
+    }
 
     const onUpload = () => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
@@ -100,12 +111,11 @@ export const FormLayoutEdit = (props) => {
                     <div className="p-fluid p-formgrid p-grid">
                             <div className="p-field p-col-2 center"><label htmlFor="shortDesc">Short Description</label> </div>
                             <div className="p-field p-col-7"><InputTextarea id="shortDesc" rows="4" className={"form-control required-field"} value={props.data && props.data.shortDesc} onChange={(e) => { props.setData({ ...props.data, shortDesc: e.target.value }) }} /></div>
-
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
                             <div className="p-field p-col-2 center"><label htmlFor="videoLink">Video Link</label></div>
-                            <div className="p-field p-col-7">    <FileUpload name="demo[]" url="./upload.php" emptyTemplate={<div>
-
+                            <div className="p-field p-col-7">
+                                <FileUpload name="demo[]" customUpload={true}  uploadHandler={uploadHandler} auto={true} emptyTemplate={<div>
                                 <video width="520" height="400" controls>
                                     {/* <source  src={data && data.resourceLink} type="video/youtube" ></source> */}
                                     <source src="https://ram--training-test.s3-us-west-1.amazonaws.com/m/outputoutput.mp4" type="video/mp4"></source>
@@ -113,7 +123,7 @@ export const FormLayoutEdit = (props) => {
                                     Your browser does not support the video tag.
                                 </video>
                                 <i className="pi pi-trash p-mr-2"></i>
-                            </div>} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>
+                            </div>} onUpload={onUpload} accept="video/*" maxFileSize={100000000} /></div>
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-2 center"><label htmlFor="tagText">Tag text/Names</label></div>

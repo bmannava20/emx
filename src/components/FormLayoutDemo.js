@@ -58,21 +58,21 @@ export const FormLayoutDemo = () => {
 
     }
     const submitEditFormData = (data) =>{
-        const {id,chapter, title,tagtext,shortDesc,resourceLink,description,company,section} = data;
+        const {id,chapter, title,tagtext,shortDesc,resourceLink,description,company,section,file} = data;
         const updateDataService = new UpdateDataService();
         const companyData = typeof company == 'string' ? {id:company}:company
         const chapterData = typeof chapter == 'string' ? {id:chapter}:chapter
         const sectionData = typeof section == 'string' ? {id:section}:section
         if(data && data.typeIdentifier === 'CHAPTER'){
 
-            updateDataService.updateChapterData({id,title,tagtext,shortDesc,resourceLink,description,company : companyData}).then(res => {   });
+            updateDataService.updateChapterData({id,title,tagtext,shortDesc,resourceLink,description,company : companyData},file).then(res => {   });
         }
         if(data && data.typeIdentifier === 'SECTION'){
-            updateDataService.updateSectionData({id,title,tagtext,shortDesc,resourceLink,description,company :companyData, chapter:chapterData}).then(data => {   });
+            updateDataService.updateSectionData({id,title,tagtext,shortDesc,resourceLink,description,company :companyData, chapter:chapterData},file).then(data => {   });
         }
         if(data && data.typeIdentifier === 'SUBSECTION'){
 
-            updateDataService.updateSubSectionData({id,title,tagtext,shortDesc,resourceLink,description,company:companyData, chapter:chapterData, section:sectionData}).then(data => {  });
+            updateDataService.updateSubSectionData({id,title,tagtext,shortDesc,resourceLink,description,company:companyData, chapter:chapterData, section:sectionData},file).then(data => {  });
         }
 
     }

@@ -85,6 +85,16 @@ const AppNew = (props) => {
         }
     },[curData.chapter])
 
+    const uploadHandler = ({files}) => {
+        const [file] = files;
+        const fileReader = new FileReader();
+        fileReader.onload = (e) => {
+            console.log('file add',e.target.result);
+            setCurData({...curData, 'file': e.target.result })
+        };
+        fileReader.readAsDataURL(file);
+    }
+
     const showErrorMsg = (data,type)=>{
         const {section,chapter, title,shortDesc,resourceLink,description,companyId} = data;
 
@@ -125,22 +135,21 @@ const AppNew = (props) => {
         return false;
     }
     const addChapter = (data)=>{
-        const {title,tagtext,shortDesc,resourceLink,description,companyId} = data;
-
+        const {title,tagtext,shortDesc,description,companyId,file} = data;
 
         const addService = new AddServiceData();
-        addService.addChapterData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}}).then(res=>{
+        addService.addChapterData({title,tagtext,shortDesc,description,company:{id: companyId}},file).then(res=>{
             localStorage.clear();
             localStorage.setItem('chapter',JSON.stringify(res));
             history.push({pathname:`/formlayout/${res.id}`, state:res});
-            history.go(0);
+            //history.go(0);
         })
     }
 
     const addSection = (data)=>{
-        const {chapter, title,tagtext,shortDesc,resourceLink,description,companyId} = data;
+        const {chapter, title,tagtext,shortDesc,description,companyId,file} = data;
         const addService = new AddServiceData();
-        addService.addSectionData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId}, chapter:{id: chapter}}).then(res=> {
+        addService.addSectionData({title,tagtext,shortDesc,description,company:{id: companyId}, chapter:{id: chapter}},file).then(res=> {
             localStorage.setItem('section',JSON.stringify(res));
             history.push({pathname: `/formlayout/${res.id}`, state: res});
             history.go(0);
@@ -148,9 +157,9 @@ const AppNew = (props) => {
     }
 
     const addSubSection = (data)=>{
-        const {section, chapter,title,tagtext,shortDesc,resourceLink,description,companyId} = data;
+        const {section, chapter,title,tagtext,shortDesc,description,companyId,file} = data;
         const addService = new AddServiceData();
-        addService.addSubsectionData({title,tagtext,shortDesc,resourceLink,description,company:{id: companyId},chapter:{id: chapter},section:{id: section}}).then(res=>{
+        addService.addSubsectionData({title,tagtext,shortDesc,description,company:{id: companyId},chapter:{id: chapter},section:{id: section}},file).then(res=>{
             localStorage.setItem('subSection',JSON.stringify(res));
             history.push({pathname:`/formlayout/${res.id}`, state:res});
             history.go(0);
@@ -209,7 +218,7 @@ const AppNew = (props) => {
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> Video </label></div>
-            <div className="p-field p-col-9"><FileUpload name="demo[]" url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>
+            <div className="p-field p-col-9"><FileUpload customUpload={true}  uploadHandler={uploadHandler} auto={true} onUpload={onUpload} accept="video/*" maxFileSize={100000000} /></div>
         </div>
         <div className="p-fluid p-formgrid p-grid fill-width">
             <div className="p-field p-col-3 center"><label> Long Description </label></div>

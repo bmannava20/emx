@@ -8,18 +8,27 @@ export default class UpdateDataService {
         }else{
             this.baseUrl = `${window.location.protocol}//${window.location.host}/training-api/api/training`
         }
-
     }
 
-    updateChapterData(data) {
-        return axios.put(`${this.baseUrl}/updateChapter`,data).then(res => res.data.data);
+    updateChapterData(data,file) {
+        let formData = new FormData();
+        formData.append('chapter',JSON.stringify(data));
+        formData.append('file',file);
+        return axios.put(`${this.baseUrl}/updateChapter`, formData).then(res => res.data.data);
     }
 
-    updateSectionData(data) {
-        return axios.put(`${this.baseUrl}/updateSection`,data).then(res => res.data.data);
+    updateSectionData(data,file) {
+
+        let formData = new FormData();
+        formData.append('section',JSON.stringify(data));
+        formData.append('file',file);
+        return axios.put(`${this.baseUrl}/updateSection`, formData).then(res => res.data.data);
     }
 
-    updateSubSectionData(data) {
-        return axios.put(`${this.baseUrl}/updateSubsection`,data).then(res => res.data.data);
+    updateSubSectionData(data,file) {
+        let formData = new FormData();
+        formData.append('secSection',JSON.stringify(data));
+        formData.append('file',file);
+        return axios.put(`${this.baseUrl}/updateSubsection`, formData).then(res => res.data.data);
     }
 }
