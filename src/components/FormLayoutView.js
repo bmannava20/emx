@@ -5,7 +5,6 @@ import { InputTextarea } from 'primereact/inputtextarea';
 import { Dropdown } from 'primereact/dropdown';
 import { FileUpload } from "primereact/fileupload";
 import { useHistory } from 'react-router-dom';
-import CustomerService from '../service/CustomerService';
 
 export const FormLayoutView = (props) => {
     const history = useHistory();
@@ -44,8 +43,8 @@ export const FormLayoutView = (props) => {
                     <div className="p-fluid p-formgrid p-grid">
                         <div className="p-field p-col-12 p-md-12">
                             {!isEdit ? <video controls>
-                                {/* <source  src={data && data.resourceLink} type="video/youtube" ></source> */}
-                                <source  src={data && data.resourceLink}></source>
+                                 {/*<source  src="https://ram--training-test.s3-us-west-1.amazonaws.com/m/outputoutput.mp4" ></source>*/}
+                               <source  src={data && data.resourceLink}></source>
                             </video> : (<div><label htmlFor="videoLink">Video Link</label><FileUpload name="demo[]" disabled={!isEdit} url="./upload.php" emptyTemplate={<div>{data && data.resourceLink}</div>} onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /></div>)}
                             {/* <FileUpload name="demo[]" disabled={!isEdit} url="./upload.php" onUpload={onUpload} multiple accept="image/*" maxFileSize={1000000} /> */}
 

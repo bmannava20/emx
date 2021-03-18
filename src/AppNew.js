@@ -15,7 +15,7 @@ import { Toast } from 'primereact/toast';
 const AppNew = (props) => {
     const [curData,setCurData] = useState({
         title:"",
-        resourceLink:'https://emx.com'
+        resourceLink:''
     });
     const [onSelect, setOnSelect] = useState("Chapter")
     let searchInputEl = null;
@@ -46,7 +46,7 @@ const AppNew = (props) => {
     useEffect(()=>{
         setCurData({
             title:"",
-            resourceLink:'https://emx.com'
+            resourceLink:''
         });
     },[onSelect])
 

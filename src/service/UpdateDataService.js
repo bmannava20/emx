@@ -27,7 +27,7 @@ export default class UpdateDataService {
 
     updateSubSectionData(data,file) {
         let formData = new FormData();
-        formData.append('secSection',JSON.stringify(data));
+        formData.append('subSection',JSON.stringify(data));
         formData.append('file',file);
         return axios.put(`${this.baseUrl}/updateSubsection`, formData).then(res => res.data.data);
     }
