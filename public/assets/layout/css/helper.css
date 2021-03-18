@@ -184,6 +184,12 @@ video{
     max-width:500px;
 }
 
+.p-fileupload-content >div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (max-width: 991px){
     .layout-wrapper .layout-search .search-container {
         width: 100%;
@@ -196,6 +202,11 @@ video{
     .p-field {
         width: 100%!important;
         margin-bottom: 1rem;
+    }
+
+    video {
+        height: 100%;
+        width: 250px;
     }
 }
 
