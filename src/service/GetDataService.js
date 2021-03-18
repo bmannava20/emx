@@ -3,7 +3,9 @@ import axios from 'axios';
 export default class GetDataService {
     baseUrl;
     constructor(BASE_URL) {
-       if(window.location.hostname === 'localhost'){
+        if(window.location.hostname === 'localhost' && window.location.port === "8080"){
+            this.baseUrl =`http://localhost:8080/training/api/training`;
+        }else if(window.location.hostname === 'localhost'){
             this.baseUrl =`http://qatraining.mymxportal.com/training-api/api/training`;
         }else{
             this.baseUrl = `${window.location.protocol}//${window.location.host}/training-api/api/training`
@@ -49,4 +51,15 @@ export default class GetDataService {
         return axios.delete(`${this.baseUrl}/deleteSubsection/${id}`).then(res => res.data);
     }
 
+    deleteChapterVideo(id){
+        return axios.delete(`${this.baseUrl}/deleteChapterResource/${id}`).then(res => res.data);
+    }
+
+    deleteSectionVideo(id){
+        return axios.delete(`${this.baseUrl}/deleteSectionResource/${id}`).then(res => res.data);
+    }
+
+    deleteSubsectionVideo(id){
+        return axios.delete(`${this.baseUrl}/deleteSubsectionResource/${id}`).then(res => res.data);
+    }
 }

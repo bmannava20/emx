@@ -3,7 +3,9 @@ import axios from 'axios';
 export default class UpdateDataService {
     baseUrl;
     constructor(BASE_URL) {
-        if(window.location.hostname === 'localhost'){
+        if(window.location.hostname === 'localhost' && window.location.port === "8080"){
+            this.baseUrl =`http://localhost:8080/training/api/training`;
+        }else if(window.location.hostname === 'localhost'){
             this.baseUrl =`http://qatraining.mymxportal.com/training-api/api/training`;
         }else{
             this.baseUrl = `${window.location.protocol}//${window.location.host}/training-api/api/training`

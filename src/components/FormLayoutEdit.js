@@ -79,6 +79,30 @@ export const FormLayoutEdit = (props) => {
         }
     },[props.data && props.data.chapter])
 
+    const deleteVideoResouce = ()=>{
+        if(props.data && props.data.typeIdentifier == 'CHAPTER'){
+            const getDataService = new GetDataService();
+            getDataService.deleteChapterVideo(props.data.id).then(res=>{
+               console.log(res);
+               // history.go(0);
+            })
+        }
+        if(props.data && props.data.typeIdentifier == 'SECTION'){
+            const getDataService = new GetDataService();
+            getDataService.deleteSectionVideo(props.data.id).then(res=>{
+                console.log(res);
+                // history.go(0);
+            })
+        }
+        if(props.data && props.data.typeIdentifier == 'SUBSECTION'){
+            const getDataService = new GetDataService();
+            getDataService.deleteSubsectionVideo(props.data.id).then(res=>{
+                console.log(res);
+                // history.go(0);
+            })
+        }
+    }
+
     return (
         <div className="p-grid">
             <div className="p-col-12">
@@ -122,7 +146,9 @@ export const FormLayoutEdit = (props) => {
                                 <video controls>
                                     <source src={props.data && props.data.resourceLink}></source>
                                 </video>
-                                <i className="pi pi-trash p-mr-2"></i>
+                                <div onClick={deleteVideoResouce}>
+                                    <i className="pi pi-trash p-mr-2 p-1"></i>
+                                </div>
                             </div>} onUpload={onUpload} accept="video/*" maxFileSize={100000000} /></div>
                     </div>
                     <div className="p-fluid p-formgrid p-grid">
