@@ -22,9 +22,12 @@ export const FormLayoutEdit = (props) => {
         fileReader.onload = (e) => {
             console.log(e.target.result);
             // setFile(e.target.result);
-            props.setData({...props.data, 'file': e.target.result })
+            props.setData({...props.data, 'file': file})
         };
-        fileReader.readAsDataURL(file);
+
+        if(file){
+            fileReader.readAsBinaryString(file);
+        }
     }
 
     const onUpload = () => {

@@ -14,8 +14,7 @@ import { Toast } from 'primereact/toast';
 
 const AppNew = (props) => {
     const [curData,setCurData] = useState({
-        title:"",
-        resourceLink:''
+        title:""
     });
     const [onSelect, setOnSelect] = useState("Chapter")
     let searchInputEl = null;
@@ -45,8 +44,7 @@ const AppNew = (props) => {
 
     useEffect(()=>{
         setCurData({
-            title:"",
-            resourceLink:''
+            title:""
         });
     },[onSelect])
 
@@ -90,9 +88,11 @@ const AppNew = (props) => {
         const fileReader = new FileReader();
         fileReader.onload = (e) => {
             console.log('file add',e.target.result);
-            setCurData({...curData, 'file': e.target.result })
+            setCurData({...curData, 'file': file })
         };
-        fileReader.readAsDataURL(file);
+        if(file) {
+            fileReader.readAsBinaryString(file);
+        }
     }
 
     const showErrorMsg = (data,type)=>{
